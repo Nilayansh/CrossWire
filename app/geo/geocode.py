@@ -90,11 +90,14 @@ def geocode(
     for lm in landmarks:
         for candidate in lm.all_names:
             c_lower = candidate.lower().strip()
-            # Combine partial ratio and token set ratio for robust substring and token matching
-            score = max(
-                fuzz.partial_ratio(c_lower, text_lower),
-                fuzz.token_set_ratio(c_lower, text_lower),
-            )
+            if not c_lower:
+                continue
+            # Direct substring match
+            if c_lower in text_lower:
+                score = 100.0
+            else:
+                score = fuzz.token_set_ratio(c_lower, text_lower)
+
             if score > best_score:
                 best_score = score
                 best_match = lm
@@ -102,7 +105,7 @@ def geocode(
     if best_match and best_score >= 80:
         confidence = min(0.95, round(best_score / 100.0, 2))
         return (best_match.lat, best_match.lon, confidence)
-    elif best_match and best_score >= 55:
+    elif best_match and best_score >= 65:
         confidence = round((best_score / 100.0) * 0.75, 2)
         return (best_match.lat, best_match.lon, confidence)
 
