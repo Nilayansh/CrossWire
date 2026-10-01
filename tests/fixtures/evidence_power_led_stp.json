@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ev-stp-01",
+    "tool": "history",
+    "ts": "2026-09-05T08:00:00Z",
+    "summary": "BESCOM power outage complaints preceded sewage overflow tickets by 45 minutes",
+    "keys": ["POWER_TICKETS_PRECEDE_SEWAGE"],
+    "source": "Ticket timeline analysis",
+    "provenance": "real",
+    "raw": {
+      "power_ticket_count": 5,
+      "sewage_ticket_count": 6,
+      "lag_minutes": 45
+    }
+  },
+  {
+    "id": "ev-stp-02",
+    "tool": "outage",
+    "ts": "2026-09-05T08:01:00Z",
+    "summary": "11kV feeder trip confirmed at Kadubeesanahalli substation",
+    "keys": ["OUTAGE_REPORTED"],
+    "source": "BESCOM feeder status adapter",
+    "provenance": "simulated",
+    "raw": {
+      "feeder": "F-KADU-04",
+      "status": "tripped",
+      "outage_start": "2026-09-05T07:10:00Z"
+    }
+  },
+  {
+    "id": "ev-stp-03",
+    "tool": "osm",
+    "ts": "2026-09-05T08:02:00Z",
+    "summary": "Large STP facility detected within 350m of affected tech park",
+    "keys": ["LARGE_STP_SITE_NEARBY"],
+    "source": "Overpass OSM query",
+    "provenance": "real",
+    "raw": {
+      "osm_id": "way/492019482",
+      "amenity": "wastewater_plant",
+      "distance_m": 320
+    }
+  }
+]

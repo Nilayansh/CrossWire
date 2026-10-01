@@ -1,0 +1,41 @@
+[
+  {
+    "id": "ev-rain-01",
+    "tool": "rainfall",
+    "ts": "2026-09-05T08:00:00Z",
+    "summary": "Rainfall exceeded 45 mm/hr during peak cloudburst",
+    "keys": ["RAIN_GT_40", "RAIN_GT_25"],
+    "source": "Open-Meteo archive API",
+    "provenance": "real",
+    "raw": {
+      "precipitation_mm": 47.2,
+      "interval": "60m"
+    }
+  },
+  {
+    "id": "ev-rain-02",
+    "tool": "elevation",
+    "ts": "2026-09-05T08:01:00Z",
+    "summary": "Centroid is in a natural topographic bowl 4.2m below median perimeter",
+    "keys": ["LOW_LYING"],
+    "source": "SRTM elevation grid",
+    "provenance": "real",
+    "raw": {
+      "centroid_elevation_m": 872.1,
+      "surrounding_median_m": 876.3
+    }
+  },
+  {
+    "id": "ev-rain-03",
+    "tool": "hotspots",
+    "ts": "2026-09-05T08:02:00Z",
+    "summary": "Bellandur Ecospace is a recognized BBMP chronic flood hotspot",
+    "keys": ["KNOWN_HOTSPOT"],
+    "source": "BBMP Chronic Hotspot Registry 2024",
+    "provenance": "derived",
+    "raw": {
+      "hotspot_id": "BLR-SWD-042",
+      "historical_frequency": "high"
+    }
+  }
+]

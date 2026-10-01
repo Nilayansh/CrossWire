@@ -1,0 +1,20 @@
+.PHONY: test lint run-api run-ui clean
+
+test:
+	python -m pytest tests -q
+
+test-p0:
+	python -m pytest tests/P0 -v
+
+lint:
+	python -m flake8 app tests --max-line-length=120 || true
+
+run-api:
+	python -m uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
+
+run-ui:
+	streamlit run ui/streamlit_app.py
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete

@@ -1,0 +1,26 @@
+# Ownership mapping for NammaTwin / CrossWire
+
+# Frozen after P0 (changes require mutual sign-off)
+/app/contracts/ @dev-a @dev-b
+
+# Developer A Track (Agent Core, Orchestrator, Scoring, Planner, API, Eval)
+/app/llm.py @dev-a
+/app/config.py @dev-a
+/app/investigator/ @dev-a
+/app/planner/ @dev-a
+/app/orchestrator/ @dev-a
+/app/verifier/ @dev-a
+/app/api/ @dev-a
+/backtest/ @dev-a
+/tests/A*/ @dev-a
+
+# Developer B Track (Geo, DB, Cluster, Tools, Intake, Dispatch, UI)
+/app/geo/ @dev-b
+/app/db/ @dev-b
+/app/cluster/ @dev-b
+/app/tools/ @dev-b
+/app/intake/ @dev-b
+/app/dispatch/ @dev-b
+/ui/ @dev-b
+/data/ @dev-b
+/tests/B*/ @dev-b

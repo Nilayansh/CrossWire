@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ev-incon-01",
+    "tool": "rainfall",
+    "ts": "2026-09-05T08:00:00Z",
+    "summary": "Trace rainfall 2 mm/hr observed",
+    "keys": ["RAIN_LT_5", "DRY_WEATHER"],
+    "source": "Open-Meteo API",
+    "provenance": "real",
+    "raw": {
+      "precipitation_mm": 1.8
+    }
+  },
+  {
+    "id": "ev-incon-02",
+    "tool": "elevation",
+    "ts": "2026-09-05T08:01:00Z",
+    "summary": "Flat terrain gradient, no bowl or depression",
+    "keys": [],
+    "source": "SRTM elevation",
+    "provenance": "real",
+    "raw": {
+      "elevation_diff_m": 0.2
+    }
+  }
+]
