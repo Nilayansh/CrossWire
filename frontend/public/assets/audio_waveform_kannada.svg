@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" fill="none" stroke="none" class="audio-waveform-vector">
+  <!-- Kannada Citizen Voice Recording Waveform Spectrum Visualizer -->
+  <!-- 28 Parametric Audio Bars with GSAP scaleY / height animation hooks -->
+
+  <g id="waveform-bars" class="gsap-audio-bars">
+    <!-- Active / Played Portion (Black #111111) -->
+    <rect class="wave-bar bar-1" x="5" y="24" width="4" height="12" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-2" x="14" y="20" width="4" height="20" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-3" x="23" y="15" width="4" height="30" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-4" x="32" y="10" width="4" height="40" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-5" x="41" y="18" width="4" height="24" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-6" x="50" y="8" width="4" height="44" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-7" x="59" y="14" width="4" height="32" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-8" x="68" y="22" width="4" height="16" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-9" x="77" y="6" width="4" height="48" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-10" x="86" y="12" width="4" height="36" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-11" x="95" y="16" width="4" height="28" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-12" x="104" y="4" width="4" height="52" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-13" x="113" y="14" width="4" height="32" rx="2" fill="#111111" />
+    <rect class="wave-bar bar-14" x="122" y="22" width="4" height="16" rx="2" fill="#111111" />
+
+    <!-- Scrub Scrubber Needle / Current Timestamp -->
+    <line x1="131" y1="2" x2="131" y2="58" stroke="#111111" stroke-width="2" class="gsap-playhead" />
+    <circle cx="131" cy="2" r="3" fill="#111111" />
+
+    <!-- Unplayed Portion (Light Gray #EAEAEA or #787774) -->
+    <rect class="wave-bar bar-15" x="140" y="18" width="4" height="24" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-16" x="149" y="8" width="4" height="44" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-17" x="158" y="12" width="4" height="36" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-18" x="167" y="20" width="4" height="20" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-19" x="176" y="5" width="4" height="50" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-20" x="185" y="16" width="4" height="28" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-21" x="194" y="10" width="4" height="40" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-22" x="203" y="22" width="4" height="16" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-23" x="212" y="7" width="4" height="46" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-24" x="221" y="14" width="4" height="32" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-25" x="230" y="18" width="4" height="24" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-26" x="239" y="11" width="4" height="38" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-27" x="248" y="24" width="4" height="12" rx="2" fill="#787774" />
+    <rect class="wave-bar bar-28" x="257" y="26" width="4" height="8" rx="2" fill="#787774" />
+  </g>
+</svg>

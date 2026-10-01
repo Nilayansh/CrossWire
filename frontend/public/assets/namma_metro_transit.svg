@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="namma-metro-vector">
+  <!-- Namma Metro Elevated Viaduct & Transit Vector -->
+  
+  <!-- Ground Level & Drainage Basin Line -->
+  <line x1="0" y1="110" x2="320" y2="110" stroke="#EAEAEA" stroke-width="2" />
+  
+  <!-- Concrete Elevated Viaduct Pillars (Classic Bangalore Pier Design) -->
+  <!-- Pier 1 -->
+  <rect x="50" y="45" width="20" height="65" fill="#F7F6F3" stroke="#111111" stroke-width="1.5" />
+  <path d="M 40 45 L 80 45 L 70 55 L 50 55 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.25" />
+  <line x1="60" y1="55" x2="60" y2="110" stroke="#787774" stroke-width="0.75" stroke-dasharray="3,3" />
+
+  <!-- Pier 2 -->
+  <rect x="230" y="45" width="20" height="65" fill="#F7F6F3" stroke="#111111" stroke-width="1.5" />
+  <path d="M 220 45 L 260 45 L 250 55 L 230 55 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.25" />
+  <line x1="240" y1="55" x2="240" y2="110" stroke="#787774" stroke-width="0.75" stroke-dasharray="3,3" />
+
+  <!-- Continuous Concrete Box Girder Deck -->
+  <rect x="0" y="38" width="320" height="8" fill="#111111" stroke="#111111" stroke-width="1.5" />
+  <!-- Rail Track & Guard Rail -->
+  <line x1="0" y1="36" x2="320" y2="36" stroke="#111111" stroke-width="1" />
+  <line x1="0" y1="33" x2="320" y2="33" stroke="#787774" stroke-width="0.75" stroke-dasharray="4,4" />
+
+  <!-- Overhead Catenary Power Mast & Wires -->
+  <line x1="60" y1="38" x2="60" y2="6" stroke="#111111" stroke-width="1.25" />
+  <line x1="55" y1="6" x2="68" y2="6" stroke="#111111" stroke-width="1" />
+  <line x1="240" y1="38" x2="240" y2="6" stroke="#111111" stroke-width="1.25" />
+  <line x1="235" y1="6" x2="248" y2="6" stroke="#111111" stroke-width="1" />
+  <!-- Live 25kV Catenary Wire -->
+  <line x1="0" y1="10" x2="320" y2="10" stroke="#787774" stroke-width="0.75" />
+
+  <!-- Sleek Namma Metro 3-Car Train Formation (Target for GSAP Translation) -->
+  <g class="gsap-metro-train" id="metro-train-group">
+    <!-- Pantograph Contact -->
+    <polyline points="105,33 115,10 120,10" stroke="#111111" stroke-width="1" fill="none" />
+    <polyline points="205,33 215,10 220,10" stroke="#111111" stroke-width="1" fill="none" />
+
+    <!-- Car 1: Leading Driving Motor Coach (Aerodynamic Streamlined Nose) -->
+    <path d="M 60 33 L 130 33 L 130 14 L 75 14 Q 60 18 60 33 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- Front Windshield & Headlight -->
+    <path d="M 64 28 L 73 20 L 73 28 Z" fill="#111111" />
+    <circle cx="64" cy="30" r="1.5" fill="#111111" class="gsap-headlight" />
+    <!-- Passenger Windows & Automatic Doors -->
+    <rect x="80" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="98" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="116" y="18" width="10" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <!-- Door seam lines -->
+    <line x1="95" y1="16" x2="95" y2="33" stroke="#111111" stroke-width="0.75" />
+    <line x1="113" y1="16" x2="113" y2="33" stroke="#111111" stroke-width="0.75" />
+
+    <!-- Gangway Accordion Coupler -->
+    <rect x="130" y="17" width="5" height="14" fill="#111111" />
+
+    <!-- Car 2: Middle Trailer Coach -->
+    <rect x="135" y="14" width="70" height="19" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <rect x="142" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="160" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="178" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="196" y="18" width="6" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <!-- Door seams -->
+    <line x1="157" y1="16" x2="157" y2="33" stroke="#111111" stroke-width="0.75" />
+    <line x1="175" y1="16" x2="175" y2="33" stroke="#111111" stroke-width="0.75" />
+
+    <!-- Gangway Coupler -->
+    <rect x="205" y="17" width="5" height="14" fill="#111111" />
+
+    <!-- Car 3: Trailing Driving Coach -->
+    <path d="M 210 33 L 280 33 Q 280 18 265 14 L 210 14 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <rect x="216" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="234" y="18" width="12" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <rect x="252" y="18" width="10" height="8" rx="1" fill="#F7F6F3" stroke="#111111" stroke-width="1" />
+    <path d="M 276 28 L 267 20 L 267 28 Z" fill="#111111" />
+    <circle cx="276" cy="30" r="1.5" fill="#111111" />
+
+    <!-- Under-chassis Bogie Wheels -->
+    <circle cx="75" cy="35" r="2.5" fill="#111111" />
+    <circle cx="85" cy="35" r="2.5" fill="#111111" />
+    <circle cx="120" cy="35" r="2.5" fill="#111111" />
+    <circle cx="145" cy="35" r="2.5" fill="#111111" />
+    <circle cx="195" cy="35" r="2.5" fill="#111111" />
+    <circle cx="220" cy="35" r="2.5" fill="#111111" />
+    <circle cx="265" cy="35" r="2.5" fill="#111111" />
+  </g>
+
+  <!-- Technical Telemetry Monospace Overlay -->
+  <text x="5" y="105" font-family="'JetBrains Mono', monospace" font-size="5" fill="#787774" letter-spacing="1">NAMMA METRO · PURPLE/BLUE CORRIDOR · PIER ELEV: +14.2M</text>
+  <text x="235" y="105" font-family="'JetBrains Mono', monospace" font-size="5" fill="#111111" font-weight="600">SPEED: 65 KM/H · CLEAR</text>
+</svg>
