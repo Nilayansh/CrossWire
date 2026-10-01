@@ -33,22 +33,24 @@ def transcribe(ogg_bytes: bytes) -> tuple[str, str]:
         except Exception:
             pass
 
-    # Try live Sarvam STT if key configured and not in DEMO_MODE
-    if settings.SARVAM_API_KEY and not settings.DEMO_MODE:
+    # Try live Sarvam STT if key configured
+    if settings.SARVAM_API_KEY:
         try:
             url = "https://api.sarvam.ai/speech-to-text"
             headers = {"api-subscription-key": settings.SARVAM_API_KEY}
-            files = {"file": ("audio.ogg", ogg_bytes, "audio/ogg")}
-            data = {"model": "saaras:v1"}
+            files = {"file": ("audio.wav", ogg_bytes, "audio/wav")}
+            data = {"model": "saarika:v2.5"}
             with httpx.Client(timeout=15.0) as client:
                 resp = client.post(url, headers=headers, files=files, data=data)
                 if resp.status_code == 200:
                     res_json = resp.json()
-                    transcript = res_json.get("transcript", SAMPLE_KN_TRANSCRIPT)
-                    lang = res_json.get("language_code", "kn")
-                    with open(cache_path, "w", encoding="utf-8") as f:
-                        json.dump({"text": transcript, "lang": lang}, f, indent=2)
-                    return transcript, lang
+                    transcript = res_json.get("transcript", "").strip()
+                    lang_raw = res_json.get("language_code", "kn")
+                    lang = lang_raw.split("-")[0] if "-" in lang_raw else lang_raw
+                    if transcript:
+                        with open(cache_path, "w", encoding="utf-8") as f:
+                            json.dump({"text": transcript, "lang": lang}, f, indent=2)
+                        return transcript, lang
         except Exception:
             pass
 

@@ -164,6 +164,7 @@ export default function App() {
         onClose={() => setIsIntakeOpen(false)}
         onSuccess={async () => {
           await loadDataForIncident();
+          setActiveStage(1);
         }}
       />
 

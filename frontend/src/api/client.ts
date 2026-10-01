@@ -83,11 +83,10 @@ export async function processAudio(base64Data: string): Promise<{
   category: string;
   severity: number;
 }> {
-  const formData = new FormData();
-  formData.append('base64_data', base64Data);
   const res = await fetch(`${BASE_URL}/intake/audio`, {
     method: 'POST',
-    body: formData,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ base64_data: base64Data }),
   });
   if (!res.ok) {
     throw new Error(`Audio processing error: ${res.statusText}`);

@@ -18,6 +18,18 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
+      '/intake': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/traffic': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/scenarios': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
     },
   },
 });

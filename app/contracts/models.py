@@ -18,6 +18,7 @@ class Ticket(BaseModel):
         "water_supply",
         "traffic",
         "garbage_debris",
+        "solid_waste",
         "road_damage",
         "other",
     ]
@@ -29,6 +30,7 @@ class Ticket(BaseModel):
     photo_depth: Optional[Literal["ankle", "knee", "waist", "vehicle"]] = None
     reporter_chat_id: Optional[str] = None
     is_synthetic: bool = False
+    image_data: Optional[str] = None
 
 
 class Incident(BaseModel):
