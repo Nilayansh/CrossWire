@@ -24,9 +24,9 @@ def generate_report(eval_results: dict[str, Any], output_dir: Optional[Path] = N
     # 2. Render matplotlib bar chart: Baseline vs NammaTwin
     m = eval_results["metrics"]
 
-    categories = ["Top-1 Accuracy", "Dept Routing Accuracy"]
-    nammatwin_scores = [m["top1_accuracy"] * 100, m["dept_routing_accuracy"] * 100]
-    baseline_scores = [m["baseline_top1_accuracy"] * 100, m["baseline_dept_accuracy"] * 100]
+    categories = ["Top-1 Accuracy", "Department F1"]
+    nammatwin_scores = [m["top1_accuracy"] * 100, m["dept_f1"] * 100]
+    baseline_scores = [m["baseline_top1_accuracy"] * 100, m["baseline_dept_f1"] * 100]
 
     x = range(len(categories))
     width = 0.35
@@ -35,8 +35,12 @@ def generate_report(eval_results: dict[str, Any], output_dir: Optional[Path] = N
     rects1 = ax.bar([i - width / 2 for i in x], baseline_scores, width, label="Category Baseline", color="#94a3b8")
     rects2 = ax.bar([i + width / 2 for i in x], nammatwin_scores, width, label="NammaTwin Agent", color="#0284c7")
 
-    ax.set_ylabel("Accuracy (%)", fontsize=12)
-    ax.set_title("NammaTwin vs. Category-Only Baseline (17 Historical Scenarios)", fontsize=13, pad=15)
+    ax.set_ylabel("Score (%)", fontsize=12)
+    ax.set_title(
+        f"NammaTwin vs. Category-Only Baseline ({int(m['total_scenarios'])} Scenarios)",
+        fontsize=13,
+        pad=15,
+    )
     ax.set_xticks(list(x))
     ax.set_xticklabels(categories, fontsize=11)
     ax.set_ylim(0, 110)

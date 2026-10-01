@@ -82,6 +82,10 @@ def test_metrics_calculation_handmade_set():
     assert abs(metrics["top1_accuracy"] - (1.0 / 3.0)) < 1e-4
     assert abs(metrics["top2_accuracy"] - (2.0 / 3.0)) < 1e-4
     assert abs(metrics["dept_routing_accuracy"] - (2.0 / 3.0)) < 1e-4
+    assert abs(metrics["dept_precision"] - (2.0 / 3.0)) < 1e-4
+    assert abs(metrics["dept_recall"] - 0.4) < 1e-4
+    assert abs(metrics["dept_f1"] - 0.5) < 1e-4
+    assert metrics["dept_exact_match"] == 0.0
     assert abs(metrics["baseline_top1_accuracy"] - (1.0 / 3.0)) < 1e-4
     assert metrics["mean_confidence_correct"] > metrics["mean_confidence_incorrect"]
 
@@ -95,3 +99,11 @@ def test_eval_runs_offline_under_60s():
     assert "metrics" in results
     assert results["metrics"]["top1_accuracy"] >= 0.70
     assert results["metrics"]["top2_accuracy"] >= 0.85
+
+
+def test_department_prediction_uses_only_top_cause():
+    results = run_eval(Path("backtest/scenarios"))
+    by_id = {p["scenario_id"]: p for p in results["predictions"]}
+    # The runner-up for this pipe burst is DRAIN_BLOCKAGE, whose departments
+    # must not be added to the primary route.
+    assert set(by_id["scen_pipe_ejipura_10"]["pred_depts"]) == {"water_board"}

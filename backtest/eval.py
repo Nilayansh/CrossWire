@@ -64,13 +64,13 @@ def evaluate_single_scenario(scenario: dict[str, Any]) -> dict[str, Any]:
     pred_top2 = ranked[1][0].value if len(ranked) > 1 else pred_top1
     confidence = ranked[0][1]
 
-    # Predict departments from top-2 hypotheses
+    # Route from the leading cause only. Including the runner-up makes the
+    # routing result look better by adding speculative departments.
     pred_depts = set()
-    for hyp, _ in ranked[:2]:
-        for d in HYPOTHESIS_DEPARTMENTS.get(hyp, []):
-            norm = DEPT_CANONICAL_MAP.get(d.lower().strip())
-            if norm:
-                pred_depts.add(norm)
+    for d in HYPOTHESIS_DEPARTMENTS.get(ranked[0][0], []):
+        norm = DEPT_CANONICAL_MAP.get(d.lower().strip())
+        if norm:
+            pred_depts.add(norm)
 
     baseline_pred, baseline_depts = compute_baseline_prediction(tickets)
 
@@ -97,6 +97,9 @@ def calculate_metrics(predictions: list[dict[str, Any]]) -> dict[str, float]:
     dept_correct = 0
     baseline_top1_correct = 0
     baseline_dept_correct = 0
+    dept_tp = dept_fp = dept_fn = 0
+    baseline_dept_tp = baseline_dept_fp = baseline_dept_fn = 0
+    dept_exact = baseline_dept_exact = 0
 
     confidences_correct: list[float] = []
     confidences_incorrect: list[float] = []
@@ -115,14 +118,26 @@ def calculate_metrics(predictions: list[dict[str, Any]]) -> dict[str, float]:
         if gt_h in (p["pred_top1"], p["pred_top2"]):
             top2_correct += 1
 
-        if any(d in gt_d for d in p["pred_depts"]):
+        pred_d = set(p["pred_depts"])
+        baseline_d = set(p["baseline_depts"])
+        if pred_d & gt_d:
             dept_correct += 1
+        if pred_d == gt_d:
+            dept_exact += 1
+        dept_tp += len(pred_d & gt_d)
+        dept_fp += len(pred_d - gt_d)
+        dept_fn += len(gt_d - pred_d)
 
         if p["baseline_pred"] == gt_h:
             baseline_top1_correct += 1
 
         if any(d in gt_d for d in p["baseline_depts"]):
             baseline_dept_correct += 1
+        if baseline_d == gt_d:
+            baseline_dept_exact += 1
+        baseline_dept_tp += len(baseline_d & gt_d)
+        baseline_dept_fp += len(baseline_d - gt_d)
+        baseline_dept_fn += len(gt_d - baseline_d)
 
     mean_conf_corr = (
         sum(confidences_correct) / len(confidences_correct) if confidences_correct else 0.0
@@ -131,13 +146,32 @@ def calculate_metrics(predictions: list[dict[str, Any]]) -> dict[str, float]:
         sum(confidences_incorrect) / len(confidences_incorrect) if confidences_incorrect else 0.0
     )
 
+    def prf(tp: int, fp: int, fn: int) -> tuple[float, float, float]:
+        precision = tp / (tp + fp) if tp + fp else 0.0
+        recall = tp / (tp + fn) if tp + fn else 0.0
+        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+        return precision, recall, f1
+
+    dept_precision, dept_recall, dept_f1 = prf(dept_tp, dept_fp, dept_fn)
+    baseline_dept_precision, baseline_dept_recall, baseline_dept_f1 = prf(
+        baseline_dept_tp, baseline_dept_fp, baseline_dept_fn
+    )
+
     return {
         "total_scenarios": float(total),
         "top1_accuracy": top1_correct / total,
         "top2_accuracy": top2_correct / total,
         "dept_routing_accuracy": dept_correct / total,
+        "dept_exact_match": dept_exact / total,
+        "dept_precision": dept_precision,
+        "dept_recall": dept_recall,
+        "dept_f1": dept_f1,
         "baseline_top1_accuracy": baseline_top1_correct / total,
         "baseline_dept_accuracy": baseline_dept_correct / total,
+        "baseline_dept_exact_match": baseline_dept_exact / total,
+        "baseline_dept_precision": baseline_dept_precision,
+        "baseline_dept_recall": baseline_dept_recall,
+        "baseline_dept_f1": baseline_dept_f1,
         "mean_confidence_correct": mean_conf_corr,
         "mean_confidence_incorrect": mean_conf_inc,
     }
@@ -174,6 +208,8 @@ def main() -> None:
     print(f"{'Top-1 Root Cause Accuracy':<35} | {m['top1_accuracy']:>10.1%} | {m['baseline_top1_accuracy']:>8.1%}")
     print(f"{'Top-2 Root Cause Accuracy':<35} | {m['top2_accuracy']:>10.1%} | {'N/A':>8}")
     print(f"{'Department Routing Accuracy':<35} | {m['dept_routing_accuracy']:>10.1%} | {m['baseline_dept_accuracy']:>8.1%}")
+    print(f"{'Department Exact Match':<35} | {m['dept_exact_match']:>10.1%} | {m['baseline_dept_exact_match']:>8.1%}")
+    print(f"{'Department Micro F1':<35} | {m['dept_f1']:>10.1%} | {m['baseline_dept_f1']:>8.1%}")
     print("-" * 65)
     print(f"{'Mean Confidence (Correct Top-1)':<35} | {m['mean_confidence_correct']:>10.1%} | {'N/A':>8}")
     print(f"{'Mean Confidence (Incorrect)':<35} | {m['mean_confidence_incorrect']:>10.1%} | {'N/A':>8}")
