@@ -173,6 +173,25 @@ def create_app(
     async def health():
         return HealthResponse()
 
+    @app.post("/system/reset", tags=["System"])
+    async def reset_system():
+        """Clear all active incidents, tickets, and pipeline states for a clean slate."""
+        if hasattr(t_repo, "_tickets"):
+            t_repo._tickets.clear()
+        if hasattr(i_repo, "_incidents"):
+            i_repo._incidents.clear()
+        if hasattr(e_repo, "_evidence"):
+            e_repo._evidence.clear()
+        if hasattr(e_repo, "_incident_map"):
+            e_repo._incident_map.clear()
+        trace_store.clear()
+        pipeline_cache.clear()
+        if hasattr(detector, "_assigned_tickets"):
+            detector._assigned_tickets.clear()
+        if hasattr(detector, "_last_investigation_ts"):
+            detector._last_investigation_ts.clear()
+        return {"status": "ok", "message": "All incident and ticket data wiped. Clean slate ready."}
+
     @app.post("/tickets", response_model=TicketIngestResponse, tags=["Tickets"])
     async def ingest_ticket(ticket: Ticket):
         # Recalculate H3 cell based on true coordinates

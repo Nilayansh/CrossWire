@@ -20,52 +20,9 @@ const PRESET_HOTSPOTS = [
   { name: 'Whitefield Hope Farm', lat: 12.984, lon: 77.752, h3: '8861892557fffff' },
 ];
 
-const PRESET_SAMPLES = [
-  {
-    lang: 'kn' as const,
-    text: 'ಬೆಳ್ಳಂದೂರು ಇಕೋಸ್ಪೇಸ್ ಮುಂದೆ ಭಾರಿ ನೀರು ನಿಂತಿದೆ, ವಾಹನಗಳು ಸಾಗುತ್ತಿಲ್ಲ',
-    category: 'waterlogging',
-    depth: 'knee' as const,
-    severity: 4,
-    spotIndex: 0,
-  },
-  {
-    lang: 'en' as const,
-    text: 'Outer ring road service lane completely flooded near Central Mall, basements inundated',
-    category: 'waterlogging',
-    depth: 'waist' as const,
-    severity: 5,
-    spotIndex: 1,
-  },
-  {
-    lang: 'kn' as const,
-    text: 'ವಿದ್ಯುತ್ ಕಂಬದಿಂದ ಕಿಡಿ ಬರುತ್ತಿದೆ ಮತ್ತು ಸಬ್‌ಸ್ಟೇಷನ್ ಬಳಿ ಕರೆಂಟ್ ಹೋಗಿದೆ',
-    category: 'power',
-    depth: null,
-    severity: 5,
-    spotIndex: 2,
-  },
-  {
-    lang: 'en' as const,
-    text: 'Severe sewage drain overflow and silt accumulation blocking storm culvert',
-    category: 'sewage',
-    depth: 'knee' as const,
-    severity: 4,
-    spotIndex: 0,
-  },
-  {
-    lang: 'en' as const,
-    text: 'Outer Ring Road gridlock: 2.5km stationary vehicle queue between Marathahalli and Ecospace',
-    category: 'traffic',
-    depth: null,
-    severity: 4,
-    spotIndex: 0,
-  },
-];
-
 export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }) => {
-  const [lang, setLang] = useState<'en' | 'kn'>('kn');
-  const [text, setText] = useState('ಬೆಳ್ಳಂದೂರು ಇಕೋಸ್ಪೇಸ್ ಮುಂದೆ ಭಾರಿ ನೀರು ನಿಂತಿದೆ');
+  const [lang, setLang] = useState<'en' | 'kn'>('en');
+  const [text, setText] = useState('');
   const [category, setCategory] = useState('waterlogging');
   const [severity, setSeverity] = useState(4);
   const [depth, setDepth] = useState<'ankle' | 'knee' | 'waist' | 'vehicle' | null>('knee');
@@ -235,15 +192,6 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
     reader.readAsDataURL(file);
   };
 
-  const applySample = (sample: typeof PRESET_SAMPLES[0]) => {
-    setLang(sample.lang);
-    setText(sample.text);
-    handleCategoryChange(sample.category);
-    setDepth(sample.depth);
-    setSeverity(sample.severity);
-    setSpot(PRESET_HOTSPOTS[sample.spotIndex]);
-  };
-
   const handleSearchLocation = async () => {
     const q = searchQuery.trim();
     if (!q) return;
@@ -365,25 +313,6 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
           </button>
         </div>
 
-        {/* Quick Sample Presets */}
-        <div className="space-y-2 bg-bone border border-borderSubtle p-3">
-          <div className="flex items-center gap-1.5 text-xs font-mono text-textMuted font-bold">
-            <Sparkles className="w-3.5 h-3.5 text-black" />
-            <span>Quick-Fill Live Complaint Templates:</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {PRESET_SAMPLES.map((s, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => applySample(s)}
-                className="text-xs font-mono border border-black bg-white px-2.5 py-1 hover:bg-black hover:text-white transition-colors text-left cursor-pointer"
-              >
-                {s.lang === 'kn' ? '🇮🇳 Kannada:' : '🇬🇧 English:'} {s.category}
-              </button>
-            ))}
-          </div>
-        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Statement & Voice Input */}

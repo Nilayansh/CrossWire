@@ -11,6 +11,7 @@ import {
   submitDecision,
   verifyIncident,
   loadScenario,
+  resetSystem,
 } from './api/client';
 import { Incident, Ticket, Dossier, ActionProposal } from './types/api';
 
@@ -75,6 +76,23 @@ export default function App() {
     }
   };
 
+  const handleReset = async () => {
+    try {
+      setLoading(true);
+      await resetSystem();
+      setIncident(null);
+      setAllIncidents([]);
+      setTickets([]);
+      setDossier(null);
+      setActions([]);
+      setActiveStage(1);
+    } catch (e) {
+      console.error('Failed to reset system:', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleAuthorize = async (approvedIds?: string[], officer?: string) => {
     if (!incident) return;
     setIsSubmitting(true);
@@ -121,6 +139,7 @@ export default function App() {
         onOpenIntake={() => setIsIntakeOpen(true)}
         onLoadScenario={handleScenarioLoad}
         onRefresh={() => loadDataForIncident(incident?.id)}
+        onReset={handleReset}
         isLoading={loading}
       />
 

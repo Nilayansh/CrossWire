@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Incident } from '../../types/api';
-import { Plus, RefreshCw, Sparkles } from 'lucide-react';
+import { Plus, RefreshCw, Sparkles, RotateCcw } from 'lucide-react';
 
 interface HeaderNavProps {
   activeStage: 1 | 2 | 3 | 4;
@@ -11,6 +11,7 @@ interface HeaderNavProps {
   onOpenIntake: () => void;
   onLoadScenario: () => Promise<void>;
   onRefresh: () => Promise<void>;
+  onReset: () => Promise<void>;
   isLoading: boolean;
 }
 
@@ -23,6 +24,7 @@ export const HeaderNav: FC<HeaderNavProps> = ({
   onOpenIntake,
   onLoadScenario,
   onRefresh,
+  onReset,
   isLoading,
 }) => {
   const stages = [
@@ -115,6 +117,16 @@ export const HeaderNav: FC<HeaderNavProps> = ({
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Scenario</span>
+          </button>
+
+          <button
+            onClick={onReset}
+            disabled={isLoading}
+            className="border border-red-600 text-red-600 px-2.5 py-1 bg-white hover:bg-red-600 hover:text-white transition-colors font-bold flex items-center gap-1 cursor-pointer"
+            title="Clear all tickets and incidents to start from scratch"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Reset</span>
           </button>
 
           <button

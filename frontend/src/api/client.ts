@@ -120,3 +120,11 @@ export async function geocodeLocation(query: string): Promise<{
   }
   return res.json();
 }
+
+export async function resetSystem(): Promise<{ status: string; message: string }> {
+  const res = await fetch(`${BASE_URL}/system/reset`, { method: 'POST' });
+  if (!res.ok) {
+    throw new Error(`Failed to reset system: ${res.statusText}`);
+  }
+  return res.json();
+}
