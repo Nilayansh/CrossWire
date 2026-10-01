@@ -1,0 +1,1 @@
+"""Investigator module for NammaTwin."""
