@@ -1,11 +1,13 @@
 from typing import TypeVar, Type, Any, Optional
 from pydantic import BaseModel
 
+from app.adapters.llm_adapter import LLMAdapter
+
 T = TypeVar("T", bound=BaseModel)
 
 
 class LLM:
-    """Production LLM wrapper. In tests, use FakeLLM."""
+    """Production LLM wrapper. Supports direct API calls and universal framework adapter."""
 
     @classmethod
     def structured(
@@ -15,11 +17,12 @@ class LLM:
         tier: str = "fast",
         system_prompt: Optional[str] = None,
     ) -> T:
-        """Call LLM with structured output constraint.
-        Requires valid API key when not mocked.
-        """
-        raise NotImplementedError(
-            "Live LLM calls require API credentials. For testing and development, use FakeLLM."
+        """Call LLM with structured output constraint through universal adapter."""
+        return LLMAdapter.structured(
+            schema=schema,
+            prompt=prompt,
+            tier=tier,
+            system_prompt=system_prompt,
         )
 
 

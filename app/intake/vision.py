@@ -37,8 +37,8 @@ def depth(photo_bytes: bytes) -> tuple[Optional[Literal["ankle", "knee", "waist"
         except Exception:
             pass
 
-    # Live multimodal LLM inspection if API key present
-    if settings.OPENAI_API_KEY and not settings.DEMO_MODE:
+    # Live multimodal LLM inspection if direct backend and API key present
+    if settings.LLM_BACKEND == "direct" and settings.OPENAI_API_KEY and not settings.DEMO_MODE:
         try:
             b64_img = base64.b64encode(photo_bytes).decode("utf-8")
             url = "https://api.openai.com/v1/chat/completions"

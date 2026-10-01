@@ -10,6 +10,9 @@ class Settings(BaseSettings):
 
     DEMO_MODE: bool = True
     ENVIRONMENT: str = "development"
+    LLM_BACKEND: str = "framework"  # "framework" (universal adapter) or "direct" (OpenAI / Sarvam)
+    FRAMEWORK_BASE_URL: str = "http://localhost:11434/v1"
+    OPENAI_BASE_URL: str = "https://api.openai.com/v1"
     OPENAI_API_KEY: str = ""
     SARVAM_API_KEY: str = ""
     TOMTOM_API_KEY: str = ""
