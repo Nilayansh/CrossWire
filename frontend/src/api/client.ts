@@ -75,3 +75,49 @@ export async function verifyIncident(
   }
   return res.json();
 }
+
+export async function processAudio(base64Data: string): Promise<{
+  transcript: string;
+  lang: string;
+  text_en: string;
+  category: string;
+  severity: number;
+}> {
+  const formData = new FormData();
+  formData.append('base64_data', base64Data);
+  const res = await fetch(`${BASE_URL}/intake/audio`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    throw new Error(`Audio processing error: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function fetchTrafficFlow(lat = 12.926, lon = 77.683): Promise<{
+  current_speed: number;
+  free_flow_speed: number;
+  speed_ratio: number;
+  congestion: string;
+  summary: string;
+}> {
+  const res = await fetch(`${BASE_URL}/traffic/flow?lat=${lat}&lon=${lon}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch traffic flow: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function geocodeLocation(query: string): Promise<{
+  lat: number;
+  lon: number;
+  confidence: number;
+  h3_r8: string;
+}> {
+  const res = await fetch(`${BASE_URL}/intake/geocode?query=${encodeURIComponent(query)}`);
+  if (!res.ok) {
+    throw new Error(`Failed to geocode location: ${res.statusText}`);
+  }
+  return res.json();
+}

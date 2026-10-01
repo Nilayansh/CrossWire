@@ -23,6 +23,7 @@ export interface Ticket {
   photo_depth?: 'ankle' | 'knee' | 'waist' | 'vehicle' | null;
   reporter_chat_id?: string | null;
   is_synthetic?: boolean;
+  image_data?: string | null;
 }
 
 export interface Incident {
@@ -59,6 +60,7 @@ export interface Dossier {
 }
 
 export interface ActionProposal {
+  id?: string;
   dept: 'stormwater' | 'power_utility' | 'sewerage' | 'traffic_police' | 'solid_waste' | 'water_board';
   action: string;
   target_latlon?: [number, number] | null;
@@ -81,6 +83,8 @@ export interface DecisionPayload {
   approved: boolean;
   modified_actions?: ActionProposal[] | null;
   feedback?: string | null;
+  approved_action_ids?: string[];
+  officer?: string;
 }
 
 export interface VerifyResponse {

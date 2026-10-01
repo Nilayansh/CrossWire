@@ -31,3 +31,26 @@ class VerifyResponse(BaseModel):
     status: str
     verify_result: str
     fast_forward_min: int
+
+
+class AudioIntakeResponse(BaseModel):
+    transcript: str
+    lang: str
+    text_en: str
+    category: str
+    severity: int
+
+
+class TrafficFlowResponse(BaseModel):
+    current_speed: float
+    free_flow_speed: float
+    speed_ratio: float
+    congestion: str
+    summary: str
+
+
+class GeocodeResponse(BaseModel):
+    lat: float
+    lon: float
+    confidence: float
+    h3_r8: str

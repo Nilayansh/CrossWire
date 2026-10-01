@@ -31,8 +31,24 @@ class TelegramTicketDispatcher:
             return True
 
 
-# Global dispatcher instance
-dispatcher = TelegramTicketDispatcher(direct=True)
+# Global dispatcher instance (defaults to live API)
+dispatcher = TelegramTicketDispatcher(direct=False)
+
+
+async def handle_start(update: Any, context: Any = None) -> None:
+    """Handle /start command with interactive guidance."""
+    msg = (
+        "🚨 *NammaTwin Bengaluru Civic Emergency Bot*\n"
+        "ನಮಸ್ಕಾರ! Welcome to the autonomous multi-agency helpline.\n\n"
+        "You can report any civic issue directly:\n"
+        "• 📝 *Text:* Describe in Kannada or English (e.g., 'ವಿದ್ಯುತ್ ಕಂಬದಿಂದ ಕಿಡಿ ಬರುತ್ತಿದೆ' or 'Flooding at Ecospace')\n"
+        "• 🎙️ *Voice Note:* Speak in Kannada or English — transcribed via Sarvam AI\n"
+        "• 📸 *Photo:* Send photo of water depth — automatically classified\n"
+        "• 📍 *Location Pin:* Send your GPS pin to assign to an H3 hex cell\n\n"
+        "Our system cross-references KSNDMC rainfall, BESCOM power outages, BWSSB drains, and TomTom traffic to dispatch emergency crews."
+    )
+    if update.message and hasattr(update.message, "reply_text"):
+        await update.message.reply_text(msg, parse_mode="Markdown")
 
 
 async def handle_text(update: Any, context: Any = None) -> Optional[Ticket]:
@@ -50,7 +66,10 @@ async def handle_text(update: Any, context: Any = None) -> Optional[Ticket]:
 
     if update.message and hasattr(update.message, "reply_text"):
         await update.message.reply_text(
-            f"✅ Ticket registered [{ticket.id}]: {ticket.category} near {ticket.text_en[:30]}..."
+            f"✅ Ticket registered [{ticket.id}]\n"
+            f"Category: {ticket.category.upper()}\n"
+            f"Location: ({ticket.lat:.4f}, {ticket.lon:.4f}) | H3: {ticket.h3_r8[:8]}...\n"
+            f"Status: Ingested into multi-agency cluster detector."
         )
     return ticket
 
@@ -144,12 +163,12 @@ def start_bot(direct: bool = True, token: Optional[str] = None):
         print("Telegram bot token not configured. Running in offline/mock mode.")
         return
 
-    from telegram.ext import ApplicationBuilder, MessageHandler, filters
-
+    from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters
     global dispatcher
     dispatcher = TelegramTicketDispatcher(direct=direct)
 
     app = ApplicationBuilder().token(bot_token).build()
+    app.add_handler(CommandHandler(["start", "help"], handle_start))
     app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_text))
     app.add_handler(MessageHandler(filters.VOICE, handle_voice))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))

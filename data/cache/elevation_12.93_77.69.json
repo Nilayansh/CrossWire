@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "dataset": "srtm30m",
+      "elevation": 882.0,
+      "location": {
+        "lat": 12.927,
+        "lng": 77.685
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 897.0,
+      "location": {
+        "lat": 12.9257,
+        "lng": 77.6949
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 890.0,
+      "location": {
+        "lat": 12.9332,
+        "lng": 77.6908
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 879.0,
+      "location": {
+        "lat": 12.9333,
+        "lng": 77.6823
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 882.0,
+      "location": {
+        "lat": 12.9258,
+        "lng": 77.678
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 877.0,
+      "location": {
+        "lat": 12.9183,
+        "lng": 77.6821
+      }
+    },
+    {
+      "dataset": "srtm30m",
+      "elevation": 889.0,
+      "location": {
+        "lat": 12.9183,
+        "lng": 77.6905
+      }
+    }
+  ],
+  "status": "OK"
+}

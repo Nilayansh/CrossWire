@@ -75,13 +75,15 @@ export default function App() {
     }
   };
 
-  const handleAuthorize = async () => {
+  const handleAuthorize = async (approvedIds?: string[], officer?: string) => {
     if (!incident) return;
     setIsSubmitting(true);
     try {
       await submitDecision(incident.id, {
         incident_id: incident.id,
         approved: true,
+        approved_action_ids: approvedIds || actions.map((a, i) => a.id || `act-${i + 1}`),
+        officer: officer || 'Chief Disaster Coordinator, BBMP Central Cell',
       });
       setIncident({ ...incident, status: 'dispatched' });
       await loadDataForIncident(incident.id);

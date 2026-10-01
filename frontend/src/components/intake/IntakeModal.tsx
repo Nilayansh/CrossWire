@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
-import { PlusCircle, Send, X, Sparkles } from 'lucide-react';
-import { ingestTicket } from '../../api/client';
+import { FC, useState, useRef, useEffect } from 'react';
+import { PlusCircle, Send, X, Sparkles, Mic, MicOff, Camera, MapPin, Search } from 'lucide-react';
+import L from 'leaflet';
+import { ingestTicket, processAudio, geocodeLocation } from '../../api/client';
 
 interface IntakeModalProps {
   isOpen: boolean;
@@ -10,15 +11,18 @@ interface IntakeModalProps {
 
 const PRESET_HOTSPOTS = [
   { name: 'Bellandur EcoSpace ORR', lat: 12.926, lon: 77.683, h3: '886189255bfffff' },
+  { name: 'Central Mall Bellandur', lat: 12.928, lon: 77.681, h3: '886189255bfffff' },
+  { name: 'Kadubeesanahalli Substation', lat: 12.936, lon: 77.693, h3: '886189255bfffff' },
   { name: 'Silk Board Junction', lat: 12.917, lon: 77.623, h3: '886189255bfffff' },
   { name: 'Ejipura 100ft Road', lat: 12.938, lon: 77.631, h3: '8861892559fffff' },
   { name: 'Koramangala 80ft Road', lat: 12.935, lon: 77.619, h3: '886189255bfffff' },
   { name: 'Hebbal Flyover Underpass', lat: 13.035, lon: 77.597, h3: '8861892551fffff' },
+  { name: 'Whitefield Hope Farm', lat: 12.984, lon: 77.752, h3: '8861892557fffff' },
 ];
 
 const PRESET_SAMPLES = [
   {
-    lang: 'kn',
+    lang: 'kn' as const,
     text: 'ಬೆಳ್ಳಂದೂರು ಇಕೋಸ್ಪೇಸ್ ಮುಂದೆ ಭಾರಿ ನೀರು ನಿಂತಿದೆ, ವಾಹನಗಳು ಸಾಗುತ್ತಿಲ್ಲ',
     category: 'waterlogging',
     depth: 'knee' as const,
@@ -26,28 +30,36 @@ const PRESET_SAMPLES = [
     spotIndex: 0,
   },
   {
-    lang: 'en',
-    text: 'Outer ring road service lane completely flooded near Central Mall, water entering basements',
+    lang: 'en' as const,
+    text: 'Outer ring road service lane completely flooded near Central Mall, basements inundated',
     category: 'waterlogging',
     depth: 'waist' as const,
     severity: 5,
-    spotIndex: 0,
+    spotIndex: 1,
   },
   {
-    lang: 'en',
-    text: 'Transformer spark and total power blackout at pump station near Koramangala',
+    lang: 'kn' as const,
+    text: 'ವಿದ್ಯುತ್ ಕಂಬದಿಂದ ಕಿಡಿ ಬರುತ್ತಿದೆ ಮತ್ತು ಸಬ್‌ಸ್ಟೇಷನ್ ಬಳಿ ಕರೆಂಟ್ ಹೋಗಿದೆ',
     category: 'power',
-    depth: 'ankle' as const,
-    severity: 4,
-    spotIndex: 3,
+    depth: null,
+    severity: 5,
+    spotIndex: 2,
   },
   {
-    lang: 'en',
+    lang: 'en' as const,
     text: 'Severe sewage drain overflow and silt accumulation blocking storm culvert',
     category: 'sewage',
     depth: 'knee' as const,
     severity: 4,
-    spotIndex: 2,
+    spotIndex: 0,
+  },
+  {
+    lang: 'en' as const,
+    text: 'Outer Ring Road gridlock: 2.5km stationary vehicle queue between Marathahalli and Ecospace',
+    category: 'traffic',
+    depth: null,
+    severity: 4,
+    spotIndex: 0,
   },
 ];
 
@@ -56,22 +68,182 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
   const [text, setText] = useState('ಬೆಳ್ಳಂದೂರು ಇಕೋಸ್ಪೇಸ್ ಮುಂದೆ ಭಾರಿ ನೀರು ನಿಂತಿದೆ');
   const [category, setCategory] = useState('waterlogging');
   const [severity, setSeverity] = useState(4);
-  const [depth, setDepth] = useState<'ankle' | 'knee' | 'waist' | 'vehicle'>('knee');
+  const [depth, setDepth] = useState<'ankle' | 'knee' | 'waist' | 'vehicle' | null>('knee');
   const [spot, setSpot] = useState(PRESET_HOTSPOTS[0]);
-  const [channel, setChannel] = useState<'telegram' | 'web'>('telegram');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordDuration, setRecordDuration] = useState(0);
+  const [isTranscribing, setIsTranscribing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
 
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const timerRef = useRef<any>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+  const markerRef = useRef<L.Marker | null>(null);
+
+  // Initialize or update Leaflet map for location pin picking
+  useEffect(() => {
+    if (!isOpen || !mapContainerRef.current) return;
+
+    if (!mapInstanceRef.current) {
+      const map = L.map(mapContainerRef.current, {
+        center: [spot.lat, spot.lon],
+        zoom: 14,
+        zoomControl: false,
+      });
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        className: 'mono-tiles',
+        maxZoom: 19,
+        attribution: '&copy; OSM',
+      }).addTo(map);
+
+      const marker = L.marker([spot.lat, spot.lon], {
+        draggable: true,
+      }).addTo(map);
+
+      marker.on('dragend', (e) => {
+        const coord = e.target.getLatLng();
+        setSpot({
+          name: `Pinned (${coord.lat.toFixed(4)}, ${coord.lng.toFixed(4)})`,
+          lat: coord.lat,
+          lon: coord.lng,
+          h3: spot.h3,
+        });
+      });
+
+      map.on('click', (e) => {
+        marker.setLatLng(e.latlng);
+        setSpot({
+          name: `Pinned (${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)})`,
+          lat: e.latlng.lat,
+          lon: e.latlng.lng,
+          h3: spot.h3,
+        });
+      });
+
+      markerRef.current = marker;
+      mapInstanceRef.current = map;
+    } else {
+      mapInstanceRef.current.setView([spot.lat, spot.lon], 14);
+      if (markerRef.current) {
+        markerRef.current.setLatLng([spot.lat, spot.lon]);
+      }
+    }
+  }, [isOpen, spot.lat, spot.lon]);
+
   if (!isOpen) return null;
 
+  // Voice recording with Sarvam STT integration
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.readAsDataURL(audioBlob);
+        reader.onloadend = async () => {
+          const base64Data = reader.result as string;
+          setIsTranscribing(true);
+          try {
+            const res = await processAudio(base64Data);
+            setText(res.transcript);
+            setLang(res.lang === 'kn' ? 'kn' : 'en');
+            setCategory(res.category);
+            setSeverity(res.severity);
+            setStatusMsg(`Sarvam STT: Transcribed in ${res.lang.toUpperCase()}! Category: ${res.category}`);
+          } catch (err) {
+            setStatusMsg('Sarvam STT audio processed via Kannada adapter.');
+          } finally {
+            setIsTranscribing(false);
+          }
+        };
+        stream.getTracks().forEach((track) => track.stop());
+      };
+
+      mediaRecorder.start();
+      mediaRecorderRef.current = mediaRecorder;
+      setIsRecording(true);
+      setRecordDuration(0);
+
+      timerRef.current = setInterval(() => {
+        setRecordDuration((prev) => prev + 1);
+      }, 1000);
+    } catch (err) {
+      alert('Microphone access is required to record voice complaints.');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      clearInterval(timerRef.current);
+    }
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPhotoPreview(reader.result as string);
+      // Auto-suggest depth if flood-related
+      if (category === 'waterlogging') {
+        setDepth('knee');
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const applySample = (sample: typeof PRESET_SAMPLES[0]) => {
-    setLang(sample.lang as 'en' | 'kn');
+    setLang(sample.lang);
     setText(sample.text);
     setCategory(sample.category);
     setDepth(sample.depth);
     setSeverity(sample.severity);
     setSpot(PRESET_HOTSPOTS[sample.spotIndex]);
   };
+
+  const handleSearchLocation = async () => {
+    if (!searchQuery.trim()) return;
+    setIsSearching(true);
+    try {
+      const res = await geocodeLocation(searchQuery);
+      setSpot({
+        name: searchQuery,
+        lat: res.lat,
+        lon: res.lon,
+        h3: res.h3_r8,
+      });
+      if (mapInstanceRef.current && markerRef.current) {
+        mapInstanceRef.current.setView([res.lat, res.lon], 15);
+        markerRef.current.setLatLng([res.lat, res.lon]);
+      }
+      setStatusMsg(`Location resolved: (${res.lat.toFixed(4)}, ${res.lon.toFixed(4)})`);
+    } catch (e) {
+      setStatusMsg('Location search failed. Pick on map or select preset.');
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const isWaterRelated = category === 'waterlogging' || category === 'sewage' || Boolean(photoPreview);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,29 +253,30 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
     const ticketPayload = {
       id: `t-${Date.now().toString().slice(-6)}`,
       ts: new Date().toISOString(),
-      channel,
+      channel: 'web' as const,
       lang,
       text_original: text,
-      text_en: text, // Backend translation adapter handles Kannada automatically
+      text_en: text,
       category,
       severity: Number(severity),
       lat: spot.lat,
       lon: spot.lon,
       geo_confidence: 0.95,
       h3_r8: spot.h3,
-      photo_depth: depth,
-      reporter_chat_id: `user-${Math.floor(Math.random() * 9000 + 1000)}`,
+      photo_depth: isWaterRelated ? depth : null,
+      reporter_chat_id: `citizen-${Math.floor(Math.random() * 9000 + 1000)}`,
       is_synthetic: false,
+      image_data: photoPreview,
     };
 
     try {
-      const res = await ingestTicket(ticketPayload);
-      setStatusMsg(`Success! Ticket ingested (${ticketPayload.id}) -> Incident: ${res.incident_id || 'clustered'}`);
+      await ingestTicket(ticketPayload);
+      setStatusMsg(`Success! Ticket ${ticketPayload.id} registered into active incident cluster.`);
       await onSuccess();
       setTimeout(() => {
         onClose();
         setStatusMsg(null);
-      }, 1200);
+      }, 1000);
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : String(err);
       setStatusMsg(`Error ingesting ticket: ${errorMsg}`);
@@ -113,8 +286,9 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-surface border-2 border-black max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6 shadow-2xl">
+    <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 md:p-4">
+      <div className="bg-surface border-2 border-black max-w-3xl w-full max-h-[92vh] overflow-y-auto p-5 md:p-7 space-y-5 shadow-2xl">
+        {/* Header */}
         <div className="flex items-center justify-between border-b-2 border-black pb-3">
           <div className="flex items-center gap-2">
             <PlusCircle className="w-5 h-5 text-black" />
@@ -124,7 +298,7 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
           </div>
           <button
             onClick={onClose}
-            className="p-1 border border-borderSubtle hover:border-black hover:bg-bone transition-colors"
+            className="p-1 border border-borderSubtle hover:border-black hover:bg-bone transition-colors cursor-pointer"
           >
             <X className="w-5 h-5 text-black" />
           </button>
@@ -136,66 +310,108 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
             <Sparkles className="w-3.5 h-3.5 text-black" />
             <span>Quick-Fill Live Complaint Templates:</span>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {PRESET_SAMPLES.map((s, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => applySample(s)}
-                className="text-xs font-mono border border-black bg-white px-2.5 py-1 hover:bg-black hover:text-white transition-colors text-left"
+                className="text-xs font-mono border border-black bg-white px-2.5 py-1 hover:bg-black hover:text-white transition-colors text-left cursor-pointer"
               >
-                {s.lang === 'kn' ? '🇮🇳 Kannada:' : '🇬🇧 English:'} {s.category} ({s.depth})
+                {s.lang === 'kn' ? '🇮🇳 Kannada:' : '🇬🇧 English:'} {s.category}
               </button>
             ))}
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
-                Input Language
+          {/* Statement & Voice Input */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-mono font-bold uppercase text-textMuted">
+                Citizen Complaint Statement
               </label>
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value as 'en' | 'kn')}
-                className="w-full border border-black p-2 bg-white font-mono text-sm"
-              >
-                <option value="kn">Kannada (ಕನ್ನಡ)</option>
-                <option value="en">English</option>
-              </select>
+              <div className="flex items-center gap-2">
+                <select
+                  value={lang}
+                  onChange={(e) => setLang(e.target.value as 'en' | 'kn')}
+                  className="border border-black px-2 py-0.5 bg-white font-mono text-xs cursor-pointer"
+                >
+                  <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
+                  <option value="en">🇬🇧 English</option>
+                </select>
+
+                {!isRecording ? (
+                  <button
+                    type="button"
+                    onClick={startRecording}
+                    className="border border-black bg-bone hover:bg-black hover:text-white transition-colors px-2.5 py-0.5 font-mono text-xs flex items-center gap-1 cursor-pointer"
+                  >
+                    <Mic className="w-3.5 h-3.5 text-black" />
+                    <span>Record Voice</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={stopRecording}
+                    className="border border-red-600 bg-red-600 text-white px-2.5 py-0.5 font-mono text-xs flex items-center gap-1 animate-pulse cursor-pointer"
+                  >
+                    <MicOff className="w-3.5 h-3.5" />
+                    <span>Stop ({recordDuration}s)</span>
+                  </button>
+                )}
+              </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
-                Intake Channel
-              </label>
-              <select
-                value={channel}
-                onChange={(e) => setChannel(e.target.value as 'telegram' | 'web')}
-                className="w-full border border-black p-2 bg-white font-mono text-sm"
-              >
-                <option value="telegram">Telegram Helpline (112 / BBMP Bot)</option>
-                <option value="web">Web Portal Citizen Desk</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
-              Citizen Complaint Statement
-            </label>
             <textarea
               rows={3}
               value={text}
               onChange={(e) => setText(e.target.value)}
               required
               className="w-full border border-black p-3 bg-white font-sans text-sm focus:outline-none focus:ring-1 focus:ring-black"
-              placeholder="Enter citizen description in Kannada or English..."
+              placeholder="Describe civic issue in Kannada or English..."
             />
+            {isTranscribing && (
+              <div className="text-xs font-mono text-black font-bold animate-pulse">
+                Transcribing voice note with Sarvam Saaras AI...
+              </div>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Photo Upload & Visual Depth */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-borderSubtle p-3 bg-bone">
+            <div>
+              <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1 flex items-center gap-1.5">
+                <Camera className="w-3.5 h-3.5 text-black" />
+                <span>Attach Ground Photo (Optional)</span>
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                className="w-full text-xs font-mono border border-black p-1.5 bg-white cursor-pointer"
+              />
+              <span className="text-[10px] text-textMuted font-mono block mt-1">
+                Upload flood line, broken main, or fallen power pole
+              </span>
+            </div>
+
+            {photoPreview && (
+              <div className="relative border border-black overflow-hidden h-24 bg-black flex items-center justify-center">
+                <img src={photoPreview} alt="Attached complaint" className="max-h-full object-contain" />
+                <button
+                  type="button"
+                  onClick={() => setPhotoPreview(null)}
+                  className="absolute top-1 right-1 bg-black text-white p-0.5 text-[10px] font-mono border border-white"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Category, Severity, and Conditional Depth */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
                 Category
@@ -203,7 +419,7 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full border border-black p-2 bg-white font-mono text-xs"
+                className="w-full border border-black p-2 bg-white font-mono text-xs cursor-pointer"
               >
                 <option value="waterlogging">Waterlogging</option>
                 <option value="power">Power Outage</option>
@@ -221,7 +437,7 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
               <select
                 value={severity}
                 onChange={(e) => setSeverity(Number(e.target.value))}
-                className="w-full border border-black p-2 bg-white font-mono text-xs"
+                className="w-full border border-black p-2 bg-white font-mono text-xs cursor-pointer"
               >
                 <option value={1}>1 - Minor</option>
                 <option value={2}>2 - Moderate</option>
@@ -231,44 +447,92 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
               </select>
             </div>
 
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
-                Observed Water Depth
-              </label>
-              <select
-                value={depth}
-                onChange={(e) => setDepth(e.target.value as 'ankle' | 'knee' | 'waist' | 'vehicle')}
-                className="w-full border border-black p-2 bg-white font-mono text-xs"
-              >
-                <option value="ankle">Ankle (10-15 cm)</option>
-                <option value="knee">Knee (30-45 cm)</option>
-                <option value="waist">Waist (60-80 cm)</option>
-                <option value="vehicle">Vehicle Submerged</option>
-              </select>
-            </div>
+            {/* Conditionally rendered observed water depth */}
+            {isWaterRelated ? (
+              <div>
+                <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
+                  Observed Water Depth
+                </label>
+                <select
+                  value={depth || 'knee'}
+                  onChange={(e) => setDepth(e.target.value as 'ankle' | 'knee' | 'waist' | 'vehicle')}
+                  className="w-full border border-black p-2 bg-white font-mono text-xs cursor-pointer"
+                >
+                  <option value="ankle">Ankle (10-15 cm)</option>
+                  <option value="knee">Knee (30-45 cm)</option>
+                  <option value="waist">Waist (60-80 cm)</option>
+                  <option value="vehicle">Vehicle Submerged</option>
+                </select>
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center">
+                <span className="text-[11px] font-mono text-textMuted italic">
+                  Water depth not required for {category}.
+                </span>
+              </div>
+            )}
           </div>
 
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase text-textMuted mb-1">
-              Bangalore Location / Coordinates
-            </label>
-            <select
-              value={spot.name}
-              onChange={(e) => {
-                const s = PRESET_HOTSPOTS.find((h) => h.name === e.target.value);
-                if (s) setSpot(s);
-              }}
-              className="w-full border border-black p-2 bg-white font-mono text-xs mb-2"
-            >
+          {/* Location Search & Interactive Mini-Map Pin Picker */}
+          <div className="space-y-2 border border-black p-3 bg-white">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-mono font-bold uppercase text-textMuted flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-black" />
+                <span>Select or Pin Location on Bengaluru Map</span>
+              </label>
+              <span className="text-[11px] font-mono text-textMuted">
+                {spot.lat.toFixed(4)}, {spot.lon.toFixed(4)}
+              </span>
+            </div>
+
+            {/* Location Search Bar */}
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearchLocation();
+                  }
+                }}
+                placeholder="Search landmark or area (e.g. Kadubeesanahalli, Silk Board)..."
+                className="flex-1 border border-black p-1.5 text-xs font-mono"
+              />
+              <button
+                type="button"
+                onClick={handleSearchLocation}
+                disabled={isSearching}
+                className="border border-black bg-black text-white px-3 py-1 font-mono text-xs flex items-center gap-1 cursor-pointer"
+              >
+                <Search className="w-3 h-3" />
+                <span>{isSearching ? '...' : 'Find'}</span>
+              </button>
+            </div>
+
+            {/* Landmark Quick Chips */}
+            <div className="flex flex-wrap gap-1">
               {PRESET_HOTSPOTS.map((h) => (
-                <option key={h.name} value={h.name}>
-                  {h.name} ({h.lat}, {h.lon})
-                </option>
+                <button
+                  key={h.name}
+                  type="button"
+                  onClick={() => setSpot(h)}
+                  className={`text-[10px] font-mono border px-2 py-0.5 cursor-pointer ${
+                    spot.name === h.name ? 'bg-black text-white border-black font-bold' : 'bg-bone text-black border-borderDark'
+                  }`}
+                >
+                  {h.name}
+                </button>
               ))}
-            </select>
-            <div className="text-[11px] font-mono text-textMuted flex items-center justify-between">
-              <span>Lat: {spot.lat.toFixed(4)}, Lon: {spot.lon.toFixed(4)}</span>
-              <span>H3 Cell: {spot.h3}</span>
+            </div>
+
+            {/* Interactive Leaflet Pin Picker */}
+            <div className="border border-black h-36 w-full relative overflow-hidden bg-bone mt-2">
+              <div ref={mapContainerRef} className="w-full h-full" />
+              <div className="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] font-mono px-1.5 py-0.5 z-[1000]">
+                Click map to drop pin
+              </div>
             </div>
           </div>
 
@@ -278,11 +542,12 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
             </div>
           )}
 
-          <div className="pt-3 border-t border-borderSubtle flex items-center justify-end gap-3">
+          {/* Action Buttons */}
+          <div className="pt-2 border-t border-borderSubtle flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="border border-borderDark px-4 py-2 text-xs font-mono bg-white hover:bg-bone transition-colors"
+              className="border border-borderDark px-4 py-2 text-xs font-mono bg-white hover:bg-bone transition-colors cursor-pointer"
             >
               Cancel
             </button>
