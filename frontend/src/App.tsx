@@ -69,6 +69,7 @@ export default function App() {
       const res = await loadScenario('bellandur_flood');
       const incId = (res as { incident_id?: string }).incident_id;
       await loadDataForIncident(incId);
+      setActiveStage(1);
     } catch (e) {
       console.error('Failed to load scenario:', e);
     } finally {

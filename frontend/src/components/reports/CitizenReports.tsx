@@ -18,6 +18,7 @@ export const CitizenReports: FC<CitizenReportsProps> = ({
   const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [isInjecting, setIsInjecting] = useState(false);
 
   const activeTicket = selectedTicketId
     ? tickets.find((t) => t.id === selectedTicketId) || tickets[0]
@@ -69,11 +70,19 @@ export const CitizenReports: FC<CitizenReportsProps> = ({
             + Submit New Citizen Report
           </button>
           <button
-            onClick={onLoadScenario}
-            className="border-2 border-black bg-bone hover:bg-black hover:text-white transition-colors px-6 py-2.5 font-mono text-xs font-bold flex items-center gap-2 cursor-pointer"
+            onClick={async () => {
+              setIsInjecting(true);
+              try {
+                await onLoadScenario();
+              } finally {
+                setIsInjecting(false);
+              }
+            }}
+            disabled={isInjecting}
+            className="border-2 border-black bg-bone hover:bg-black hover:text-white transition-colors px-6 py-2.5 font-mono text-xs font-bold flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
-            <Sparkles className="w-4 h-4" />
-            Load Bellandur Flood Cluster (14 Reports)
+            <Sparkles className={`w-4 h-4 ${isInjecting ? 'animate-spin' : ''}`} />
+            <span>{isInjecting ? 'Injecting 14 Reports...' : 'Load Bellandur Flood Cluster (14 Reports)'}</span>
           </button>
         </div>
       </div>

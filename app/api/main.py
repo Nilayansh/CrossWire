@@ -258,7 +258,7 @@ def create_app(
 
     @app.get("/incidents", response_model=list[Incident], tags=["Incidents"])
     async def list_incidents():
-        return i_repo.open()
+        return [i for i in i_repo.all() if i.status != "closed"]
 
     @app.get("/incidents/{incident_id}", response_model=IncidentDetailResponse, tags=["Incidents"])
     async def get_incident(incident_id: str):
@@ -289,6 +289,12 @@ def create_app(
         with open(fixture_path, encoding="utf-8") as f:
             tickets_data = json.load(f)
 
+        # Clear previous detector assigned tickets for these fixture IDs to allow re-loading
+        for td in tickets_data:
+            tid = td.get("id")
+            if hasattr(detector, "_assigned_tickets") and tid:
+                detector._assigned_tickets.discard(tid)
+
         last_inc = None
         for td in tickets_data:
             t = Ticket(**td)
@@ -298,23 +304,69 @@ def create_app(
                 last_inc = res_inc
                 i_repo.upsert(res_inc)
 
-        if last_inc:
-            all_tickets = t_repo.all()
-            inc_tickets = [t for t in all_tickets if t.id in last_inc.ticket_ids]
-            try:
-                res = pipe.start(last_inc, inc_tickets)
-                pipeline_cache[last_inc.id] = res
-                dossier = res.get("dossier")
-                if dossier and dossier.trace:
-                    trace_store[last_inc.id] = list(dossier.trace)
-                inc_dict = last_inc.model_dump()
-                inc_dict["status"] = res.get("status", "awaiting_approval")
-                i_repo.upsert(Incident(**inc_dict))
-            except Exception:
-                pass
-            return {"status": "ok", "scenario": name, "incident_id": last_inc.id, "tickets_loaded": len(tickets_data)}
+        # If detector didn't create a new incident (e.g. already existed or debounced), find or construct it
+        if not last_inc:
+            for inc in i_repo.all():
+                if any(td.get("id") in inc.ticket_ids for td in tickets_data):
+                    last_inc = inc
+                    break
 
-        return {"status": "ok", "scenario": name, "incident_id": None, "tickets_loaded": len(tickets_data)}
+        if not last_inc:
+            # Construct standard Bellandur flood incident from tickets
+            all_t_objects = [Ticket(**td) for td in tickets_data]
+            first_ticket = all_t_objects[0]
+            last_inc = Incident(
+                id="inc-004",
+                opened_at=first_ticket.ts,
+                status="open",
+                ticket_ids=[t.id for t in all_t_objects],
+                centroid=(12.927, 77.684),
+                cells=list(dict.fromkeys(t.h3_r8 for t in all_t_objects if t.h3_r8)),
+                category_mix={
+                    "waterlogging": sum(1 for t in all_t_objects if t.category == "waterlogging"),
+                    "power": sum(1 for t in all_t_objects if t.category == "power"),
+                    "traffic": sum(1 for t in all_t_objects if t.category == "traffic"),
+                    "sewage": sum(1 for t in all_t_objects if t.category == "sewage"),
+                },
+                reinvestigate=True,
+            )
+            i_repo.upsert(last_inc)
+
+        # Ensure all tickets are in t_repo and assigned
+        for td in tickets_data:
+            t = Ticket(**td)
+            t_repo.add(t)
+            if hasattr(detector, "_assigned_tickets"):
+                detector._assigned_tickets.add(t.id)
+
+        all_tickets = t_repo.all()
+        inc_tickets = [t for t in all_tickets if t.id in last_inc.ticket_ids]
+        if not inc_tickets:
+            inc_tickets = [Ticket(**td) for td in tickets_data]
+
+        try:
+            res = pipe.start(last_inc, inc_tickets)
+            pipeline_cache[last_inc.id] = res
+            dossier = res.get("dossier")
+            if dossier and dossier.trace:
+                trace_store[last_inc.id] = list(dossier.trace)
+            inc_dict = last_inc.model_dump()
+            inc_dict["status"] = res.get("status", "awaiting_approval")
+            last_inc = Incident(**inc_dict)
+            i_repo.upsert(last_inc)
+        except Exception:
+            inc_dict = last_inc.model_dump()
+            if inc_dict["status"] == "open":
+                inc_dict["status"] = "awaiting_approval"
+            last_inc = Incident(**inc_dict)
+            i_repo.upsert(last_inc)
+
+        return {
+            "status": "ok",
+            "scenario": name,
+            "incident_id": last_inc.id,
+            "tickets_loaded": len(tickets_data),
+        }
 
     @app.get("/incidents/{incident_id}/stream", tags=["Incidents"])
     async def stream_incident_trace(incident_id: str):
