@@ -1,0 +1,189 @@
+{
+  "id": "scen_traffic_tin_factory_14",
+  "tickets": [
+    {
+      "id": "t-scen_t-001",
+      "ts": "2026-09-05T08:04:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c9f\u0ccd\u0cb0\u0cbe\u0cab\u0cbf\u0c95\u0ccd \u0c9c\u0cbe\u0cae\u0ccd \u0c86\u0c97\u0cbf\u0ca6\u0cc6",
+      "text_en": "Heavy traffic jam",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.994368009114801,
+      "lon": 77.66318457778843,
+      "geo_confidence": 0.95,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-002",
+      "ts": "2026-09-05T08:08:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.993122721268717,
+      "lon": 77.66165580607739,
+      "geo_confidence": 0.93,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-003",
+      "ts": "2026-09-05T08:14:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.994279180409475,
+      "lon": 77.66330106110482,
+      "geo_confidence": 0.91,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-004",
+      "ts": "2026-09-05T08:19:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 4,
+      "lat": 12.99454638781025,
+      "lon": 77.66083825530723,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.994412298639316,
+      "lon": 77.66290299471963,
+      "geo_confidence": 0.91,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-006",
+      "ts": "2026-09-05T08:29:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.994295650191974,
+      "lon": 77.66393951274985,
+      "geo_confidence": 0.89,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-007",
+      "ts": "2026-09-05T08:32:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.993935922271454,
+      "lon": 77.66006241210093,
+      "geo_confidence": 0.86,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-008",
+      "ts": "2026-09-05T08:36:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Heavy traffic jam",
+      "text_en": "Heavy traffic jam",
+      "category": "traffic",
+      "severity": 5,
+      "lat": 12.993288591688822,
+      "lon": 77.66369335313622,
+      "geo_confidence": 0.86,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_traffic_tin_factory_14-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: TRAFFIC_SLOWDOWN",
+      "keys": [
+        "TRAFFIC_SLOWDOWN"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "TRAFFIC_SLOWDOWN"
+      }
+    },
+    {
+      "id": "ev-scen_traffic_tin_factory_14-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: NO_WATER_POWER_SIGNAL",
+      "keys": [
+        "NO_WATER_POWER_SIGNAL"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "NO_WATER_POWER_SIGNAL"
+      }
+    },
+    {
+      "id": "ev-scen_traffic_tin_factory_14-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DRY_WEATHER",
+      "keys": [
+        "DRY_WEATHER"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DRY_WEATHER"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "TRAFFIC_ONLY",
+  "ground_truth_depts": [
+    "traffic_police"
+  ]
+}

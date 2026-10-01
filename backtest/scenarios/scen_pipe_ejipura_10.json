@@ -1,0 +1,189 @@
+{
+  "id": "scen_pipe_ejipura_10",
+  "tickets": [
+    {
+      "id": "t-scen_p-001",
+      "ts": "2026-09-05T08:04:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.932679902894012,
+      "lon": 77.6291568555768,
+      "geo_confidence": 0.97,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-002",
+      "ts": "2026-09-05T08:06:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.93316606628013,
+      "lon": 77.63010828499547,
+      "geo_confidence": 0.86,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-003",
+      "ts": "2026-09-05T08:11:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.934050826707647,
+      "lon": 77.62822760457549,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-004",
+      "ts": "2026-09-05T08:15:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.935600934355968,
+      "lon": 77.63001905847521,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-005",
+      "ts": "2026-09-05T08:21:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.93423098332922,
+      "lon": 77.62981232904527,
+      "geo_confidence": 0.86,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-006",
+      "ts": "2026-09-05T08:25:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.934884004316856,
+      "lon": 77.62994756622706,
+      "geo_confidence": 0.98,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-007",
+      "ts": "2026-09-05T08:30:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.933414110251018,
+      "lon": 77.62759760797805,
+      "geo_confidence": 0.85,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-008",
+      "ts": "2026-09-05T08:37:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.933875970742571,
+      "lon": 77.62995059266062,
+      "geo_confidence": 0.95,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_pipe_ejipura_10-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LINEAR_SPREAD",
+      "keys": [
+        "LINEAR_SPREAD"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LINEAR_SPREAD"
+      }
+    },
+    {
+      "id": "ev-scen_pipe_ejipura_10-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DRY_WEATHER",
+      "keys": [
+        "DRY_WEATHER"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DRY_WEATHER"
+      }
+    },
+    {
+      "id": "ev-scen_pipe_ejipura_10-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_LT_5",
+      "keys": [
+        "RAIN_LT_5"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_LT_5"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "PIPE_BURST",
+  "ground_truth_depts": [
+    "water_board"
+  ]
+}

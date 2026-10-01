@@ -1,0 +1,176 @@
+{
+  "id": "scen_stp_marathahalli_08",
+  "tickets": [
+    {
+      "id": "t-scen_s-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c9f\u0ccd\u0cb0\u0cbe\u0cab\u0cbf\u0c95\u0ccd \u0c9c\u0cbe\u0cae\u0ccd \u0c86\u0c97\u0cbf\u0ca6\u0cc6",
+      "text_en": "Heavy traffic jam",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.937091621011726,
+      "lon": 77.69762267666515,
+      "geo_confidence": 0.9,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-002",
+      "ts": "2026-09-05T08:09:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 3,
+      "lat": 12.93493111026189,
+      "lon": 77.6966522905153,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-003",
+      "ts": "2026-09-05T08:11:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.937214699211404,
+      "lon": 77.69867671171886,
+      "geo_confidence": 0.9,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-004",
+      "ts": "2026-09-05T08:18:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 5,
+      "lat": 12.936433867615042,
+      "lon": 77.69993327213821,
+      "geo_confidence": 0.97,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.937607075917496,
+      "lon": 77.69873742953028,
+      "geo_confidence": 0.87,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-006",
+      "ts": "2026-09-05T08:28:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.935292641153724,
+      "lon": 77.69890252386007,
+      "geo_confidence": 0.92,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-007",
+      "ts": "2026-09-05T08:31:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.937326356642815,
+      "lon": 77.69914482288866,
+      "geo_confidence": 0.92,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-008",
+      "ts": "2026-09-05T08:36:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 4,
+      "lat": 12.9346106157803,
+      "lon": 77.69959988246072,
+      "geo_confidence": 0.9,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_stp_marathahalli_08-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: POWER_TICKETS_PRECEDE_SEWAGE",
+      "keys": [
+        "POWER_TICKETS_PRECEDE_SEWAGE"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "POWER_TICKETS_PRECEDE_SEWAGE"
+      }
+    },
+    {
+      "id": "ev-scen_stp_marathahalli_08-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LARGE_STP_SITE_NEARBY",
+      "keys": [
+        "LARGE_STP_SITE_NEARBY"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LARGE_STP_SITE_NEARBY"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "POWER_LED_STP_OVERFLOW",
+  "ground_truth_depts": [
+    "power_utility",
+    "sewerage"
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "id": "scen_rain_silkboard_02",
+  "tickets": [
+    {
+      "id": "t-scen_r-001",
+      "ts": "2026-09-05T08:02:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.915385803484918,
+      "lon": 77.622325061366,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-002",
+      "ts": "2026-09-05T08:06:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c95\u0cb8\u0ca6 \u0cb0\u0cbe\u0cb6\u0cbf \u0c9a\u0cb0\u0c82\u0ca1\u0cbf \u0cae\u0cc1\u0c9a\u0ccd\u0c9a\u0cbf\u0ca6\u0cc6",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.915676642721337,
+      "lon": 77.62173737719428,
+      "geo_confidence": 0.87,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-003",
+      "ts": "2026-09-05T08:11:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.91595211981757,
+      "lon": 77.62492547539179,
+      "geo_confidence": 0.95,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-004",
+      "ts": "2026-09-05T08:16:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.918351825771037,
+      "lon": 77.62167630696062,
+      "geo_confidence": 0.97,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.915948422154495,
+      "lon": 77.62423385017553,
+      "geo_confidence": 0.93,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-006",
+      "ts": "2026-09-05T08:28:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.915902398881391,
+      "lon": 77.62124587190237,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-007",
+      "ts": "2026-09-05T08:33:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.918256039797885,
+      "lon": 77.62208021787151,
+      "geo_confidence": 0.93,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-008",
+      "ts": "2026-09-05T08:37:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.91813058865978,
+      "lon": 77.62265041194716,
+      "geo_confidence": 0.93,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_rain_silkboard_02-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_GT_25",
+      "keys": [
+        "RAIN_GT_25"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_GT_25"
+      }
+    },
+    {
+      "id": "ev-scen_rain_silkboard_02-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LOW_LYING",
+      "keys": [
+        "LOW_LYING"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LOW_LYING"
+      }
+    },
+    {
+      "id": "ev-scen_rain_silkboard_02-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: KNOWN_HOTSPOT",
+      "keys": [
+        "KNOWN_HOTSPOT"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "KNOWN_HOTSPOT"
+      }
+    },
+    {
+      "id": "ev-scen_rain_silkboard_02-4",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: SUSTAINED_RAIN_24H",
+      "keys": [
+        "SUSTAINED_RAIN_24H"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "SUSTAINED_RAIN_24H"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "RAIN_OVERWHELM",
+  "ground_truth_depts": [
+    "stormwater",
+    "traffic_police"
+  ]
+}

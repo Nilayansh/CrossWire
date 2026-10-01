@@ -1,0 +1,204 @@
+{
+  "id": "scen_rain_bellandur_01",
+  "tickets": [
+    {
+      "id": "t-scen_r-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.92634841485717,
+      "lon": 77.68392986582576,
+      "geo_confidence": 0.87,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-002",
+      "ts": "2026-09-05T08:06:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.924121017958052,
+      "lon": 77.68112847979157,
+      "geo_confidence": 0.85,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-003",
+      "ts": "2026-09-05T08:10:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.925592713837041,
+      "lon": 77.68492490113645,
+      "geo_confidence": 0.88,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-004",
+      "ts": "2026-09-05T08:18:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.925007024190807,
+      "lon": 77.68471608421835,
+      "geo_confidence": 0.92,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-005",
+      "ts": "2026-09-05T08:22:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.927659160156816,
+      "lon": 77.68354513722898,
+      "geo_confidence": 0.86,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-006",
+      "ts": "2026-09-05T08:29:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.925697124035318,
+      "lon": 77.6838954221169,
+      "geo_confidence": 0.89,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-007",
+      "ts": "2026-09-05T08:30:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.92657568551391,
+      "lon": 77.68103419946549,
+      "geo_confidence": 0.96,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-008",
+      "ts": "2026-09-05T08:35:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 5,
+      "lat": 12.926095953086556,
+      "lon": 77.6821710096202,
+      "geo_confidence": 0.97,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_rain_bellandur_01-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_GT_40",
+      "keys": [
+        "RAIN_GT_40"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_GT_40"
+      }
+    },
+    {
+      "id": "ev-scen_rain_bellandur_01-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_GT_25",
+      "keys": [
+        "RAIN_GT_25"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_GT_25"
+      }
+    },
+    {
+      "id": "ev-scen_rain_bellandur_01-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LOW_LYING",
+      "keys": [
+        "LOW_LYING"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LOW_LYING"
+      }
+    },
+    {
+      "id": "ev-scen_rain_bellandur_01-4",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: KNOWN_HOTSPOT",
+      "keys": [
+        "KNOWN_HOTSPOT"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "KNOWN_HOTSPOT"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "RAIN_OVERWHELM",
+  "ground_truth_depts": [
+    "stormwater",
+    "traffic_police"
+  ]
+}

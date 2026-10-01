@@ -1,0 +1,176 @@
+{
+  "id": "scen_ambiguous_low_signals_16",
+  "tickets": [
+    {
+      "id": "t-scen_a-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 4,
+      "lat": 12.935068386238784,
+      "lon": 77.6309798299016,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-002",
+      "ts": "2026-09-05T08:08:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.934893899780143,
+      "lon": 77.62982551179182,
+      "geo_confidence": 0.92,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-003",
+      "ts": "2026-09-05T08:13:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.932619180929152,
+      "lon": 77.63069610039105,
+      "geo_confidence": 0.96,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-004",
+      "ts": "2026-09-05T08:18:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.933741096389927,
+      "lon": 77.6276325444237,
+      "geo_confidence": 0.9,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-005",
+      "ts": "2026-09-05T08:24:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0cae\u0cb3\u0cc6 \u0ca8\u0cc0\u0cb0\u0cc1 \u0cb0\u0cb8\u0ccd\u0ca4\u0cc6\u0caf\u0cb2\u0ccd\u0cb2\u0cbf \u0ca4\u0cc1\u0c82\u0cac\u0cbf\u0ca6\u0cc6",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.933792243552348,
+      "lon": 77.62821090168374,
+      "geo_confidence": 0.89,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-006",
+      "ts": "2026-09-05T08:29:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 4,
+      "lat": 12.934860609983538,
+      "lon": 77.62849591538455,
+      "geo_confidence": 0.85,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-007",
+      "ts": "2026-09-05T08:30:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.932787109841119,
+      "lon": 77.62850783209889,
+      "geo_confidence": 0.97,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-008",
+      "ts": "2026-09-05T08:36:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.933352938071272,
+      "lon": 77.63086708666924,
+      "geo_confidence": 0.92,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_ambiguous_low_signals_16-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_LT_5",
+      "keys": [
+        "RAIN_LT_5"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_LT_5"
+      }
+    },
+    {
+      "id": "ev-scen_ambiguous_low_signals_16-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DRY_WEATHER",
+      "keys": [
+        "DRY_WEATHER"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DRY_WEATHER"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "DRAIN_BLOCKAGE",
+  "ground_truth_depts": [
+    "stormwater",
+    "solid_waste"
+  ]
+}

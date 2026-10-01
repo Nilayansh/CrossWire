@@ -1,0 +1,190 @@
+{
+  "id": "scen_drain_whitefield_06",
+  "tickets": [
+    {
+      "id": "t-scen_d-001",
+      "ts": "2026-09-05T08:00:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.927501762306994,
+      "lon": 77.68181756060937,
+      "geo_confidence": 0.96,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-002",
+      "ts": "2026-09-05T08:05:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.924824097708397,
+      "lon": 77.68358110085445,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-003",
+      "ts": "2026-09-05T08:13:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c95\u0cb8\u0ca6 \u0cb0\u0cbe\u0cb6\u0cbf \u0c9a\u0cb0\u0c82\u0ca1\u0cbf \u0cae\u0cc1\u0c9a\u0ccd\u0c9a\u0cbf\u0ca6\u0cc6",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.927999845669616,
+      "lon": 77.68294522022798,
+      "geo_confidence": 0.9,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-004",
+      "ts": "2026-09-05T08:18:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c95\u0cb8\u0ca6 \u0cb0\u0cbe\u0cb6\u0cbf \u0c9a\u0cb0\u0c82\u0ca1\u0cbf \u0cae\u0cc1\u0c9a\u0ccd\u0c9a\u0cbf\u0ca6\u0cc6",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.927808624563001,
+      "lon": 77.68111065537185,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Garbage pile blocking drain inlet",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.924244599426636,
+      "lon": 77.68183710886393,
+      "geo_confidence": 0.86,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-006",
+      "ts": "2026-09-05T08:26:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 4,
+      "lat": 12.927463977254577,
+      "lon": 77.68297336533611,
+      "geo_confidence": 0.95,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-007",
+      "ts": "2026-09-05T08:33:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 4,
+      "lat": 12.925028352349612,
+      "lon": 77.68321295735768,
+      "geo_confidence": 0.98,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-008",
+      "ts": "2026-09-05T08:38:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Manhole overflowing with foul smell near apartment gate",
+      "text_en": "Manhole overflowing with foul smell near apartment gate",
+      "category": "sewage",
+      "severity": 5,
+      "lat": 12.926333988332868,
+      "lon": 77.6838209321549,
+      "geo_confidence": 0.92,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_drain_whitefield_06-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DEBRIS_TICKETS_NEARBY",
+      "keys": [
+        "DEBRIS_TICKETS_NEARBY"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DEBRIS_TICKETS_NEARBY"
+      }
+    },
+    {
+      "id": "ev-scen_drain_whitefield_06-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: KNOWN_HOTSPOT",
+      "keys": [
+        "KNOWN_HOTSPOT"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "KNOWN_HOTSPOT"
+      }
+    },
+    {
+      "id": "ev-scen_drain_whitefield_06-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DRY_WEATHER",
+      "keys": [
+        "DRY_WEATHER"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DRY_WEATHER"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "DRAIN_BLOCKAGE",
+  "ground_truth_depts": [
+    "stormwater",
+    "solid_waste"
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "id": "scen_traffic_goraguntepalya_15",
+  "tickets": [
+    {
+      "id": "t-scen_t-001",
+      "ts": "2026-09-05T08:04:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 5,
+      "lat": 12.992559981074796,
+      "lon": 77.66195794341483,
+      "geo_confidence": 0.89,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-002",
+      "ts": "2026-09-05T08:08:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.993385718547739,
+      "lon": 77.66081193104085,
+      "geo_confidence": 0.93,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-003",
+      "ts": "2026-09-05T08:14:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.994460426788832,
+      "lon": 77.66076128307559,
+      "geo_confidence": 0.98,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-004",
+      "ts": "2026-09-05T08:15:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.992593668708992,
+      "lon": 77.66368457214972,
+      "geo_confidence": 0.96,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-005",
+      "ts": "2026-09-05T08:21:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 5,
+      "lat": 12.993851118906798,
+      "lon": 77.66144790668875,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-006",
+      "ts": "2026-09-05T08:28:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.994735785811407,
+      "lon": 77.66358377707334,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-007",
+      "ts": "2026-09-05T08:34:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Vehicles stranded, traffic moving at crawling speed",
+      "text_en": "Vehicles stranded, traffic moving at crawling speed",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.993423454244057,
+      "lon": 77.66391918210178,
+      "geo_confidence": 0.85,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_t-008",
+      "ts": "2026-09-05T08:37:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 5,
+      "lat": 12.99434292703263,
+      "lon": 77.66293337358614,
+      "geo_confidence": 0.88,
+      "h3_r8": "886189209dfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_traffic_goraguntepalya_15-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: TRAFFIC_SLOWDOWN",
+      "keys": [
+        "TRAFFIC_SLOWDOWN"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "TRAFFIC_SLOWDOWN"
+      }
+    },
+    {
+      "id": "ev-scen_traffic_goraguntepalya_15-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: NO_WATER_POWER_SIGNAL",
+      "keys": [
+        "NO_WATER_POWER_SIGNAL"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "NO_WATER_POWER_SIGNAL"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "TRAFFIC_ONLY",
+  "ground_truth_depts": [
+    "traffic_police"
+  ]
+}

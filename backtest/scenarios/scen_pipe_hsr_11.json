@@ -1,0 +1,189 @@
+{
+  "id": "scen_pipe_hsr_11",
+  "tickets": [
+    {
+      "id": "t-scen_p-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.918871809247365,
+      "lon": 77.62389354163692,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-002",
+      "ts": "2026-09-05T08:07:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.918892539853731,
+      "lon": 77.62205467888629,
+      "geo_confidence": 0.9,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-003",
+      "ts": "2026-09-05T08:14:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.918634827397817,
+      "lon": 77.6219045071569,
+      "geo_confidence": 0.98,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-004",
+      "ts": "2026-09-05T08:19:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Sparks from transformer and power cut",
+      "text_en": "Sparks from transformer and power cut",
+      "category": "power",
+      "severity": 3,
+      "lat": 12.918349032106237,
+      "lon": 77.62463122030194,
+      "geo_confidence": 0.92,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-005",
+      "ts": "2026-09-05T08:22:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.91617536820476,
+      "lon": 77.623870460976,
+      "geo_confidence": 0.86,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-006",
+      "ts": "2026-09-05T08:27:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.916912902957211,
+      "lon": 77.62272579043369,
+      "geo_confidence": 0.91,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-007",
+      "ts": "2026-09-05T08:33:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.918410960967332,
+      "lon": 77.62317520641065,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_p-008",
+      "ts": "2026-09-05T08:37:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.916480507067297,
+      "lon": 77.6235153356937,
+      "geo_confidence": 0.85,
+      "h3_r8": "8861892437fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_pipe_hsr_11-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LINEAR_SPREAD",
+      "keys": [
+        "LINEAR_SPREAD"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LINEAR_SPREAD"
+      }
+    },
+    {
+      "id": "ev-scen_pipe_hsr_11-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LOCALIZED_SPREAD",
+      "keys": [
+        "LOCALIZED_SPREAD"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LOCALIZED_SPREAD"
+      }
+    },
+    {
+      "id": "ev-scen_pipe_hsr_11-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DRY_WEATHER",
+      "keys": [
+        "DRY_WEATHER"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DRY_WEATHER"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "PIPE_BURST",
+  "ground_truth_depts": [
+    "water_board"
+  ]
+}

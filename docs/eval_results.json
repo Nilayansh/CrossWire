@@ -1,0 +1,343 @@
+{
+  "predictions": [
+    {
+      "scenario_id": "scen_ambiguous_low_signals_16",
+      "gt_hypothesis": "DRAIN_BLOCKAGE",
+      "gt_depts": [
+        "stormwater",
+        "solid_waste"
+      ],
+      "pred_top1": "PIPE_BURST",
+      "pred_top2": "DRAIN_BLOCKAGE",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.554675118858954,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_ambiguous_mixed_signals_17",
+      "gt_hypothesis": "RAIN_OVERWHELM",
+      "gt_depts": [
+        "stormwater"
+      ],
+      "pred_top1": "DRAIN_BLOCKAGE",
+      "pred_top2": "LAKE_OVERFLOW",
+      "pred_depts": [
+        "stormwater",
+        "solid_waste"
+      ],
+      "confidence": 0.3125,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_drain_indiranagar_05",
+      "gt_hypothesis": "DRAIN_BLOCKAGE",
+      "gt_depts": [
+        "stormwater",
+        "solid_waste"
+      ],
+      "pred_top1": "DRAIN_BLOCKAGE",
+      "pred_top2": "PIPE_BURST",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.78125,
+      "baseline_pred": "DRAIN_BLOCKAGE",
+      "baseline_depts": [
+        "solid_waste"
+      ]
+    },
+    {
+      "scenario_id": "scen_drain_koramangala_04",
+      "gt_hypothesis": "DRAIN_BLOCKAGE",
+      "gt_depts": [
+        "stormwater",
+        "solid_waste"
+      ],
+      "pred_top1": "DRAIN_BLOCKAGE",
+      "pred_top2": "PIPE_BURST",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.8644536652835407,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_drain_whitefield_06",
+      "gt_hypothesis": "DRAIN_BLOCKAGE",
+      "gt_depts": [
+        "stormwater",
+        "solid_waste"
+      ],
+      "pred_top1": "DRAIN_BLOCKAGE",
+      "pred_top2": "PIPE_BURST",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.7012987012987012,
+      "baseline_pred": "DRAIN_BLOCKAGE",
+      "baseline_depts": [
+        "solid_waste"
+      ]
+    },
+    {
+      "scenario_id": "scen_lake_bellandur_12",
+      "gt_hypothesis": "LAKE_OVERFLOW",
+      "gt_depts": [
+        "stormwater"
+      ],
+      "pred_top1": "LAKE_OVERFLOW",
+      "pred_top2": "RAIN_OVERWHELM",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "confidence": 0.8223350253807106,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_lake_varthur_13",
+      "gt_hypothesis": "LAKE_OVERFLOW",
+      "gt_depts": [
+        "stormwater"
+      ],
+      "pred_top1": "LAKE_OVERFLOW",
+      "pred_top2": "RAIN_OVERWHELM",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "confidence": 0.8737864077669903,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_pipe_ejipura_10",
+      "gt_hypothesis": "PIPE_BURST",
+      "gt_depts": [
+        "water_board"
+      ],
+      "pred_top1": "PIPE_BURST",
+      "pred_top2": "DRAIN_BLOCKAGE",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.8616445100935499,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_pipe_hsr_11",
+      "gt_hypothesis": "PIPE_BURST",
+      "gt_depts": [
+        "water_board"
+      ],
+      "pred_top1": "PIPE_BURST",
+      "pred_top2": "DRAIN_BLOCKAGE",
+      "pred_depts": [
+        "stormwater",
+        "water_board",
+        "solid_waste"
+      ],
+      "confidence": 0.8018327605956472,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_rain_bellandur_01",
+      "gt_hypothesis": "RAIN_OVERWHELM",
+      "gt_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "pred_top1": "RAIN_OVERWHELM",
+      "pred_top2": "LAKE_OVERFLOW",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "confidence": 0.9762579490447586,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_rain_hebbal_03",
+      "gt_hypothesis": "RAIN_OVERWHELM",
+      "gt_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "pred_top1": "RAIN_OVERWHELM",
+      "pred_top2": "LAKE_OVERFLOW",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "confidence": 0.9108850766661607,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_rain_silkboard_02",
+      "gt_hypothesis": "RAIN_OVERWHELM",
+      "gt_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "pred_top1": "RAIN_OVERWHELM",
+      "pred_top2": "LAKE_OVERFLOW",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police"
+      ],
+      "confidence": 0.7527601204416193,
+      "baseline_pred": "RAIN_OVERWHELM",
+      "baseline_depts": [
+        "stormwater"
+      ]
+    },
+    {
+      "scenario_id": "scen_stp_kadubeesanahalli_07",
+      "gt_hypothesis": "POWER_LED_STP_OVERFLOW",
+      "gt_depts": [
+        "power_utility",
+        "sewerage"
+      ],
+      "pred_top1": "POWER_LED_STP_OVERFLOW",
+      "pred_top2": "RAIN_OVERWHELM",
+      "pred_depts": [
+        "traffic_police",
+        "sewerage",
+        "power_utility",
+        "stormwater"
+      ],
+      "confidence": 0.9683411722856804,
+      "baseline_pred": "POWER_LED_STP_OVERFLOW",
+      "baseline_depts": [
+        "power_utility"
+      ]
+    },
+    {
+      "scenario_id": "scen_stp_mahadevapura_09",
+      "gt_hypothesis": "POWER_LED_STP_OVERFLOW",
+      "gt_depts": [
+        "power_utility",
+        "sewerage"
+      ],
+      "pred_top1": "POWER_LED_STP_OVERFLOW",
+      "pred_top2": "RAIN_OVERWHELM",
+      "pred_depts": [
+        "traffic_police",
+        "sewerage",
+        "power_utility",
+        "stormwater"
+      ],
+      "confidence": 0.8973208563004742,
+      "baseline_pred": "POWER_LED_STP_OVERFLOW",
+      "baseline_depts": [
+        "power_utility"
+      ]
+    },
+    {
+      "scenario_id": "scen_stp_marathahalli_08",
+      "gt_hypothesis": "POWER_LED_STP_OVERFLOW",
+      "gt_depts": [
+        "power_utility",
+        "sewerage"
+      ],
+      "pred_top1": "POWER_LED_STP_OVERFLOW",
+      "pred_top2": "RAIN_OVERWHELM",
+      "pred_depts": [
+        "traffic_police",
+        "sewerage",
+        "power_utility",
+        "stormwater"
+      ],
+      "confidence": 0.8581436077057794,
+      "baseline_pred": "POWER_LED_STP_OVERFLOW",
+      "baseline_depts": [
+        "sewerage"
+      ]
+    },
+    {
+      "scenario_id": "scen_traffic_goraguntepalya_15",
+      "gt_hypothesis": "TRAFFIC_ONLY",
+      "gt_depts": [
+        "traffic_police"
+      ],
+      "pred_top1": "TRAFFIC_ONLY",
+      "pred_top2": "DRAIN_BLOCKAGE",
+      "pred_depts": [
+        "stormwater",
+        "traffic_police",
+        "solid_waste"
+      ],
+      "confidence": 0.96,
+      "baseline_pred": "TRAFFIC_ONLY",
+      "baseline_depts": [
+        "traffic_police"
+      ]
+    },
+    {
+      "scenario_id": "scen_traffic_tin_factory_14",
+      "gt_hypothesis": "TRAFFIC_ONLY",
+      "gt_depts": [
+        "traffic_police"
+      ],
+      "pred_top1": "TRAFFIC_ONLY",
+      "pred_top2": "PIPE_BURST",
+      "pred_depts": [
+        "traffic_police",
+        "water_board"
+      ],
+      "confidence": 0.9783140388064568,
+      "baseline_pred": "TRAFFIC_ONLY",
+      "baseline_depts": [
+        "traffic_police"
+      ]
+    }
+  ],
+  "metrics": {
+    "total_scenarios": 17.0,
+    "top1_accuracy": 0.8823529411764706,
+    "top2_accuracy": 0.9411764705882353,
+    "dept_routing_accuracy": 1.0,
+    "baseline_top1_accuracy": 0.6470588235294118,
+    "baseline_dept_accuracy": 0.8823529411764706,
+    "mean_confidence_correct": 0.8672415927780046,
+    "mean_confidence_incorrect": 0.433587559429477
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "id": "scen_rain_hebbal_03",
+  "tickets": [
+    {
+      "id": "t-scen_r-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.92415295194512,
+      "lon": 77.68387995783159,
+      "geo_confidence": 0.92,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-002",
+      "ts": "2026-09-05T08:05:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.926943958873693,
+      "lon": 77.68291977916054,
+      "geo_confidence": 0.94,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-003",
+      "ts": "2026-09-05T08:14:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.926854389549618,
+      "lon": 77.68354341973583,
+      "geo_confidence": 0.9,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-004",
+      "ts": "2026-09-05T08:19:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.926018361445962,
+      "lon": 77.68144871230305,
+      "geo_confidence": 0.86,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.927908569078332,
+      "lon": 77.6819300875389,
+      "geo_confidence": 0.87,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-006",
+      "ts": "2026-09-05T08:29:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 3,
+      "lat": 12.927392956159547,
+      "lon": 77.682457102384,
+      "geo_confidence": 0.92,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-007",
+      "ts": "2026-09-05T08:31:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.925257500996171,
+      "lon": 77.68316339344526,
+      "geo_confidence": 0.88,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_r-008",
+      "ts": "2026-09-05T08:35:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.927740821846047,
+      "lon": 77.68184404546756,
+      "geo_confidence": 0.87,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_rain_hebbal_03-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_GT_40",
+      "keys": [
+        "RAIN_GT_40"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_GT_40"
+      }
+    },
+    {
+      "id": "ev-scen_rain_hebbal_03-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: KNOWN_HOTSPOT",
+      "keys": [
+        "KNOWN_HOTSPOT"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "KNOWN_HOTSPOT"
+      }
+    },
+    {
+      "id": "ev-scen_rain_hebbal_03-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: SUSTAINED_RAIN_24H",
+      "keys": [
+        "SUSTAINED_RAIN_24H"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "SUSTAINED_RAIN_24H"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "RAIN_OVERWHELM",
+  "ground_truth_depts": [
+    "stormwater",
+    "traffic_police"
+  ]
+}

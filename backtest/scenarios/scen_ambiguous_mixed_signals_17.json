@@ -1,0 +1,175 @@
+{
+  "id": "scen_ambiguous_mixed_signals_17",
+  "tickets": [
+    {
+      "id": "t-scen_a-001",
+      "ts": "2026-09-05T08:02:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.926615312486616,
+      "lon": 77.68165074369135,
+      "geo_confidence": 0.96,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-002",
+      "ts": "2026-09-05T08:06:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.926046352820048,
+      "lon": 77.68265959639353,
+      "geo_confidence": 0.98,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-003",
+      "ts": "2026-09-05T08:11:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.926718285179476,
+      "lon": 77.68186706880262,
+      "geo_confidence": 0.87,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-004",
+      "ts": "2026-09-05T08:17:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 4,
+      "lat": 12.925712823974735,
+      "lon": 77.6848425498082,
+      "geo_confidence": 0.93,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-005",
+      "ts": "2026-09-05T08:20:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Garbage pile blocking drain inlet",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 5,
+      "lat": 12.924928303630022,
+      "lon": 77.68250206669542,
+      "geo_confidence": 0.91,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-006",
+      "ts": "2026-09-05T08:28:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.925659204783539,
+      "lon": 77.68486380165284,
+      "geo_confidence": 0.89,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-007",
+      "ts": "2026-09-05T08:31:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "\u0c9f\u0ccd\u0cb0\u0cbe\u0cab\u0cbf\u0c95\u0ccd \u0c9c\u0cbe\u0cae\u0ccd \u0c86\u0c97\u0cbf\u0ca6\u0cc6",
+      "text_en": "Heavy traffic jam",
+      "category": "traffic",
+      "severity": 5,
+      "lat": 12.925044977703564,
+      "lon": 77.68348458503763,
+      "geo_confidence": 0.93,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_a-008",
+      "ts": "2026-09-05T08:36:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Garbage pile blocking drain inlet",
+      "text_en": "Garbage pile blocking drain inlet",
+      "category": "garbage_debris",
+      "severity": 3,
+      "lat": 12.924495368727566,
+      "lon": 77.68493608267521,
+      "geo_confidence": 0.91,
+      "h3_r8": "886189255bfffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_ambiguous_mixed_signals_17-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_LT_15",
+      "keys": [
+        "RAIN_LT_15"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_LT_15"
+      }
+    },
+    {
+      "id": "ev-scen_ambiguous_mixed_signals_17-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LOW_LYING",
+      "keys": [
+        "LOW_LYING"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LOW_LYING"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "RAIN_OVERWHELM",
+  "ground_truth_depts": [
+    "stormwater"
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "id": "scen_stp_mahadevapura_09",
+  "tickets": [
+    {
+      "id": "t-scen_s-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Sparks from transformer and power cut",
+      "text_en": "Sparks from transformer and power cut",
+      "category": "power",
+      "severity": 4,
+      "lat": 12.935530138601395,
+      "lon": 77.69779142956551,
+      "geo_confidence": 0.95,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-002",
+      "ts": "2026-09-05T08:07:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 4,
+      "lat": 12.936714099349341,
+      "lon": 77.69782905714099,
+      "geo_confidence": 0.95,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-003",
+      "ts": "2026-09-05T08:14:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 3,
+      "lat": 12.935593495108812,
+      "lon": 77.69608492684856,
+      "geo_confidence": 0.86,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-004",
+      "ts": "2026-09-05T08:15:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 4,
+      "lat": 12.935177157180432,
+      "lon": 77.69972241440226,
+      "geo_confidence": 0.93,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-005",
+      "ts": "2026-09-05T08:22:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Construction debris dumped in storm water drain",
+      "text_en": "Construction debris dumped in storm water drain",
+      "category": "garbage_debris",
+      "severity": 4,
+      "lat": 12.937518381531303,
+      "lon": 77.6980684157228,
+      "geo_confidence": 0.86,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-006",
+      "ts": "2026-09-05T08:27:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Substation feeder tripped, no power in layout",
+      "text_en": "Substation feeder tripped, no power in layout",
+      "category": "power",
+      "severity": 3,
+      "lat": 12.936618389691887,
+      "lon": 77.69769790490129,
+      "geo_confidence": 0.98,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-007",
+      "ts": "2026-09-05T08:31:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Bumper to bumper jam for 3km",
+      "text_en": "Bumper to bumper jam for 3km",
+      "category": "traffic",
+      "severity": 4,
+      "lat": 12.935983763902225,
+      "lon": 77.69646812779672,
+      "geo_confidence": 0.87,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_s-008",
+      "ts": "2026-09-05T08:36:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Power outage reported",
+      "text_en": "Power outage reported",
+      "category": "power",
+      "severity": 4,
+      "lat": 12.936422693319232,
+      "lon": 77.69952369242483,
+      "geo_confidence": 0.96,
+      "h3_r8": "8861892551fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_stp_mahadevapura_09-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: POWER_TICKETS_PRECEDE_SEWAGE",
+      "keys": [
+        "POWER_TICKETS_PRECEDE_SEWAGE"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "POWER_TICKETS_PRECEDE_SEWAGE"
+      }
+    },
+    {
+      "id": "ev-scen_stp_mahadevapura_09-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: OUTAGE_REPORTED",
+      "keys": [
+        "OUTAGE_REPORTED"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "OUTAGE_REPORTED"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "POWER_LED_STP_OVERFLOW",
+  "ground_truth_depts": [
+    "power_utility",
+    "sewerage"
+  ]
+}

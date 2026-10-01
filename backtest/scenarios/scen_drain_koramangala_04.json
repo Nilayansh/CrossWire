@@ -1,0 +1,190 @@
+{
+  "id": "scen_drain_koramangala_04",
+  "tickets": [
+    {
+      "id": "t-scen_d-001",
+      "ts": "2026-09-05T08:03:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.935963169445637,
+      "lon": 77.62889311279747,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-002",
+      "ts": "2026-09-05T08:05:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Severe water stagnation 2 feet high",
+      "text_en": "Severe water stagnation 2 feet high",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.933611331350756,
+      "lon": 77.62951223534476,
+      "geo_confidence": 0.87,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-003",
+      "ts": "2026-09-05T08:13:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Sparks from transformer and power cut",
+      "text_en": "Sparks from transformer and power cut",
+      "category": "power",
+      "severity": 5,
+      "lat": 12.932190713807676,
+      "lon": 77.6308839780973,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-004",
+      "ts": "2026-09-05T08:19:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 4,
+      "lat": 12.934132557351846,
+      "lon": 77.6307362434772,
+      "geo_confidence": 0.94,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-005",
+      "ts": "2026-09-05T08:22:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 5,
+      "lat": 12.933199633455455,
+      "lon": 77.63016749301671,
+      "geo_confidence": 0.93,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-006",
+      "ts": "2026-09-05T08:26:00Z",
+      "channel": "telegram",
+      "lang": "kn",
+      "text_original": "Drain clogged with sewage backing into storm drain",
+      "text_en": "Drain clogged with sewage backing into storm drain",
+      "category": "sewage",
+      "severity": 3,
+      "lat": 12.93544672348221,
+      "lon": 77.63098264014124,
+      "geo_confidence": 0.88,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-007",
+      "ts": "2026-09-05T08:33:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water logging on road",
+      "text_en": "Water logging on road",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.934567257069084,
+      "lon": 77.62752019168087,
+      "geo_confidence": 0.91,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    },
+    {
+      "id": "t-scen_d-008",
+      "ts": "2026-09-05T08:37:00Z",
+      "channel": "telegram",
+      "lang": "en",
+      "text_original": "Water overflowing near service road bus stop",
+      "text_en": "Water overflowing near service road bus stop",
+      "category": "waterlogging",
+      "severity": 3,
+      "lat": 12.934268852239827,
+      "lon": 77.62898677273263,
+      "geo_confidence": 0.97,
+      "h3_r8": "8861892435fffff",
+      "photo_depth": "ankle",
+      "reporter_chat_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "evidence_overrides": [
+    {
+      "id": "ev-scen_drain_koramangala_04-1",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: DEBRIS_TICKETS_NEARBY",
+      "keys": [
+        "DEBRIS_TICKETS_NEARBY"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "DEBRIS_TICKETS_NEARBY"
+      }
+    },
+    {
+      "id": "ev-scen_drain_koramangala_04-2",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: LOCALIZED_SPREAD",
+      "keys": [
+        "LOCALIZED_SPREAD"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "LOCALIZED_SPREAD"
+      }
+    },
+    {
+      "id": "ev-scen_drain_koramangala_04-3",
+      "tool": "evidence_tool",
+      "ts": "2026-09-05T08:00:00+00:00",
+      "summary": "Observed evidence signal: RAIN_LT_15",
+      "keys": [
+        "RAIN_LT_15"
+      ],
+      "source": "backtest_synthetic",
+      "provenance": "derived",
+      "raw": {
+        "key": "RAIN_LT_15"
+      }
+    }
+  ],
+  "ground_truth_hypothesis": "DRAIN_BLOCKAGE",
+  "ground_truth_depts": [
+    "stormwater",
+    "solid_waste"
+  ]
+}
