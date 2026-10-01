@@ -218,6 +218,23 @@ class LLMAdapter:
                 "text_en": prompt,
             })
 
+        # Handle TranslationDraft (Kannada translation)
+        if schema_name == "TranslationDraft":
+            p_lower = prompt.lower()
+            if any(w in p_lower for w in ["ನೀರು", "ಮಳೆ", "ನೆರೆ"]):
+                return schema.model_validate({"translated_en": "Heavy water accumulation and flooding on road"})
+            elif any(w in p_lower for w in ["ಕರೆಂಟ್", "ವಿದ್ಯುತ್"]):
+                return schema.model_validate({"translated_en": "Power outage and sparks from electric pole"})
+            elif any(w in p_lower for w in ["ಚರಂಡಿ", "ಒಳಚರಂಡಿ"]):
+                return schema.model_validate({"translated_en": "Sewage drain overflowing onto street"})
+            elif any(w in p_lower for w in ["ವಾಹನ", "ಸಂಚಾರ"]):
+                return schema.model_validate({"translated_en": "Traffic stalled and vehicles stranded in water"})
+            elif any(w in p_lower for w in ["ರಸ್ತೆ", "ಗುಂಡಿ"]):
+                return schema.model_validate({"translated_en": "Severe road damage and potholes"})
+            elif any(w in p_lower for w in ["ಕಸ"]):
+                return schema.model_validate({"translated_en": "Garbage and debris obstruction"})
+            return schema.model_validate({"translated_en": "Civic infrastructure issue reported in area"})
+
         # Generic default synthesizer
         dummy_data: dict[str, Any] = {}
         for field_name, field_info in schema.model_fields.items():

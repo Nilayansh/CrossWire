@@ -65,3 +65,9 @@ def test_llm_direct_mode_openai_call():
         )
         assert draft.category == "waterlogging"
         assert draft.severity == 4
+
+
+def test_universal_adapter_translation():
+    from app.intake.extract import translate
+    res = translate("ಇಲ್ಲಿ ಭಾರಿ ಮಳೆ ಮತ್ತು ನೀರು ನಿಂತಿದೆ", source_lang="kn")
+    assert "water" in res.lower() or "flood" in res.lower()
