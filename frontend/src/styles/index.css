@@ -23,3 +23,8 @@ body {
 .mono-tiles {
   filter: grayscale(100%) contrast(90%) brightness(105%);
 }
+
+.custom-pin-marker {
+  background: transparent !important;
+  border: none !important;
+}

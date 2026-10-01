@@ -59,52 +59,117 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
   useEffect(() => {
     if (!isOpen || !mapContainerRef.current) return;
 
-    if (!mapInstanceRef.current) {
-      const map = L.map(mapContainerRef.current, {
-        center: [spot.lat, spot.lon],
-        zoom: 14,
-        zoomControl: false,
-      });
-
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        className: 'mono-tiles',
-        maxZoom: 19,
-        attribution: '&copy; OSM',
-      }).addTo(map);
-
-      const marker = L.marker([spot.lat, spot.lon], {
-        draggable: true,
-      }).addTo(map);
-
-      marker.on('dragend', (e) => {
-        const coord = e.target.getLatLng();
-        setSpot({
-          name: `Pinned (${coord.lat.toFixed(4)}, ${coord.lng.toFixed(4)})`,
-          lat: coord.lat,
-          lon: coord.lng,
-          h3: spot.h3,
-        });
-      });
-
-      map.on('click', (e) => {
-        marker.setLatLng(e.latlng);
-        setSpot({
-          name: `Pinned (${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)})`,
-          lat: e.latlng.lat,
-          lon: e.latlng.lng,
-          h3: spot.h3,
-        });
-      });
-
-      markerRef.current = marker;
-      mapInstanceRef.current = map;
-    } else {
-      mapInstanceRef.current.setView([spot.lat, spot.lon], 14);
-      if (markerRef.current) {
-        markerRef.current.setLatLng([spot.lat, spot.lon]);
-      }
+    // Clean up any stale map instance
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+      markerRef.current = null;
     }
-  }, [isOpen, spot.lat, spot.lon]);
+
+    const pinIcon = L.divIcon({
+      className: 'custom-pin-marker',
+      html: `
+        <div style="
+          background-color: #000;
+          color: #fff;
+          width: 30px;
+          height: 30px;
+          border-radius: 50% 50% 50% 0;
+          transform: rotate(-45deg);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #fff;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        ">
+          <span style="transform: rotate(45deg); font-size: 13px;">📍</span>
+        </div>
+      `,
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+    });
+
+    const map = L.map(mapContainerRef.current, {
+      center: [spot.lat, spot.lon],
+      zoom: 14,
+      zoomControl: true,
+    });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap',
+    }).addTo(map);
+
+    const marker = L.marker([spot.lat, spot.lon], {
+      icon: pinIcon,
+      draggable: true,
+    }).addTo(map);
+
+    marker.on('dragend', (e) => {
+      const coord = e.target.getLatLng();
+      setSpot((prev) => ({
+        ...prev,
+        name: `Pinned (${coord.lat.toFixed(4)}, ${coord.lng.toFixed(4)})`,
+        lat: coord.lat,
+        lon: coord.lng,
+      }));
+    });
+
+    map.on('click', (e) => {
+      marker.setLatLng(e.latlng);
+      setSpot((prev) => ({
+        ...prev,
+        name: `Pinned (${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)})`,
+        lat: e.latlng.lat,
+        lon: e.latlng.lng,
+      }));
+    });
+
+    markerRef.current = marker;
+    mapInstanceRef.current = map;
+
+    // Multiple invalidateSize triggers to ensure tiles load seamlessly across browsers
+    const t1 = setTimeout(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    }, 100);
+
+    const t2 = setTimeout(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    }, 400);
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    });
+    if (mapContainerRef.current) {
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      resizeObserver.disconnect();
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+        markerRef.current = null;
+      }
+    };
+  }, [isOpen]);
+
+  // Pan map and update marker whenever spot changes
+  useEffect(() => {
+    if (mapInstanceRef.current && markerRef.current) {
+      mapInstanceRef.current.setView([spot.lat, spot.lon], 14);
+      markerRef.current.setLatLng([spot.lat, spot.lon]);
+      mapInstanceRef.current.invalidateSize();
+    }
+  }, [spot.lat, spot.lon]);
 
   if (!isOpen) return null;
 
@@ -510,10 +575,18 @@ export const IntakeModal: FC<IntakeModalProps> = ({ isOpen, onClose, onSuccess }
             </div>
 
             {/* Interactive Leaflet Pin Picker */}
-            <div className="border border-black h-36 w-full relative overflow-hidden bg-bone mt-2">
-              <div ref={mapContainerRef} className="w-full h-full" />
-              <div className="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] font-mono px-1.5 py-0.5 z-[1000]">
-                Click map to drop pin
+            <div
+              className="border-2 border-black w-full relative overflow-hidden bg-bone mt-2 shadow-inner isolate"
+              style={{ height: '220px', minHeight: '220px' }}
+            >
+              <div
+                ref={mapContainerRef}
+                className="w-full h-full min-h-[220px]"
+                style={{ height: '220px', minHeight: '220px', width: '100%', zIndex: 1 }}
+              />
+              <div className="absolute bottom-2 right-2 bg-black text-white text-[10px] font-mono px-2 py-1 z-[1000] border border-white font-bold shadow pointer-events-none flex items-center gap-1">
+                <span>📍</span>
+                <span>Click or drag pin anywhere in Bengaluru</span>
               </div>
             </div>
           </div>
