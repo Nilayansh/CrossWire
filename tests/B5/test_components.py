@@ -1,4 +1,6 @@
-from __future__ import annotations
+import pytest
+
+pytest.importorskip("streamlit")
 
 from app.contracts.keys import HypothesisID
 from app.contracts.models import Ticket
