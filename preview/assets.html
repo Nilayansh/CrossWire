@@ -132,60 +132,145 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 
-  <!-- TOP OFFICIAL HEADER -->
-  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
-          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
-          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Design System & Asset Directory</span>
-        </div>
-        <p class="text-sm font-serif italic text-textMuted mt-1">
-          Bengaluru Incident Command · Minimalist Monochrome Vector & Photographic Repository
-        </p>
+  <!-- TOP UNIFIED SLIM HEADER & HOVER NAVIGATION (NEVER CUTS OFF) -->
+  <header class="sticky top-0 z-50 bg-[#FBFBF9]/95 backdrop-blur-md border-b-2 border-black shadow-sm">
+    <!-- Slim Project Title Bar -->
+    <div class="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between border-b border-borderSubtle">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Crest" class="w-6 h-6 object-contain" />
+          <span class="text-xl font-serif font-bold italic tracking-tight text-textMain group-hover:underline">CrossWire</span>
+        </a>
+        <span class="hidden sm:inline-block text-xs text-textMuted border-l border-borderSubtle pl-3 font-sans">
+          Bengaluru Incident Visual & Asset Library
+        </span>
       </div>
 
-      <div class="flex items-center gap-4 text-xs font-mono">
-        <div class="border border-borderSubtle bg-bone p-2 px-3">
-          <span class="text-textMuted block text-[10px] uppercase">Specification:</span>
-          <strong class="text-black text-sm">minimalist-ui + imagegen-frontend-web</strong>
+      <!-- Quick Incident Badges -->
+      <div class="flex items-center gap-3 text-xs font-mono">
+        <div class="border border-borderDark px-2.5 py-1 bg-bone flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-black inline-block"></span>
+          <span class="font-bold text-black">8 City SVGs</span>
+          <span class="text-textMuted hidden md:inline">&bull; 4 Photos</span>
         </div>
-        <div class="border-2 border-black p-2 px-3 bg-surface">
-          <span class="text-textMuted block text-[10px] uppercase">Palette & Code:</span>
-          <strong class="text-black text-sm uppercase">Pure Monochrome (#111111)</strong>
+        <div class="border-2 border-black bg-black text-white px-2.5 py-1 font-bold text-[11px] uppercase tracking-wider">
+          Asset Catalog
         </div>
       </div>
     </div>
-  </header>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
-      <div class="flex items-center gap-8 shrink-0">
-        <a href="index.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">1</span>
-          <span>Citizen Reports</span>
-        </a>
-        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
-          <span>Geographic Map</span>
-        </a>
-        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
-          <span>Cause Analysis</span>
-        </a>
-        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
-          <span>Departmental Actions</span>
-        </a>
+    <!-- Intuitive Navigation Tabs with Hover Information Popovers -->
+    <nav class="max-w-6xl mx-auto px-6 flex items-center justify-between text-sm">
+      <div class="flex items-center gap-1 md:gap-4">
+        
+        <!-- Tab 1: Citizen Reports -->
+        <div class="relative group py-2.5">
+          <a href="index.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">1</span>
+            <span>Citizen Reports</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 1 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Ground Reports</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Helpline Calls & Photos</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Listen to Kannada emergency calls from citizens, check street flood photos, and see live rain radar.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>View Reports &rarr;</span>
+                <span class="text-textMuted">3 Active Calls</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: City Map -->
+        <div class="relative group py-2.5">
+          <a href="map.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">2</span>
+            <span>City Flood Map</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 2 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Interactive Map</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Flooded Roads & Drains</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Interactive map of Bellandur: see where water is pooling, follow storm drains, and check nearby schools and hospitals.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>Open Map &rarr;</span>
+                <span class="text-textMuted">Live Radar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Why It Happened -->
+        <div class="relative group py-2.5">
+          <a href="investigation.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">3</span>
+            <span>Why It Happened</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 3 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Cause Finder</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Root Cause Analysis</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Explains in plain English why the water overflowed: compares heavy rainfall, trash blocking the culvert, and lake levels.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>See Findings &rarr;</span>
+                <span class="text-textMuted">84% Drain Blockage</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Emergency Actions -->
+        <div class="relative group py-2.5">
+          <a href="dispatch.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">4</span>
+            <span>City Action Plan</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 4 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Emergency Orders</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Dispatching City Teams</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                See official work orders sent to Traffic Police (diverting traffic), BWSSB (water pump trucks), and BBMP (drain cleaning).
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>View Orders &rarr;</span>
+                <span class="text-textMuted">4 Teams Deployed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <a href="assets.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2 shrink-0">
-        <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center bg-black text-white">&bull;</span>
-        <span>Bangalore Assets Library</span>
+
+      <!-- Right side active indicator -->
+      <a href="assets.html" class="py-1 px-3 border-b-2 border-black font-serif italic font-bold text-xs text-black shrink-0 flex items-center gap-1.5">
+        <span>🎨 Assets Library</span>
       </a>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <!-- MAIN CONTAINER -->
   <main class="flex-1 max-w-6xl mx-auto w-full px-8 py-10 space-y-12">
