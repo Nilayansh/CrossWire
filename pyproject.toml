@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "live: marks tests that make live network calls (deselect with -m 'not live')",
+]
+addopts = "-m 'not live'"

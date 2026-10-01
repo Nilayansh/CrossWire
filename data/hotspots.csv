@@ -1,0 +1,9 @@
+hotspot_id,name,lat,lon,radius_m,severity,historical_frequency
+BLR-SWD-042,Bellandur Ecospace,12.9260,77.6830,600,high,high
+BLR-SWD-019,Central Mall Bellandur,12.9280,77.6810,500,high,high
+BLR-SWD-031,Kadubeesanahalli Underpass,12.9380,77.6960,450,high,high
+BLR-SWD-005,Central Silk Board,12.9170,77.6230,500,high,high
+BLR-SWD-012,Sony World Koramangala,12.9350,77.6240,400,medium,medium
+BLR-SWD-027,Marathahalli Bridge,12.9560,77.7010,500,medium,medium
+BLR-SWD-033,Iblur Flyover Junction,12.9240,77.6690,450,high,high
+BLR-SWD-008,Hebbal Flyover,13.0350,77.5970,600,high,high
