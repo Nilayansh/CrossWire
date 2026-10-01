@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossWire · Bengaluru Monochrome Asset & Animated Vector Library</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP Core, ScrollTrigger & CrossWire Bangalore Motion Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="assets/animations.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          fontWeight: {
+            normal: '480',
+            medium: '580',
+            semibold: '650',
+            bold: '750',
+          },
+          colors: {
+            canvas: '#FBFBFA',
+            surface: '#FFFFFF',
+            borderSubtle: '#EAEAEA',
+            borderDark: '#111111',
+            textMain: '#111111',
+            textBody: '#1F2428',
+            textMuted: '#57606A',
+            bone: '#F7F6F3',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #FBFBFA;
+      color: #1F2428;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 480;
+      letter-spacing: -0.012em;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Harmonic Type Scales */
+    h1, h2, h3, h4 {
+      letter-spacing: -0.02em;
+    }
+    p, span, li, td {
+      letter-spacing: -0.01em;
+    }
+    .font-mono {
+      letter-spacing: -0.005em;
+    }
+
+    .highlight-card, .highlight-box {
+      border: 2.5px solid #111111 !important;
+    }
+    .vector-card {
+      border: 1.5px solid #111111;
+      background: #FFFFFF;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+    }
+    .vector-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Hardware Custom Cursor Styles */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, [role="button"], select {
+        cursor: none !important;
+      }
+    }
+    #crosswire-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: #111111;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    #crosswire-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(17, 17, 17, 0.45);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99998;
+      transform-origin: center center;
+    }
+    #crosswire-scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      background: #111111;
+      z-index: 100000;
+      width: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+  <!-- TOP OFFICIAL HEADER -->
+  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
+          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Design System & Asset Directory</span>
+        </div>
+        <p class="text-sm font-serif italic text-textMuted mt-1">
+          Bengaluru Incident Command · Minimalist Monochrome Vector & Photographic Repository
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <div class="border border-borderSubtle bg-bone p-2 px-3">
+          <span class="text-textMuted block text-[10px] uppercase">Specification:</span>
+          <strong class="text-black text-sm">minimalist-ui + imagegen-frontend-web</strong>
+        </div>
+        <div class="border-2 border-black p-2 px-3 bg-surface">
+          <span class="text-textMuted block text-[10px] uppercase">Palette & Code:</span>
+          <strong class="text-black text-sm uppercase">Pure Monochrome (#111111)</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
+      <div class="flex items-center gap-8 shrink-0">
+        <a href="index.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">1</span>
+          <span>Citizen Reports</span>
+        </a>
+        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
+          <span>Geographic Map</span>
+        </a>
+        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
+          <span>Cause Analysis</span>
+        </a>
+        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
+          <span>Departmental Actions</span>
+        </a>
+      </div>
+      <a href="assets.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2 shrink-0">
+        <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center bg-black text-white">&bull;</span>
+        <span>Bangalore Assets Library</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl mx-auto w-full px-8 py-10 space-y-12">
+
+    <!-- PAGE HERO HEADER -->
+    <div class="border-b border-borderSubtle pb-6 space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-xs border border-black px-2 py-0.5 bg-bone font-semibold">LOCAL BENGALURU CIVIC ASSET COMPENDIUM</span>
+        <span class="font-mono text-xs text-textMuted">WARM MONOCHROME (#FBFBFA / #111111)</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-serif font-bold italic text-textMain tracking-tight">
+        Bangalore-Specific Visual & Vector Assets
+      </h1>
+      <p class="text-base text-textBody max-w-3xl leading-relaxed">
+        Curated repository of high-contrast black and white editorial photography, technical architectural blueprints, and precision-coded SVG vectors designed specifically for Bengaluru's urban topography, civic infrastructure, and emergency telemetry.
+      </p>
+    </div>
+
+    <!-- LIVE INTERACTIVE GSAP CONTROLLER BAR -->
+    <section class="border-2 border-black bg-surface p-6 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-borderSubtle gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-textMuted font-bold block">Interactive Motion Testing Deck</span>
+          <h2 class="text-xl font-serif font-bold italic text-black">GSAP Vector Motion Controls</h2>
+        </div>
+        <span class="text-xs font-mono border border-borderDark px-2 py-0.5 bg-bone">GPU Accelerated Transforms</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+        <button onclick="toggleAudioDemo()" id="btn-audio-demo" class="border-2 border-black px-4 py-2 bg-bone hover:bg-black hover:text-white transition-colors font-bold">
+          Toggle Kannada Voice Waveform
+        </button>
+        <button onclick="speedUpMetro()" id="btn-metro-speed" class="border border-black px-4 py-2 bg-white hover:bg-black hover:text-white transition-colors">
+          Accelerate Namma Metro (2x)
+        </button>
+        <button onclick="pulseRadarHotspot()" class="border border-black px-4 py-2 bg-white hover:bg-black hover:text-white transition-colors">
+          Trigger Doppler Cloudburst Ping
+        </button>
+        <button onclick="surgePumpFlow()" class="border border-black px-4 py-2 bg-white hover:bg-black hover:text-white transition-colors">
+          Surge Dewatering Pump (18,000 LPM)
+        </button>
+        <button onclick="window.CrossWireMotion.initAll()" class="border border-borderSubtle px-4 py-2 bg-bone hover:border-black text-textMuted hover:text-black transition-colors">
+          Reset All Animations
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 1: GENERATED EDITORIAL & ARCHITECTURAL ASSETS (4 FULL 16:9 IMAGES) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+        <div>
+          <span class="text-xs font-mono uppercase text-textMuted font-bold block">Part 01 · High-Contrast Fine Art Imagery</span>
+          <h2 class="text-2xl font-serif font-bold italic text-textMain">Bengaluru Editorial & Blueprint Assets</h2>
+        </div>
+        <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold">4 PRIMARY SECTOR ASSETS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Image Asset 1: Bellandur Flood Incident -->
+        <div class="border-2 border-black bg-surface p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold uppercase text-black">Asset 01 · Incident Sensory Evidence</span>
+            <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-1.5 py-0.5">16:9 · HASSELBLAD MONO</span>
+          </div>
+          <div class="border border-borderDark overflow-hidden bg-bone">
+            <img src="assets/bangalore_flood_incident.jpg" alt="Bangalore Outer Ring Road Bellandur flood incident with BMTC bus and auto rickshaw" class="w-full h-64 object-cover contrast-110" />
+          </div>
+          <div>
+            <h3 class="text-lg font-serif font-bold italic text-black">Bellandur Gate ORR Monsoon Inundation</h3>
+            <p class="text-xs text-textBody mt-1 leading-relaxed">
+              Authentic documentary photojournalism at Outer Ring Road, Bellandur Gate. Features standing flood water with 0.5m-2.0m depth gauge, stranded BMTC Volvo bus (Route 500C), classic Bangalore auto-rickshaw, and the elevated Namma Metro concrete viaduct.
+            </p>
+          </div>
+          <div class="border border-borderSubtle bg-bone p-2.5 flex items-center justify-between text-[11px] font-mono">
+            <span>Primary Usage: <strong>preview/index.html (Stage 1)</strong></span>
+            <a href="assets/bangalore_flood_incident.jpg" target="_blank" class="underline font-bold text-black">Open Original &nearr;</a>
+          </div>
+        </div>
+
+        <!-- Image Asset 2: Vidhana Soudha Civic Architecture -->
+        <div class="border-2 border-black bg-surface p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold uppercase text-black">Asset 02 · Civic Governance Authority</span>
+            <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-1.5 py-0.5">16:9 · ARCHITECTURAL FINE-ART</span>
+          </div>
+          <div class="border border-borderDark overflow-hidden bg-bone">
+            <img src="assets/vidhana_soudha_civic.jpg" alt="Vidhana Soudha Bangalore Neo-Dravidian Architectural Facade in Monochrome" class="w-full h-64 object-cover contrast-110" />
+          </div>
+          <div>
+            <h3 class="text-lg font-serif font-bold italic text-black">Vidhana Soudha Neo-Dravidian Seat of Governance</h3>
+            <p class="text-xs text-textBody mt-1 leading-relaxed">
+              Symmetrical architectural elevation of Bengaluru's Vidhana Soudha. Displays the central grand dome, "Government of Karnataka" engraved frieze, Ashoka lion capital, ornamental granite pillars, and tiered stone staircase under dramatic monsoon skies.
+            </p>
+          </div>
+          <div class="border border-borderSubtle bg-bone p-2.5 flex items-center justify-between text-[11px] font-mono">
+            <span>Primary Usage: <strong>Civic Header & Authority Proof</strong></span>
+            <a href="assets/vidhana_soudha_civic.jpg" target="_blank" class="underline font-bold text-black">Open Original &nearr;</a>
+          </div>
+        </div>
+
+        <!-- Image Asset 3: Rajakaluve Blueprint -->
+        <div class="border-2 border-black bg-surface p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold uppercase text-black">Asset 03 · Hydro-Topographical Engineering</span>
+            <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-1.5 py-0.5">16:9 · SWISS SCHEMATIC</span>
+          </div>
+          <div class="border border-borderDark overflow-hidden bg-bone">
+            <img src="assets/rajakaluve_blueprint_urban.jpg" alt="Bengaluru Urban Rajakaluve Stormwater Drainage Network Blueprint" class="w-full h-64 object-cover contrast-110" />
+          </div>
+          <div>
+            <h3 class="text-lg font-serif font-bold italic text-black">Rajakaluve Stormwater Canal Section A-A'</h3>
+            <p class="text-xs text-textBody mt-1 leading-relaxed">
+              Technical architectural blueprint detailing the subterranean reinforced concrete conduit, ultrasonic silt sediment sensor (Unit S1-SD), concrete overflow weir (+918.0M), street elevation (+920.0M), and lake diversion bypass channel.
+            </p>
+          </div>
+          <div class="border border-borderSubtle bg-bone p-2.5 flex items-center justify-between text-[11px] font-mono">
+            <span>Primary Usage: <strong>preview/investigation.html (Stage 3)</strong></span>
+            <a href="assets/rajakaluve_blueprint_urban.jpg" target="_blank" class="underline font-bold text-black">Open Original &nearr;</a>
+          </div>
+        </div>
+
+        <!-- Image Asset 4: Emergency Dispatch Unit -->
+        <div class="border-2 border-black bg-surface p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold uppercase text-black">Asset 04 · Emergency Municipal Operations</span>
+            <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-1.5 py-0.5">16:9 · FIELD DOCUMENTARY</span>
+          </div>
+          <div class="border border-borderDark overflow-hidden bg-bone">
+            <img src="assets/bangalore_emergency_dispatch.jpg" alt="BWSSB Emergency Dewatering Unit Night Operation with Bangalore Police Barricade" class="w-full h-64 object-cover contrast-110" />
+          </div>
+          <div>
+            <h3 class="text-lg font-serif font-bold italic text-black">BWSSB Rapid Dewatering Night Deployment</h3>
+            <p class="text-xs text-textBody mt-1 leading-relaxed">
+              Editorial field photo of the Bangalore Water Supply and Sewerage Board rapid response team operating high-capacity mobile diesel pumps under Bangalore Police bilingual "NO ENTRY FLOODING" barriers on Outer Ring Road.
+            </p>
+          </div>
+          <div class="border border-borderSubtle bg-bone p-2.5 flex items-center justify-between text-[11px] font-mono">
+            <span>Primary Usage: <strong>preview/dispatch.html (Stage 4)</strong></span>
+            <a href="assets/bangalore_emergency_dispatch.jpg" target="_blank" class="underline font-bold text-black">Open Original &nearr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: CODED MINIMALIST SVG VECTOR ASSETS (ANIMATED & MODULAR) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+        <div>
+          <span class="text-xs font-mono uppercase text-textMuted font-bold block">Part 02 · Scalable Vector Graphics Engine</span>
+          <h2 class="text-2xl font-serif font-bold italic text-textMain">Coded Minimalist SVGs & Micro-Animations</h2>
+        </div>
+        <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold">8 ANIMATED SVGS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- SVG 1: Vidhana Soudha Architectural Crest -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">01. Vidhana Soudha Crest</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">SVG VECTOR</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-3">
+            <object data="assets/vidhana_soudha_crest.svg" type="image/svg+xml" class="w-full h-full pointer-events-none vidhana-soudha-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Karnataka State Civic Crest</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Neo-Dravidian dome, central pillars, and Ashoka capital finial in 1.5px architectural line art.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>Class: <code>.vidhana-soudha-vector</code></span>
+            <a href="assets/vidhana_soudha_crest.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 2: Namma Metro Elevated Viaduct -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">02. Namma Metro Viaduct</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">ANIMATED TRANSIT</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-2 overflow-hidden">
+            <object data="assets/namma_metro_transit.svg" type="image/svg+xml" class="w-full h-full pointer-events-none namma-metro-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Elevated Transit Corridor</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              BMRCL 3-car formation with pantographs gliding over cantilevered concrete piers (Pier #142).
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.gsap-metro-train</code></span>
+            <a href="assets/namma_metro_transit.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 3: Bengaluru Auto-Rickshaw -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">03. Bengaluru Auto-Rickshaw</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">ICONIC VEHICLE</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-3">
+            <object data="assets/bengaluru_auto_rickshaw.svg" type="image/svg+xml" class="w-36 h-36 pointer-events-none bangalore-auto-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Three-Wheeler Urban Transit</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Spinning spoked wheels, oscillating wiper, fare meter box, and license plate KA01 in warm monochrome.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.gsap-auto-wheel-front</code></span>
+            <a href="assets/bengaluru_auto_rickshaw.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 4: Rajakaluve Canal Drainage -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">04. Rajakaluve Hydro Flow</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">STREAMLINE FLOW</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-2 overflow-hidden">
+            <object data="assets/rajakaluve_drainage_flow.svg" type="image/svg+xml" class="w-full h-full pointer-events-none rajakaluve-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Canal & Silt Sensor Array</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Dynamic dash-array water velocity streamlines, silt sediment bed, and ultrasonic S1-SD pings.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.gsap-streamline-1</code></span>
+            <a href="assets/rajakaluve_drainage_flow.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 5: KSNDMC Doppler Radar -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">05. KSNDMC Doppler Radar</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">WEATHER SCANNER</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-3">
+            <object data="assets/ksndmc_doppler_radar.svg" type="image/svg+xml" class="w-36 h-36 pointer-events-none ksndmc-radar-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Precipitation Doppler Beam</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Continuous 360-degree radar rotation, range rings (50km), and pulsing H3 cloudburst cell.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.gsap-radar-sweep</code></span>
+            <a href="assets/ksndmc_doppler_radar.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 6: Sarvam Kannada Audio Waveform -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">06. Sarvam Voice Waveform</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">SPEECH-TO-TEXT</span>
+          </div>
+          <div class="h-44 bg-bone border border-borderSubtle flex items-center justify-center p-3">
+            <object data="assets/audio_waveform_kannada.svg" type="image/svg+xml" class="w-full pointer-events-none audio-waveform-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">Citizen Voice Spectrum</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              28 parametric frequency bars oscillating on playback with scrubber playhead needle.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.wave-bar</code></span>
+            <a href="assets/audio_waveform_kannada.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 7: Civic Department Emblems -->
+        <div class="vector-card p-5 space-y-4 md:col-span-2">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">07. Bengaluru Civic Department Badges</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">SWISS MONOGRAMS</span>
+          </div>
+          <div class="h-32 bg-bone border border-borderSubtle flex items-center justify-center p-2">
+            <object data="assets/civic_department_emblems.svg" type="image/svg+xml" class="w-full h-full pointer-events-none civic-departments-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">BBMP · BWSSB · BTP · BESCOM Insignias</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Architectural monogram shields for Bruhat Bengaluru Mahanagara Palike, Water & Sewerage Board, Traffic Police, and Electricity Supply.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>Monochrome Shield Geometry</span>
+            <a href="assets/civic_department_emblems.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+        <!-- SVG 8: Dewatering Pump Unit -->
+        <div class="vector-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+            <span class="text-xs font-mono font-bold uppercase text-black">08. Dewatering Pump Unit</span>
+            <span class="text-[10px] font-mono border border-black bg-bone px-1">RAPID SUCTION</span>
+          </div>
+          <div class="h-32 bg-bone border border-borderSubtle flex items-center justify-center p-2 overflow-hidden">
+            <object data="assets/emergency_dewatering_pump.svg" type="image/svg+xml" class="w-full h-full pointer-events-none dewatering-pump-vector"></object>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-serif font-bold italic text-black">500-HP Centrifugal Trailer Pump</h4>
+            <p class="text-xs text-textMuted leading-tight font-mono">
+              Spinning impeller, vibrating manometer pressure gauge, intake and discharge flow streamlines.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+            <span>GSAP Hook: <code>.gsap-pump-impeller</code></span>
+            <a href="assets/emergency_dewatering_pump.svg" target="_blank" class="underline text-black font-semibold">View Source &nearr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: CODE SNIPPET REFERENCE & INTEGRATION GUIDE -->
+    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
+      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-textMuted font-bold block">Developer Integration Guide</span>
+          <h2 class="text-2xl font-serif font-bold italic text-textMain">How to Embed & Animate in Any Page</h2>
+        </div>
+        <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold">100% VANILLA & GSAP 3</span>
+      </div>
+
+      <div class="space-y-4 text-xs font-mono">
+        <div class="border border-borderSubtle bg-bone p-4 space-y-2">
+          <span class="text-black font-bold block uppercase">// Step 1: Include GSAP & CrossWire Bangalore Motion Engine</span>
+          <pre class="text-textBody bg-white p-3 border border-borderSubtle overflow-x-auto"><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/animations.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="border border-borderSubtle bg-bone p-4 space-y-2">
+          <span class="text-black font-bold block uppercase">// Step 2: Embed Any Vector Using Standard Object Tag (Auto-Animated)</span>
+          <pre class="text-textBody bg-white p-3 border border-borderSubtle overflow-x-auto"><code>&lt;!-- Namma Metro Elevated Transit Viaduct --&gt;
+&lt;object data="assets/namma_metro_transit.svg" type="image/svg+xml" class="namma-metro-vector"&gt;&lt;/object&gt;
+
+&lt;!-- KSNDMC Doppler Precipitation Radar Scanner --&gt;
+&lt;object data="assets/ksndmc_doppler_radar.svg" type="image/svg+xml" class="ksndmc-radar-vector"&gt;&lt;/object&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCEED ACTION BANNER -->
+    <div class="p-6 border-2 border-black bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h4 class="text-base font-serif font-bold italic text-black">Return to Incident Response Console</h4>
+        <p class="text-sm text-textBody mt-0.5">
+          Step through the 4 live municipal pages to inspect how these assets provide local Bangalore context.
+        </p>
+      </div>
+      <a href="index.html" class="inline-block border-2 border-black bg-white px-6 py-3 font-bold text-xs uppercase tracking-wider text-black hover:bg-black hover:text-white transition-all text-center">
+        Go to Citizen Reports (Stage 1) &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-borderSubtle bg-surface px-8 py-6 text-center text-xs font-mono text-textMuted">
+    CrossWire Incident Management System · Autonomous Civic Response Engine · Bengaluru Municipal Assets Architecture.
+  </footer>
+
+  <script>
+    let isDemoAudioPlaying = false;
+    function toggleAudioDemo() {
+      isDemoAudioPlaying = !isDemoAudioPlaying;
+      const btn = document.getElementById('btn-audio-demo');
+      if (window.CrossWireMotion) {
+        window.CrossWireMotion.toggleAudioAnimation(isDemoAudioPlaying);
+      }
+      btn.innerText = isDemoAudioPlaying ? "Pause Kannada Voice Waveform" : "Toggle Kannada Voice Waveform";
+      btn.classList.toggle('bg-black', isDemoAudioPlaying);
+      btn.classList.toggle('text-white', isDemoAudioPlaying);
+    }
+
+    function speedUpMetro() {
+      const train = document.querySelector('.gsap-metro-train');
+      if (train && window.gsap) {
+        gsap.killTweensOf(train);
+        gsap.fromTo(train,
+          { x: -180 },
+          { x: 220, duration: 4.5, repeat: -1, ease: "power1.inOut", repeatDelay: 0.8 }
+        );
+        document.getElementById('btn-metro-speed').innerText = "Namma Metro Speed: 130 km/h (Express)";
+      }
+    }
+
+    function pulseRadarHotspot() {
+      if (window.gsap) {
+        gsap.to('.gsap-cloudburst-hotspot', {
+          scale: 1.4,
+          duration: 0.3,
+          yoyo: true,
+          repeat: 3,
+          transformOrigin: "center center"
+        });
+      }
+    }
+
+    function surgePumpFlow() {
+      if (window.gsap) {
+        gsap.to('.gsap-gauge-needle', { rotation: 65, duration: 0.2, yoyo: true, repeat: 5 });
+        gsap.to('.gsap-pump-impeller', { rotation: "+=1440", duration: 1.5, ease: "power2.inOut" });
+      }
+    }
+  </script>
+</body>
+</html>

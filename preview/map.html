@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossWire · Geographic Map & Spatial Analysis</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP Core, ScrollTrigger & CrossWire Bangalore Motion Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="assets/animations.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          fontWeight: {
+            normal: '480',
+            medium: '580',
+            semibold: '650',
+            bold: '750',
+          },
+          colors: {
+            canvas: '#FBFBFA',
+            surface: '#FFFFFF',
+            borderSubtle: '#EAEAEA',
+            borderDark: '#111111',
+            textMain: '#111111',
+            textBody: '#1F2428',
+            textMuted: '#57606A',
+            bone: '#F7F6F3',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #FBFBFA;
+      color: #1F2428;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 480;
+      letter-spacing: -0.012em;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Harmonic Type Scales */
+    h1, h2, h3, h4 {
+      letter-spacing: -0.02em;
+    }
+    p, span, li, td {
+      letter-spacing: -0.01em;
+    }
+    .font-mono {
+      letter-spacing: -0.005em;
+    }
+
+    .step-card {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .highlight-active {
+      border: 2.5px solid #111111 !important;
+      background-color: #F7F6F3 !important;
+    }
+    .highlight-card, .highlight-box {
+      border: 2.5px solid #111111 !important;
+    }
+
+    /* Hardware Custom Cursor Styles */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, [role="button"], select {
+        cursor: none !important;
+      }
+    }
+    #crosswire-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: #111111;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    #crosswire-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(17, 17, 17, 0.45);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99998;
+      transform-origin: center center;
+    }
+    #crosswire-scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      background: #111111;
+      z-index: 100000;
+      width: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      pointer-events: none;
+    }
+
+    /* Strict isolation and zero overflow for map */
+    .map-wrapper {
+      position: relative !important;
+      overflow: hidden !important;
+      border: 2.5px solid #111111;
+      background: #FFFFFF;
+      contain: paint;
+    }
+    #map-container {
+      width: 100% !important;
+      height: 520px !important;
+      position: relative !important;
+      overflow: hidden !important;
+      z-index: 10 !important;
+      isolation: isolate !important;
+    }
+
+    /* OpenStreetMap architectural monochrome filter: NO API key required, pure black & white */
+    .leaflet-tile {
+      filter: grayscale(100%) contrast(90%) brightness(105%) !important;
+    }
+    .leaflet-container {
+      background: #F7F6F3 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      overflow: hidden !important;
+    }
+    .leaflet-popup-content-wrapper {
+      background: #FFFFFF !important;
+      border: 2px solid #111111 !important;
+      border-radius: 4px !important;
+      box-shadow: none !important;
+      color: #111111 !important;
+    }
+    .leaflet-popup-tip {
+      background: #111111 !important;
+    }
+    .highlight-box {
+      border: 2.5px solid #111111 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+  <!-- TOP OFFICIAL HEADER (STRICT Z-50) -->
+  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm relative">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
+          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Municipal Operations Portal</span>
+        </div>
+        <p class="text-sm font-serif italic text-textMuted mt-1">
+          City Incident Management System · Bengaluru Disaster Response Division
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="assets.html" class="border border-borderDark px-2.5 py-1.5 bg-bone hover:bg-black hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-black inline-block"></span>
+          <span>Asset & Vector Library</span>
+        </a>
+        <div class="border border-borderSubtle bg-bone p-2 px-3">
+          <span class="text-textMuted block text-[10px] uppercase">Incident File:</span>
+          <strong class="text-black text-sm">#INC-892 (Bellandur Gate)</strong>
+        </div>
+        <div class="border-2 border-black p-2 px-3 bg-surface">
+          <span class="text-textMuted block text-[10px] uppercase">Official Status:</span>
+          <strong class="text-black text-sm uppercase">P1 Urgent Action</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS (STRICT Z-40) -->
+  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40 relative">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
+      <div class="flex items-center gap-8 shrink-0">
+        <a href="index.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">1</span>
+          <span>Citizen Reports</span>
+        </a>
+        <a href="map.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2">
+          <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center">2</span>
+          <span>Geographic Map</span>
+        </a>
+        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
+          <span>Cause Analysis</span>
+        </a>
+        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
+          <span>Departmental Actions</span>
+        </a>
+      </div>
+      <a href="assets.html" class="py-2 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0">
+        &larr; View Bangalore Assets & SVGs
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT AREA -->
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-12 space-y-12 overflow-x-hidden">
+
+    <!-- ATTENTION (HERO): 4-STAGE INCIDENT PROTOCOL NAVIGATION -->
+    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
+      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div class="max-w-3xl">
+          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Incident Response Protocol</span>
+          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
+            How to Navigate This Incident Response
+          </h1>
+          <p class="text-xs text-textMuted mt-1">
+            Spatial inspection of natural catchment topography, underground drainage vectors, and public infrastructure exposure.
+          </p>
+        </div>
+        <span class="text-xs font-mono border border-black px-2.5 py-1 bg-bone font-semibold shrink-0">4-STAGE WORKFLOW</span>
+      </div>
+
+      <!-- 4 Explicit Protocol Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Stage 1 -->
+        <a href="index.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">01</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">1. Citizen Reports</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Review incoming citizen complaints, flood depth photos, and voice audio statements.
+          </p>
+        </a>
+
+        <!-- Stage 2 -->
+        <a href="map.html" class="step-card p-4 highlight-active border-2 border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-black px-1.5 py-0.5 bg-white">02</span>
+            <span class="text-[11px] font-serif italic text-black font-bold">Active Stage</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">2. Geographic Map</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Inspect the low-lying flood basin, stormwater canal vectors, and nearby hospitals and schools.
+          </p>
+        </a>
+
+        <!-- Stage 3 -->
+        <a href="investigation.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">03</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">3. Cause Analysis</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Examine the verified findings comparing extreme rainfall, culvert debris, and electrical feeds.
+          </p>
+        </a>
+
+        <!-- Stage 4 -->
+        <a href="dispatch.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">04</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">4. Departmental Actions</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Authorize coordinated emergency orders for water dewatering pumps and traffic diversions.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION TITLE & CONTROLS -->
+    <div class="border-b border-borderSubtle pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
+          Geographical Incident Map & Drainage Infrastructure
+        </h2>
+        <p class="text-xs text-textBody mt-1 max-w-2xl leading-relaxed">
+          Spatial overview of the affected waterlogging zone in Ward 150 correlated with elevation depression and canal routes.
+        </p>
+      </div>
+
+      <!-- MAP LAYER CONTROLS -->
+      <div class="flex flex-wrap items-center gap-3 border-2 border-black bg-surface p-2.5 shrink-0">
+        <span class="text-xs font-serif font-bold italic text-black">Active Layers:</span>
+        <label class="flex items-center gap-1.5 text-xs font-mono cursor-pointer">
+          <input type="checkbox" id="layer-drainage" checked onchange="toggleDrainageLayer()" class="accent-black w-3.5 h-3.5" />
+          <span>Rajakaluve</span>
+        </label>
+        <label class="flex items-center gap-1.5 text-xs font-mono cursor-pointer">
+          <input type="checkbox" id="layer-basin" checked onchange="toggleBasinLayer()" class="accent-black w-3.5 h-3.5" />
+          <span>Basin Polygon</span>
+        </label>
+        <label class="flex items-center gap-1.5 text-xs font-mono cursor-pointer">
+          <input type="checkbox" id="layer-nodes" checked onchange="toggleNodesLayer()" class="accent-black w-3.5 h-3.5" />
+          <span>Critical Assets</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- GAPLESS BENTO GRID (MAP & SPATIAL INFRASTRUCTURE) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 grid-flow-dense items-stretch">
+
+      <!-- BENTO CELL 1: STRICTLY CONTAINED MAP CONTAINER (COL-SPAN-12 LG:COL-SPAN-8) -->
+      <div class="md:col-span-12 lg:col-span-8 border-2 border-black bg-surface overflow-hidden flex flex-col justify-between">
+        <div class="map-wrapper border-0">
+          <div id="map-container" style="height: 480px;"></div>
+        </div>
+        
+        <!-- Spatial Details Sub-Ribbon -->
+        <div class="p-4 border-t-2 border-black bg-bone grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+          <div>
+            <span class="text-textMuted block uppercase text-[10px]">Location:</span>
+            <strong class="text-black text-xs">Bellandur Gate ORR</strong>
+            <span class="text-textMuted block text-[10px]">12.9352° N, 77.6821° E</span>
+          </div>
+          <div>
+            <span class="text-textMuted block uppercase text-[10px]">Elevation Dip:</span>
+            <strong class="text-black text-xs">884m ASL (Depression)</strong>
+            <span class="text-textMuted block text-[10px]">12m below local ground</span>
+          </div>
+          <div>
+            <span class="text-textMuted block uppercase text-[10px]">Canal Route:</span>
+            <strong class="text-black text-xs">SWD-BLR-150 Main Drain</strong>
+            <span class="text-textMuted block text-[10px]">Discharging to Bellandur Lake</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 2: PRECIPITATION TIMELINE & ACCUMULATION (COL-SPAN-12 LG:COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="space-y-1 border-b border-borderSubtle pb-3">
+          <span class="text-[10px] font-mono uppercase text-textMuted font-bold block">Temporal Rainfall Scrubber</span>
+          <h3 class="text-lg font-serif font-bold italic text-black">Precipitation Timeline</h3>
+          <p class="text-xs text-textMuted">Slide to review accumulation over the past 3 hours.</p>
+        </div>
+
+        <!-- Timeline Slider -->
+        <div class="space-y-3 bg-bone border border-borderSubtle p-4">
+          <div class="flex justify-between items-center text-xs font-mono">
+            <span class="text-textMuted">Current Time:</span>
+            <span id="scrub-label" class="border border-black bg-white px-2 py-0.5 font-bold text-black">
+              T - 45m (42.8 mm/hr)
+            </span>
+          </div>
+          <input type="range" id="time-slider" min="0" max="100" value="45" oninput="handleScrub(this.value)" class="w-full accent-black cursor-ew-resize h-2 bg-gray-200" />
+          <div class="flex justify-between text-[10px] font-mono text-textMuted">
+            <span>T-180m Dry</span>
+            <span class="font-bold text-black">Peak Downpour</span>
+            <span>Current Drainage</span>
+          </div>
+        </div>
+
+        <div class="p-3 border border-borderSubtle bg-surface text-xs text-textBody leading-relaxed">
+          <strong>Hydrological Insight:</strong> Natural funneling caused runoff from surrounding elevated layouts (elevation +896m) to overwhelm the single culvert aperture at Bellandur Gate.
+        </div>
+
+        <div class="border-t border-borderSubtle pt-3 flex items-center justify-between text-xs font-mono text-textMuted">
+          <span>Catchment: Koramangala Valley</span>
+          <span class="text-black font-semibold">Sensor S1-SD: Active</span>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 3: NAMMA METRO TRANSIT VIADUCT & DRAINAGE PROFILE (COL-SPAN-12 LG:COL-SPAN-7) -->
+      <div class="md:col-span-12 lg:col-span-7 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="border-b border-borderSubtle pb-3 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-mono uppercase text-textMuted font-bold block">Infrastructure Cross-Section</span>
+            <h3 class="text-lg font-serif font-bold italic text-black">Namma Metro Elevated Viaduct & Basin Bed</h3>
+          </div>
+          <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold">BMRCL BLUE LINE</span>
+        </div>
+
+        <div class="border border-borderSubtle bg-bone p-3 overflow-hidden relative">
+          <div class="w-full h-36 flex items-center justify-center">
+            <object data="assets/namma_metro_transit.svg" type="image/svg+xml" class="w-full h-full pointer-events-none namma-metro-vector"></object>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-[11px] font-mono text-textMuted">
+            <span>Viaduct Pier #142 (Elevation +14.2m)</span>
+            <span class="text-black font-semibold">Speed: 65 km/h · No Track Submersion</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-textBody leading-relaxed">
+          Elevated metro viaduct operates independently above flood water level. Surface road below (+884m) remains inundated with 45-60cm of standing water.
+        </p>
+      </div>
+
+      <!-- BENTO CELL 4: ELEVATION DATUM & FACILITY VULNERABILITY (COL-SPAN-12 LG:COL-SPAN-5) -->
+      <div class="md:col-span-12 lg:col-span-5 border-2 border-black bg-surface p-6 space-y-3 flex flex-col justify-between">
+        <div class="border-b border-borderSubtle pb-2">
+          <span class="text-[10px] font-mono uppercase text-textMuted font-bold block">Topographical Vulnerability</span>
+          <h3 class="text-lg font-serif font-bold italic text-black">Elevation & Facility Exposure</h3>
+        </div>
+
+        <div class="space-y-2 text-xs font-mono">
+          <div class="border border-borderSubtle bg-bone p-2.5">
+            <span class="text-textMuted block text-[10px] uppercase">Metro Rail Deck Elevation</span>
+            <strong class="text-sm text-black">+898.2 Meters ASL</strong>
+            <span class="text-[10px] text-textMuted block">Safe from flood stage by +14.2m</span>
+          </div>
+          <div class="border border-borderDark bg-black text-white p-2.5">
+            <span class="text-gray-400 block text-[10px] uppercase">Outer Ring Road Inundation Dip</span>
+            <strong class="text-sm text-white">+884.0 Meters ASL</strong>
+            <span class="text-[10px] text-gray-300 block">Lowest basin depression (Water: +0.6m)</span>
+          </div>
+          <div class="border border-borderSubtle bg-bone p-2.5">
+            <span class="text-textMuted block text-[10px] uppercase">Sakra World Hospital Access</span>
+            <strong class="text-sm text-black">1.2km East · Ambulances Rerouted</strong>
+            <span class="text-[10px] text-textMuted block">Emergency corridor designated via Sarjapur Road</span>
+          </div>
+        </div>
+
+        <div class="border-t border-borderSubtle pt-2 flex justify-between text-[11px] font-mono text-textMuted">
+          <span>Basin Area: 4.2 km²</span>
+          <span class="text-black font-semibold">Priority: P1 Urgent</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTION BANNER (AIDA: ACTION) -->
+    <div class="p-6 md:p-8 border-2 border-black bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="max-w-2xl">
+        <h3 class="text-lg md:text-xl font-serif font-bold italic text-black">Review the Causal Investigation Findings</h3>
+        <p class="text-xs text-textBody mt-1 leading-relaxed">
+          See the mathematical breakdown of root causes comparing heavy rainfall, drainage blockage, and electrical utility uptime.
+        </p>
+      </div>
+      <a href="investigation.html" class="inline-block border-2 border-black bg-black px-6 py-3.5 font-bold text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all text-center shrink-0 active:scale-95">
+        Go to Cause Analysis &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-borderSubtle bg-surface px-8 py-6 text-center text-xs font-mono text-textMuted">
+    CrossWire Incident Management System · Autonomous Civic Response Engine · All data verified for official municipal use.
+  </footer>
+
+  <script>
+    let map, incidentHex, drainLine, nodeMarkers = [];
+
+    function initMap() {
+      const center = [12.9352, 77.6821];
+      map = L.map('map-container', { 
+        zoomControl: true,
+        attributionControl: false
+      }).setView(center, 15);
+
+      // OpenStreetMap Free Tile Layer with architectural monochrome filter (NO API KEY REQUIRED)
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(map);
+
+      // Primary Hexagon (3px solid black border)
+      const hexCoords = [
+        [12.9390, 77.6821], [12.9371, 77.6860], [12.9333, 77.6860],
+        [12.9314, 77.6821], [12.9333, 77.6782], [12.9371, 77.6782]
+      ];
+
+      incidentHex = L.polygon(hexCoords, {
+        color: '#111111',
+        weight: 3,
+        fillColor: '#111111',
+        fillOpacity: 0.08
+      }).addTo(map);
+
+      incidentHex.bindPopup(`
+        <div style="font-family:'Plus Jakarta Sans'; font-size:12px; padding:4px;">
+          <strong style="font-family:'Newsreader', serif; font-size:15px; font-style:italic;">Primary Affected Zone</strong><br/>
+          Location: Bellandur Gate Junction<br/>
+          Elevation: 884m (-12m depression)<br/>
+          Active Complaints: <strong>8 Verified Reports</strong>
+        </div>
+      `);
+
+      // Drainage Line
+      const drainPath = [
+        [12.9352, 77.6821], [12.9340, 77.6845], [12.9325, 77.6870],
+        [12.9300, 77.6910], [12.9280, 77.6950]
+      ];
+
+      drainLine = L.polyline(drainPath, { color: '#111111', weight: 2.5 }).addTo(map);
+      drainLine.bindPopup("<div style='font-size:12px;'><strong>Primary Stormwater Drain (Rajakaluve)</strong><br/>Flows directly eastward to Bellandur Lake</div>");
+
+      // Critical Facility Pins
+      const nodes = [
+        { name: "Columbia Asia Hospital", pos: [12.9380, 77.6795], desc: "Emergency Access Road Vulnerable" },
+        { name: "Ward 150 Primary School", pos: [12.9320, 77.6810], desc: "High Ground · Safe" },
+        { name: "66kV BESCOM Substation", pos: [12.9360, 77.6855], desc: "Substation Feeder 4 Tripped" }
+      ];
+
+      nodes.forEach(n => {
+        const icon = L.divIcon({
+          className: 'custom-pin',
+          html: `<div style="background:#FFFFFF; border:2.5px solid #111111; width:14px; height:14px;"></div>`,
+          iconSize: [14, 14]
+        });
+        const marker = L.marker(n.pos, { icon: icon }).addTo(map);
+        marker.bindPopup(`<div style="font-size:12px;"><strong>${n.name}</strong><br/>${n.desc}</div>`);
+        nodeMarkers.push(marker);
+      });
+    }
+
+    function toggleDrainageLayer() {
+      if (document.getElementById('layer-drainage').checked) map.addLayer(drainLine);
+      else map.removeLayer(drainLine);
+    }
+    function toggleBasinLayer() {
+      const checked = document.getElementById('layer-basin').checked;
+      incidentHex.setStyle({ fillOpacity: checked ? 0.08 : 0 });
+    }
+    function toggleNodesLayer() {
+      const checked = document.getElementById('layer-nodes').checked;
+      nodeMarkers.forEach(m => checked ? map.addLayer(m) : map.removeLayer(m));
+    }
+
+    function handleScrub(val) {
+      const lbl = document.getElementById('scrub-label');
+      if (val < 30) {
+        lbl.innerText = "T - 120 Minutes (Dry Weather / Normal)";
+        incidentHex.setStyle({ fillOpacity: 0.02, weight: 1.5 });
+      } else if (val < 70) {
+        lbl.innerText = "T - 45 Minutes (Maximum Rainfall: 42.8 mm/hr)";
+        incidentHex.setStyle({ fillOpacity: 0.12, weight: 3.5 });
+      } else {
+        lbl.innerText = "Current Status (Gradual Drainage)";
+        incidentHex.setStyle({ fillOpacity: 0.08, weight: 2.5 });
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initMap);
+  </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossWire · Incident Root Cause Analysis</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP Core, ScrollTrigger & CrossWire Bangalore Motion Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="assets/animations.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          fontWeight: {
+            normal: '480',
+            medium: '580',
+            semibold: '650',
+            bold: '750',
+          },
+          colors: {
+            canvas: '#FBFBFA',
+            surface: '#FFFFFF',
+            borderSubtle: '#EAEAEA',
+            borderDark: '#111111',
+            textMain: '#111111',
+            textBody: '#1F2428',
+            textMuted: '#57606A',
+            bone: '#F7F6F3',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #FBFBFA;
+      color: #1F2428;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 480;
+      letter-spacing: -0.012em;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Harmonic Type Scales */
+    h1, h2, h3, h4 {
+      letter-spacing: -0.02em;
+    }
+    p, span, li, td {
+      letter-spacing: -0.01em;
+    }
+    .font-mono {
+      letter-spacing: -0.005em;
+    }
+
+    .step-card {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .highlight-active {
+      border: 2.5px solid #111111 !important;
+      background-color: #F7F6F3 !important;
+    }
+    .highlight-box, .highlight-card {
+      border: 2.5px solid #111111 !important;
+    }
+
+    /* Hardware Custom Cursor Styles */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, [role="button"], select {
+        cursor: none !important;
+      }
+    }
+    #crosswire-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: #111111;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    #crosswire-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(17, 17, 17, 0.45);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99998;
+      transform-origin: center center;
+    }
+    #crosswire-scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      background: #111111;
+      z-index: 100000;
+      width: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+  <!-- TOP OFFICIAL HEADER (STRICT Z-50) -->
+  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm relative">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
+          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Municipal Operations Portal</span>
+        </div>
+        <p class="text-sm font-serif italic text-textMuted mt-1">
+          City Incident Management System · Bengaluru Disaster Response Division
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="assets.html" class="border border-borderDark px-2.5 py-1.5 bg-bone hover:bg-black hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-black inline-block"></span>
+          <span>Asset & Vector Library</span>
+        </a>
+        <div class="border border-borderSubtle bg-bone p-2 px-3">
+          <span class="text-textMuted block text-[10px] uppercase">Incident File:</span>
+          <strong class="text-black text-sm">#INC-892 (Bellandur Gate)</strong>
+        </div>
+        <div class="border-2 border-black p-2 px-3 bg-surface">
+          <span class="text-textMuted block text-[10px] uppercase">Official Status:</span>
+          <strong class="text-black text-sm uppercase">P1 Urgent Action</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS (STRICT Z-40) -->
+  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40 relative">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
+      <div class="flex items-center gap-8 shrink-0">
+        <a href="index.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">1</span>
+          <span>Citizen Reports</span>
+        </a>
+        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
+          <span>Geographic Map</span>
+        </a>
+        <a href="investigation.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2">
+          <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center">3</span>
+          <span>Cause Analysis</span>
+        </a>
+        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
+          <span>Departmental Actions</span>
+        </a>
+      </div>
+      <a href="assets.html" class="py-2 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0">
+        &larr; View Bangalore Assets & SVGs
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-12 space-y-12 overflow-x-hidden">
+
+    <!-- ATTENTION (HERO): 4-STAGE INCIDENT PROTOCOL NAVIGATION -->
+    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
+      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div class="max-w-3xl">
+          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Incident Response Protocol</span>
+          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
+            How to Navigate This Incident Response
+          </h1>
+          <p class="text-xs text-textMuted mt-1">
+            Systematic Bayesian root cause deduction correlating Doppler rainfall intensity, drainage bathymetry, and substation telemetry.
+          </p>
+        </div>
+        <span class="text-xs font-mono border border-black px-2.5 py-1 bg-bone font-semibold shrink-0">4-STAGE WORKFLOW</span>
+      </div>
+
+      <!-- 4 Explicit Protocol Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Stage 1 -->
+        <a href="index.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">01</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">1. Citizen Reports</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Review incoming citizen complaints, flood depth photos, and voice audio statements.
+          </p>
+        </a>
+
+        <!-- Stage 2 -->
+        <a href="map.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">02</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">2. Geographic Map</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Inspect the low-lying flood basin, stormwater canal vectors, and nearby hospitals and schools.
+          </p>
+        </a>
+
+        <!-- Stage 3 (Active) -->
+        <a href="investigation.html" class="step-card p-4 highlight-active border-2 border-black block space-y-2 group" data-hover="true">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-black px-1.5 py-0.5 bg-white">03</span>
+            <span class="text-[11px] font-serif italic text-black font-bold">Active Stage</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">3. Cause Analysis</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Examine the verified findings comparing extreme rainfall, culvert debris, and electrical feeds.
+          </p>
+        </a>
+
+        <!-- Stage 4 -->
+        <a href="dispatch.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">04</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">4. Departmental Actions</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Authorize coordinated emergency orders for water dewatering pumps and traffic diversions.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION TITLE & CONTEXT (2-LINE HERO RULE COMPLIANT) -->
+    <div class="border-b border-borderSubtle pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="max-w-4xl">
+        <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Empirical Hypothesis Evaluation</span>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold italic text-textMain tracking-tight">
+          Incident Root Cause & Hydrological Verification
+        </h2>
+        <p class="text-sm font-sans text-textBody mt-2 leading-relaxed">
+          Sustained cloudburst precipitation exceeding canal conveyance capacity inside the Bellandur 884m natural depression basin.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-xs font-mono border border-black px-3 py-1 bg-bone font-semibold">BAYESIAN PROBABILITY: VERIFIED</span>
+      </div>
+    </div>
+
+    <!-- INTEREST: GAPLESS BENTO CAUSE INVESTIGATION MATRIX -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 grid-flow-dense">
+
+      <!-- PRIMARY FINDING (COL 8): 82% STATISTICAL CONFIDENCE -->
+      <div class="lg:col-span-8 bg-surface highlight-box p-6 md:p-8 space-y-6 flex flex-col justify-between" data-hover="true">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-borderSubtle gap-3">
+            <div>
+              <span class="text-xs font-mono font-bold text-black uppercase tracking-wider block">Primary Confirmed Cause</span>
+              <h3 class="text-2xl font-serif font-bold italic text-black mt-1">
+                Extreme Precipitation Exceeding Natural Basin Capacity
+              </h3>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="text-4xl font-mono font-bold text-black">82%</span>
+              <span class="text-[10px] font-mono text-textMuted block uppercase">Statistical Confidence</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar Indicator -->
+          <div class="w-full bg-bone h-2.5 border border-black p-0.5 mt-4">
+            <div class="bg-black h-full transition-all duration-1000" style="width: 82%;"></div>
+          </div>
+
+          <p class="text-sm md:text-base text-textBody leading-relaxed pt-4">
+            <strong>Official Hydrographic Finding:</strong> Doppler radar records at KSNDMC confirmed a localized <strong>42.8 mm/hr</strong> cloudburst over Outer Ring Road. Situated inside an 884-meter natural depression (12 meters below the surrounding residential grade), runoff volume overwhelmed the 400mm RC canal conduit by 230%, causing immediate water pooling.
+          </p>
+
+          <!-- Technical Architectural Blueprint & Vector Telemetry Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
+            <!-- Rajakaluve Blueprint Asset -->
+            <div class="border-2 border-black p-3 bg-bone space-y-2 group overflow-hidden">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="font-bold text-black uppercase">Municipal Blueprint</span>
+                <span class="text-textMuted text-[10px]">SECTION A-A' SCHEMATIC</span>
+              </div>
+              <div class="border border-borderDark overflow-hidden bg-white">
+                <img src="assets/rajakaluve_blueprint_urban.jpg" alt="Bengaluru Urban Rajakaluve Stormwater Canal Architectural Blueprint" class="w-full h-48 md:h-52 object-cover contrast-115 group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <p class="text-[11px] font-mono text-textMuted leading-tight">
+                Section A-A' culvert cross-section: RC 400mm concrete conduit, overflow weir (+918.0M MSL), bypass canal to Bellandur Lake.
+              </p>
+            </div>
+
+            <!-- Animated Dynamic Canal Flow Vector -->
+            <div class="border-2 border-black p-3 bg-white space-y-2">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="font-bold text-black uppercase">Canal Telemetry Vector</span>
+                <span class="border border-black bg-bone px-1 text-[10px] font-bold">SENSOR S1-SD</span>
+              </div>
+              <div class="border border-borderSubtle bg-bone p-2 h-48 md:h-52 flex items-center justify-center overflow-hidden">
+                <object data="assets/rajakaluve_drainage_flow.svg" type="image/svg+xml" class="w-full h-full pointer-events-none rajakaluve-vector"></object>
+              </div>
+              <p class="text-[11px] font-mono text-textMuted leading-tight">
+                Live sensor ping: 32cm bed sediment detected. Ultrasonic transducer pinging water-air interface at 12Hz continuous frequency.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-borderSubtle bg-bone p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono mt-4">
+          <span class="text-textBody">Sensor Triangulation: <strong class="text-black">Open-Meteo Radar + OpenTopoData Elevation SRTM</strong></span>
+          <span class="border border-black bg-white px-2 py-0.5 font-bold uppercase shrink-0">Priority Basis Confirmed</span>
+        </div>
+      </div>
+
+      <!-- SECONDARY CONTRIBUTING & RULED-OUT FACTORS (COL 4) -->
+      <div class="lg:col-span-4 flex flex-col gap-6 justify-between">
+        
+        <!-- FACTOR 2: SOLID WASTE OBSTRUCTION (12%) -->
+        <div class="bg-surface border-2 border-borderDark p-6 space-y-3 flex-1 flex flex-col justify-between" data-hover="true">
+          <div>
+            <div class="flex items-start justify-between pb-3 border-b border-borderSubtle">
+              <div>
+                <span class="text-xs font-mono text-textMuted uppercase block">Contributing Factor</span>
+                <h4 class="text-lg font-serif font-bold italic text-textMain mt-0.5">
+                  Solid Waste Grate Obstruction
+                </h4>
+              </div>
+              <span class="text-2xl font-mono font-bold text-black shrink-0">12%</span>
+            </div>
+
+            <div class="w-full bg-bone h-2 border border-borderSubtle mt-3">
+              <div class="bg-black/60 h-full" style="width: 12%;"></div>
+            </div>
+
+            <p class="text-xs text-textBody leading-relaxed pt-3">
+              Municipal sanitation logs recorded 5 open debris tickets along the upstream channel in Ward 150 within 48 hours. Field inspection verified trapped solid waste reduced culvert hydraulic intake throughput by approximately 15%, intensifying the backflow.
+            </p>
+          </div>
+
+          <div class="border-t border-borderSubtle pt-3 text-[11px] font-mono text-textMuted flex items-center justify-between">
+            <span>Ward 150 Debris Tickets:</span>
+            <strong class="text-black font-mono">5 Open Tasks</strong>
+          </div>
+        </div>
+
+        <!-- FACTOR 3: SUBSTATION POWER FAILURE (RULED OUT - 6%) -->
+        <div class="bg-bone border border-borderSubtle p-6 space-y-3 flex-1 flex flex-col justify-between opacity-90" data-hover="true">
+          <div>
+            <div class="flex items-start justify-between pb-3 border-b border-borderSubtle">
+              <div>
+                <span class="text-xs font-mono text-textMuted uppercase block">Investigated & Ruled Out</span>
+                <h4 class="text-lg font-serif font-bold italic text-textMain mt-0.5">
+                  Treatment Plant Pump Outage
+                </h4>
+              </div>
+              <span class="text-2xl font-mono font-bold text-textMuted shrink-0">6%</span>
+            </div>
+
+            <div class="w-full bg-white h-2 border border-borderSubtle mt-3">
+              <div class="bg-gray-400 h-full" style="width: 6%;"></div>
+            </div>
+
+            <p class="text-xs text-textBody leading-relaxed pt-3">
+              Substation Feeder 4 experienced a breaker trip at 1:40 PM. However, telemetry confirms the automated auxiliary diesel generator at the BWSSB plant engaged within 180 seconds, ensuring uninterrupted pump operation without mechanical failure.
+            </p>
+          </div>
+
+          <div class="border-t border-borderSubtle pt-3 text-[11px] font-mono text-textMuted flex items-center justify-between">
+            <span>Auxiliary Generator Response:</span>
+            <strong class="text-black font-mono">Engaged in 180s</strong>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DESIRE: OFFICIAL MULTI-AGENCY VERIFICATION EVIDENCE TABLE -->
+    <section class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderSubtle pb-3">
+        <div>
+          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Official Cross-Verification Audit</span>
+          <h3 class="text-xl font-serif font-bold italic text-textMain">Multi-Agency Telemetry Records</h3>
+        </div>
+        <span class="text-xs font-mono border border-black bg-bone px-2.5 py-1 font-semibold">ALL 4 DATA STREAMS VALIDATED</span>
+      </div>
+
+      <div class="border-2 border-black bg-surface overflow-hidden">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b-2 border-black bg-bone text-xs font-mono uppercase text-textMain">
+              <th class="p-3.5 md:p-4 border-r border-borderSubtle">Agency Data Source</th>
+              <th class="p-3.5 md:p-4 border-r border-borderSubtle">Telemetry Parameter</th>
+              <th class="p-3.5 md:p-4 border-r border-borderSubtle">Observed Reading</th>
+              <th class="p-3.5 md:p-4">Official Verification Rule</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-borderSubtle font-sans text-xs md:text-sm">
+            <tr class="hover:bg-bone/40 transition-colors">
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">KSNDMC / Open-Meteo</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle text-textBody">Hourly Rain Gauge Rate</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">42.8 mm/hour</td>
+              <td class="p-3.5 md:p-4 text-textBody">Exceeds municipal flash threshold of 40.0 mm/hr</td>
+            </tr>
+            <tr class="hover:bg-bone/40 transition-colors">
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">OpenTopoData SRTM</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle text-textBody">Topographical Ground Elevation</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">884m MSL</td>
+              <td class="p-3.5 md:p-4 text-textBody">12 meters below local residential median (896m)</td>
+            </tr>
+            <tr class="hover:bg-bone/40 transition-colors">
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">BBMP Ward 150 Logs</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle text-textBody">Upstream Silt/Garbage Tickets</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">5 Debris Tickets</td>
+              <td class="p-3.5 md:p-4 text-textBody">Corroborates 15% hydraulic intake constriction</td>
+            </tr>
+            <tr class="hover:bg-bone/40 transition-colors">
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">BESCOM SCADA Feeder</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle text-textBody">Substation Feeder 4 Status</td>
+              <td class="p-3.5 md:p-4 border-r border-borderSubtle font-mono font-bold text-black">Trip at 13:40 IST</td>
+              <td class="p-3.5 md:p-4 text-textBody">Auxiliary power initiated within 180s; continuous pump load</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ACTION: PROCEED DIRECTIVE BANNER (TACTILE & HIGH CONTRAST) -->
+    <div class="p-6 md:p-8 border-2 border-black bg-surface flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="max-w-2xl">
+        <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Phase 4 Directive Mobilization</span>
+        <h4 class="text-xl md:text-2xl font-serif font-bold italic text-black mt-1">
+          Authorize Coordinated Departmental Directives
+        </h4>
+        <p class="text-sm font-sans text-textBody mt-1 leading-relaxed">
+          Root cause analysis confirms immediate requirement for BWSSB 50-HP dewatering pumps, BTP traffic diversions at Iblur Flyover, and BBMP culvert grate clearing.
+        </p>
+      </div>
+      <a href="dispatch.html" class="inline-block border-2 border-black bg-black text-white px-8 py-4 font-bold text-xs uppercase tracking-wider hover:bg-white hover:text-black transition-all text-center shrink-0">
+        Review Departmental Actions &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-borderSubtle bg-surface px-8 py-6 text-center text-xs font-mono text-textMuted">
+    CrossWire Incident Management System · Autonomous Civic Response Engine · All data verified for official municipal use.
+  </footer>
+
+</body>
+</html>

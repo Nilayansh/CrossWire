@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 90" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="civic-departments-vector">
+  <!-- 4 Bengaluru Civic Department Minimalist Crests -->
+
+  <!-- 1. BBMP - Bruhat Bengaluru Mahanagara Palike -->
+  <g id="dept-bbmp" transform="translate(10, 5)">
+    <rect x="0" y="0" width="75" height="80" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- Municipal Seal Circle -->
+    <circle cx="37.5" cy="30" r="18" fill="#F7F6F3" stroke="#111111" stroke-width="1.25" />
+    <!-- Kempegowda Tower Silhouette inside Seal -->
+    <path d="M 37.5 18 L 42 24 L 41 38 L 34 38 L 33 24 Z" fill="#111111" stroke="#111111" stroke-width="0.5" />
+    <line x1="30" y1="38" x2="45" y2="38" stroke="#111111" stroke-width="1.5" />
+    <!-- Label -->
+    <text x="37.5" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" text-anchor="middle" fill="#111111">BBMP</text>
+    <text x="37.5" y="69" font-family="'JetBrains Mono', monospace" font-size="3.5" text-anchor="middle" fill="#787774">CIVIC WORKS</text>
+  </g>
+
+  <!-- 2. BWSSB - Bangalore Water Supply & Sewerage Board -->
+  <g id="dept-bwssb" transform="translate(98, 5)">
+    <rect x="0" y="0" width="75" height="80" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- Hydro Valve / Water Droplet Conduit -->
+    <circle cx="37.5" cy="30" r="18" fill="#F7F6F3" stroke="#111111" stroke-width="1.25" />
+    <!-- Precise Minimalist Droplet + Waves -->
+    <path d="M 37.5 18 C 34 24, 30 28, 30 33 C 30 37, 33 40, 37.5 40 C 42 40, 45 37, 45 33 C 45 28, 41 24, 37.5 18 Z" fill="#111111" />
+    <line x1="28" y1="36" x2="47" y2="36" stroke="#FFFFFF" stroke-width="1" />
+    <!-- Label -->
+    <text x="37.5" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" text-anchor="middle" fill="#111111">BWSSB</text>
+    <text x="37.5" y="69" font-family="'JetBrains Mono', monospace" font-size="3.5" text-anchor="middle" fill="#787774">HYDRO DRAINAGE</text>
+  </g>
+
+  <!-- 3. BTP - Bengaluru Traffic Police -->
+  <g id="dept-btp" transform="translate(186, 5)">
+    <rect x="0" y="0" width="75" height="80" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- Traffic Triangle / Shield -->
+    <circle cx="37.5" cy="30" r="18" fill="#F7F6F3" stroke="#111111" stroke-width="1.25" />
+    <!-- Directional Diversion Arrows -->
+    <polyline points="31,28 37.5,21 44,28" stroke="#111111" stroke-width="2" />
+    <polyline points="31,35 37.5,28 44,35" stroke="#111111" stroke-width="2" />
+    <line x1="37.5" y1="21" x2="37.5" y2="39" stroke="#111111" stroke-width="2" />
+    <!-- Label -->
+    <text x="37.5" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" text-anchor="middle" fill="#111111">BTP</text>
+    <text x="37.5" y="69" font-family="'JetBrains Mono', monospace" font-size="3.5" text-anchor="middle" fill="#787774">TRAFFIC POLICE</text>
+  </g>
+
+  <!-- 4. BESCOM - Bangalore Electricity Supply Company -->
+  <g id="dept-bescom" transform="translate(274, 5)">
+    <rect x="0" y="0" width="75" height="80" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- High Voltage Transmission Diamond -->
+    <circle cx="37.5" cy="30" r="18" fill="#F7F6F3" stroke="#111111" stroke-width="1.25" />
+    <!-- Geometric Lightning Bolt -->
+    <polygon points="39,18 31,31 37,31 35,42 45,28 39,28" fill="#111111" stroke="#111111" stroke-width="0.5" />
+    <!-- Label -->
+    <text x="37.5" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" text-anchor="middle" fill="#111111">BESCOM</text>
+    <text x="37.5" y="69" font-family="'JetBrains Mono', monospace" font-size="3.5" text-anchor="middle" fill="#787774">GRID UTILITIES</text>
+  </g>
+</svg>

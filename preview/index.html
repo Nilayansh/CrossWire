@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossWire · Citizen Complaints & Incident Reports</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP Core, ScrollTrigger & CrossWire Bangalore Motion Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="assets/animations.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          fontWeight: {
+            normal: '480',
+            medium: '580',
+            semibold: '650',
+            bold: '750',
+          },
+          colors: {
+            canvas: '#FBFBFA',
+            surface: '#FFFFFF',
+            borderSubtle: '#EAEAEA',
+            borderDark: '#111111',
+            textMain: '#111111',
+            textBody: '#1F2428',
+            textMuted: '#57606A',
+            bone: '#F7F6F3',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #FBFBFA;
+      color: #1F2428;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 480;
+      letter-spacing: -0.012em;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    
+    /* Harmonic Type Scales */
+    h1, h2, h3, h4 {
+      letter-spacing: -0.02em;
+    }
+    p, span, li, td {
+      letter-spacing: -0.01em;
+    }
+    .font-mono {
+      letter-spacing: -0.005em;
+    }
+
+    /* Ensure all step cards are always 100% visible with refined spring transition */
+    .step-card {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .highlight-active {
+      border: 2.5px solid #111111 !important;
+      background-color: #F7F6F3 !important;
+    }
+    .highlight-card, .highlight-box {
+      border: 2.5px solid #111111 !important;
+    }
+
+    /* Hardware Custom Cursor Styles */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, [role="button"], select {
+        cursor: none !important;
+      }
+    }
+    #crosswire-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: #111111;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    #crosswire-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(17, 17, 17, 0.45);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 99998;
+      transform-origin: center center;
+    }
+    #crosswire-scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      background: #111111;
+      z-index: 100000;
+      width: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+  <!-- TOP OFFICIAL HEADER -->
+  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
+          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Municipal Operations Portal</span>
+        </div>
+        <p class="text-sm font-serif italic text-textMuted mt-1">
+          City Incident Management System · Bengaluru Disaster Response Division
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="assets.html" class="border border-borderDark px-2.5 py-1.5 bg-bone hover:bg-black hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-black inline-block"></span>
+          <span>Asset & Vector Library</span>
+        </a>
+        <div class="border border-borderSubtle bg-bone p-2 px-3">
+          <span class="text-textMuted block text-[10px] uppercase">Incident File:</span>
+          <strong class="text-black text-sm">#INC-892 (Bellandur Gate)</strong>
+        </div>
+        <div class="border-2 border-black p-2 px-3 bg-surface">
+          <span class="text-textMuted block text-[10px] uppercase">Official Status:</span>
+          <strong class="text-black text-sm uppercase">P1 Urgent Action</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
+      <div class="flex items-center gap-8 shrink-0">
+        <a href="index.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2">
+          <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center">1</span>
+          <span>Citizen Reports</span>
+        </a>
+        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
+          <span>Geographic Map</span>
+        </a>
+        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
+          <span>Cause Analysis</span>
+        </a>
+        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
+          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
+          <span>Departmental Actions</span>
+        </a>
+      </div>
+      <a href="assets.html" class="py-2 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0">
+        &larr; View Bangalore Assets & SVGs
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-12 space-y-12 overflow-x-hidden">
+
+    <!-- ATTENTION (HERO): 4-STAGE INCIDENT PROTOCOL NAVIGATION -->
+    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
+      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div class="max-w-3xl">
+          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Incident Response Protocol</span>
+          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
+            How to Navigate This Incident Response
+          </h1>
+          <p class="text-xs text-textMuted mt-1">
+            Unified verification workflow reconciling citizen voice statements, geographic drainage vectors, hydrological cause analysis, and departmental emergency dispatch.
+          </p>
+        </div>
+        <span class="text-xs font-mono border border-black px-2.5 py-1 bg-bone font-semibold shrink-0">4-STAGE WORKFLOW</span>
+      </div>
+
+      <!-- 4 Explicit Protocol Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Stage 1 -->
+        <a href="index.html" class="step-card p-4 highlight-active border-2 border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-black px-1.5 py-0.5 bg-white">01</span>
+            <span class="text-[11px] font-serif italic text-black font-bold">Active Stage</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">1. Citizen Reports</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Review incoming citizen complaints, flood depth photos, and voice audio statements.
+          </p>
+        </a>
+
+        <!-- Stage 2 -->
+        <a href="map.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">02</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">2. Geographic Map</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Inspect the low-lying flood basin, stormwater canal vectors, and nearby hospitals and schools.
+          </p>
+        </a>
+
+        <!-- Stage 3 -->
+        <a href="investigation.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">03</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">3. Cause Analysis</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Examine the verified findings comparing extreme rainfall, culvert debris, and electrical feeds.
+          </p>
+        </a>
+
+        <!-- Stage 4 -->
+        <a href="dispatch.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">04</span>
+          </div>
+          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">4. Departmental Actions</h2>
+          <p class="text-xs text-textBody leading-relaxed">
+            Authorize coordinated emergency orders for water dewatering pumps and traffic diversions.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION TITLE & CONTEXT -->
+    <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
+          Citizen Complaints & Sensory Telemetry
+        </h2>
+        <p class="text-xs text-textBody mt-1 max-w-2xl leading-relaxed">
+          Incoming verified field reports from local residents in Ward 150 (Bellandur) correlated with Doppler radar and municipal sensor arrays.
+        </p>
+      </div>
+      <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold shrink-0">INCIDENT CATCHMENT · WARD 150</span>
+    </div>
+
+    <!-- GAPLESS BENTO GRID (INTEREST & DESIRE) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 grid-flow-dense items-stretch">
+
+      <!-- BENTO CELL 1: PRIMARY PHOTO EVIDENCE (COL-SPAN-7) -->
+      <div class="md:col-span-12 lg:col-span-7 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between group">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-black inline-block"></span>
+            <span class="font-mono text-xs font-bold uppercase text-black">Photographic Evidence · TK-4821</span>
+          </div>
+          <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted">ORR BELLANDUR GATE</span>
+        </div>
+
+        <div class="relative border-2 border-black overflow-hidden bg-bone">
+          <img src="assets/bangalore_flood_incident.jpg" alt="Bangalore Bellandur flood incident evidence with BMTC Volvo and auto-rickshaw" class="w-full h-72 object-cover contrast-110 group-hover:scale-[1.02] transition-transform duration-500 ease-out" />
+          <!-- Measurement Overlay -->
+          <div class="absolute bottom-3 left-3 right-3 bg-white/95 border-2 border-black p-3 backdrop-blur-sm shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-black uppercase">Computer Vision Analysis</span>
+              <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">CONFIDENCE: 92%</span>
+            </div>
+            <p class="text-sm font-sans text-textBody mt-1">
+              Standing Water Depth: <strong>45 to 60 cm</strong> · Grid: <strong>Outer Ring Road (ORR) Under Metro Pier #142</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-textMuted pt-1">
+          <span>Direction: Facing East toward Ecospace</span>
+          <span class="text-black font-semibold">BMTC Volvo 500C & Auto-Rickshaw Submerged</span>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 2: SARVAM KANNADA STT AUDIO & WAVEFORM (COL-SPAN-5) -->
+      <div class="md:col-span-12 lg:col-span-5 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+          <span class="font-mono text-xs font-bold uppercase text-black">Citizen Voice Statement</span>
+          <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted">SARVAM STT · KANNADA</span>
+        </div>
+
+        <!-- Animated Audio Waveform Box -->
+        <div class="border-2 border-black p-4 bg-bone space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="font-bold text-black font-serif italic text-sm">Audio Spectrum Visualizer</span>
+            <span class="border border-borderSubtle bg-white px-2 py-0.5">0:28 @ 16kHz</span>
+          </div>
+
+          <!-- Interactive Waveform SVG Component -->
+          <div class="bg-white border border-black p-2 h-14 flex items-center justify-center overflow-hidden">
+            <object data="assets/audio_waveform_kannada.svg" type="image/svg+xml" class="w-full h-full pointer-events-none audio-waveform-vector" id="audio-wave-obj">
+              <svg viewBox="0 0 280 60" class="w-full h-full audio-waveform-vector"><line x1="0" y1="30" x2="280" y2="30" stroke="#111111" stroke-width="2"/></svg>
+            </object>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button onclick="toggleAudio()" id="audio-btn" class="w-12 h-10 border-2 border-black bg-white flex items-center justify-center hover:bg-black hover:text-white transition-colors shrink-0 active:scale-95">
+              <span id="audio-icon" class="text-xs font-mono font-bold">PLAY</span>
+            </button>
+            <div class="flex-1 bg-white h-3 border border-black p-0.5">
+              <div id="audio-progress" class="bg-black h-full w-1/3 transition-all duration-300"></div>
+            </div>
+            <span class="text-[11px] font-mono text-textMuted shrink-0" id="audio-timer">0:09 / 0:28</span>
+          </div>
+        </div>
+
+        <!-- Bilingual Transcription -->
+        <div class="space-y-2 text-xs">
+          <div class="border border-borderSubtle bg-surface p-3 space-y-1">
+            <span class="font-mono text-[10px] text-textMuted block uppercase">Original Audio Statement (Kannada):</span>
+            <p class="text-sm text-textBody leading-relaxed font-sans">
+              "ಬೆಳ್ಳಂದೂರು ಗೇಟ್ ಬಳಿ ರಾಜಕಾಲುವೆ ನೀರು ರಸ್ತೆಗೆ ನುಗ್ಗಿದೆ, ವಾಹನಗಳು ಮುಳುಗಿವೆ."
+            </p>
+          </div>
+          <div class="border border-borderSubtle bg-surface p-3 space-y-1">
+            <span class="font-mono text-[10px] text-textMuted block uppercase">Official English Translation:</span>
+            <p class="text-sm text-textBody leading-relaxed font-serif italic">
+              "The main storm drain near Bellandur Gate is overflowing onto the road. Several vehicles are unable to move due to standing water."
+            </p>
+          </div>
+        </div>
+
+        <div class="border border-borderSubtle p-2.5 bg-bone flex items-center justify-between text-[11px] font-mono">
+          <span>Coordinates: <strong>12.9352° N, 77.6821° E</strong></span>
+          <span>H3: <strong>#88618925d3fffff</strong></span>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 3: KSNDMC PRECIPITATION DOPPLER (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+          <span class="text-xs font-mono font-bold uppercase text-black">KSNDMC Weather Radar</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">50KM BEAM</span>
+        </div>
+        <div class="w-full h-36 bg-bone border border-borderSubtle flex items-center justify-center p-2">
+          <object data="assets/ksndmc_doppler_radar.svg" type="image/svg+xml" class="w-32 h-32 pointer-events-none ksndmc-radar-vector"></object>
+        </div>
+        <div class="space-y-1 text-xs font-mono">
+          <div class="flex justify-between">
+            <span class="text-textMuted">Downpour Rate:</span>
+            <strong class="text-black">82.4 mm/hr</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-textMuted">Cloudburst Status:</span>
+            <span class="border border-black px-1 text-[10px] font-bold bg-bone">SUSTAINED CELL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 4: BTP CORRIDOR TRAFFIC VECTOR (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+          <span class="text-xs font-mono font-bold uppercase text-black">BTP Traffic Bottleneck</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">ORR CORRIDOR</span>
+        </div>
+        <div class="w-full h-36 bg-bone border border-borderSubtle flex items-center justify-center p-2">
+          <object data="assets/bengaluru_auto_rickshaw.svg" type="image/svg+xml" class="w-36 h-28 pointer-events-none bangalore-auto-vector"></object>
+        </div>
+        <div class="space-y-1 text-xs font-mono">
+          <div class="flex justify-between">
+            <span class="text-textMuted">Bottleneck Point:</span>
+            <strong class="text-black">Iblur to Ecospace</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-textMuted">Traffic Advice:</span>
+            <span class="text-black font-semibold">Sarjapur Diversion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 5: HYDROLOGICAL DRAINAGE & METRO STATUS (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
+          <span class="text-xs font-mono font-bold uppercase text-black">Basin & Transit Telemetry</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">CANAL SWD-150</span>
+        </div>
+        <div class="space-y-2 text-xs font-mono">
+          <div class="border border-borderSubtle bg-bone p-2.5 space-y-1">
+            <span class="text-textMuted block text-[10px] uppercase">Rajakaluve Bed Sediment</span>
+            <strong class="text-base text-black">32 cm Silt Detritus</strong>
+            <span class="text-[10px] text-textMuted block">Culvert throughput reduced by 15%</span>
+          </div>
+          <div class="border border-borderDark bg-black text-white p-2.5 space-y-1">
+            <span class="text-gray-400 block text-[10px] uppercase">Namma Metro Elevated Transit</span>
+            <strong class="text-xs text-white">Pier #142 Viaduct: Operating Normal</strong>
+          </div>
+        </div>
+        <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+          <span>Sensor ID: S1-SD</span>
+          <span class="text-black font-semibold">Status: Nominal</span>
+        </div>
+      </div>
+
+      <!-- BENTO CELL 6: RELATED CITIZEN COMPLAINT STREAM (COL-SPAN-12) -->
+      <div class="md:col-span-12 border-2 border-black bg-surface p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-black inline-block"></span>
+            <h3 class="text-lg font-serif font-bold italic text-black">Catchment Queue of Incident Reports</h3>
+          </div>
+          <span class="text-xs font-mono text-textMuted">Past 60 Minutes · 3 Correlated Reports</span>
+        </div>
+
+        <div class="border border-borderSubtle divide-y divide-borderSubtle text-sm">
+          <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-mono font-bold text-black">TK-4819</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Drainage / Sewage</span>
+                <span class="text-xs font-mono text-textMuted">2:05 PM (10 mins ago)</span>
+              </div>
+              <p class="text-sm text-textBody">
+                Resident in Green Glen Layout reported black wastewater bubbling out from the secondary road manhole.
+              </p>
+            </div>
+            <span class="text-xs font-mono text-textMuted shrink-0">Location: 250m South of Junction</span>
+          </div>
+
+          <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-mono font-bold text-black">TK-4814</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Power Utility</span>
+                <span class="text-xs font-mono text-textMuted">1:55 PM (20 mins ago)</span>
+              </div>
+              <p class="text-sm text-textBody">
+                Transformer spark followed by localized power outage reported near the 66kV electrical substation feeder.
+              </p>
+            </div>
+            <span class="text-xs font-mono text-textMuted shrink-0">Location: 180m East of Junction</span>
+          </div>
+
+          <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-mono font-bold text-black">TK-4809</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Traffic Delay</span>
+                <span class="text-xs font-mono text-textMuted">1:45 PM (30 mins ago)</span>
+              </div>
+              <p class="text-sm text-textBody">
+                Traffic stationary on Outer Ring Road from Iblur flyover towards Ecospace due to standing water at the dip.
+              </p>
+            </div>
+            <span class="text-xs font-mono text-textMuted shrink-0">Location: 400m West of Junction</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTION BANNER (AIDA: ACTION) -->
+    <div class="p-6 md:p-8 border-2 border-black bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="max-w-2xl">
+        <h3 class="text-lg md:text-xl font-serif font-bold italic text-black">Examine the Incident on the Geographic Map</h3>
+        <p class="text-xs text-textBody mt-1 leading-relaxed">
+          Inspect how these 4 citizen reports cluster geographically around the natural drainage bowl and critical public infrastructure.
+        </p>
+      </div>
+      <a href="map.html" class="inline-block border-2 border-black bg-black px-6 py-3.5 font-bold text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all text-center shrink-0 active:scale-95">
+        Go to Geographic Map &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-borderSubtle bg-surface px-8 py-6 text-center text-xs font-mono text-textMuted">
+    CrossWire Incident Management System · Autonomous Civic Response Engine · All data verified for official municipal use.
+  </footer>
+
+  <script>
+    let isPlaying = false;
+    function toggleAudio() {
+      const btn = document.getElementById('audio-icon');
+      const prog = document.getElementById('audio-progress');
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        btn.innerText = "PAUSE";
+        prog.style.width = "100%";
+        if (window.CrossWireMotion) {
+          window.CrossWireMotion.toggleAudioAnimation(true);
+        }
+      } else {
+        btn.innerText = "PLAY";
+        prog.style.width = "33%";
+        if (window.CrossWireMotion) {
+          window.CrossWireMotion.toggleAudioAnimation(false);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
