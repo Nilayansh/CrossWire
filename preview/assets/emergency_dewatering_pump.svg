@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 140" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="dewatering-pump-vector">
+  <!-- BWSSB High-Capacity Mobile Dewatering Pump Unit (Trailer Mounted) -->
+
+  <!-- Ground Plane -->
+  <line x1="5" y1="130" x2="235" y2="130" stroke="#111111" stroke-width="1.5" />
+
+  <!-- Trailer Frame Chassis -->
+  <rect x="50" y="100" width="130" height="8" fill="#111111" />
+  <line x1="180" y1="104" x2="210" y2="114" stroke="#111111" stroke-width="2" />
+  <circle cx="212" cy="115" r="2.5" fill="#111111" />
+
+  <!-- Trailer Wheels (Rotatable / Spoked) -->
+  <g class="gsap-trailer-wheel" transform-origin="115 115">
+    <circle cx="115" cy="115" r="14" fill="#FFFFFF" stroke="#111111" stroke-width="2.5" />
+    <circle cx="115" cy="115" r="5" fill="#111111" />
+    <line x1="115" y1="101" x2="115" y2="129" stroke="#111111" stroke-width="1" />
+    <line x1="101" y1="115" x2="129" y2="115" stroke="#111111" stroke-width="1" />
+  </g>
+
+  <!-- Heavy Duty Acoustic Enclosure (Engine / Pump Body) -->
+  <rect x="55" y="45" width="120" height="55" fill="#FFFFFF" stroke="#111111" stroke-width="2" />
+  <!-- Enclosure Louvers / Ventilation Slits -->
+  <line x1="62" y1="55" x2="80" y2="55" stroke="#111111" stroke-width="1.5" />
+  <line x1="62" y1="62" x2="80" y2="62" stroke="#111111" stroke-width="1.5" />
+  <line x1="62" y1="69" x2="80" y2="69" stroke="#111111" stroke-width="1.5" />
+  <line x1="62" y1="76" x2="80" y2="76" stroke="#111111" stroke-width="1.5" />
+
+  <!-- Exhaust Stack & Rain Cap -->
+  <line x1="70" y1="45" x2="70" y2="28" stroke="#111111" stroke-width="2.5" />
+  <line x1="65" y1="28" x2="75" y2="28" stroke="#111111" stroke-width="2" />
+  <!-- Exhaust Plume Particle (Animated) -->
+  <circle cx="70" cy="22" r="2" stroke="#787774" stroke-width="1" stroke-dasharray="2,2" class="gsap-exhaust-puff" />
+
+  <!-- Volute Pump Impeller Casing (Circular Centrifugal Body) -->
+  <circle cx="130" cy="72" r="18" fill="#F7F6F3" stroke="#111111" stroke-width="2" />
+  <circle cx="130" cy="72" r="8" fill="#111111" class="gsap-pump-impeller" />
+  <line x1="130" y1="64" x2="130" y2="80" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="122" y1="72" x2="138" y2="72" stroke="#FFFFFF" stroke-width="1" />
+
+  <!-- Analog Pressure Dial Gauge (Target for GSAP Needle oscillation) -->
+  <circle cx="158" cy="52" r="7" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+  <line x1="158" y1="52" x2="162" y2="48" stroke="#111111" stroke-width="1.5" class="gsap-gauge-needle" transform-origin="158 52" />
+
+  <!-- Flexible Intake Suction Hose (Ribbed / Corrugated) -->
+  <path d="M 115 80 C 85 90, 40 100, 15 125" stroke="#111111" stroke-width="7" stroke-linecap="round" fill="none" />
+  <path d="M 115 80 C 85 90, 40 100, 15 125" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="2,3" fill="none" class="gsap-intake-flow" />
+
+  <!-- High-Pressure Discharge Hose (Outflow to Rajakaluve) -->
+  <path d="M 148 72 C 180 72, 205 85, 230 115" stroke="#111111" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M 148 72 C 180 72, 205 85, 230 115" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3,4" fill="none" class="gsap-discharge-flow" />
+
+  <!-- Unit Technical Label -->
+  <text x="95" y="60" font-family="'JetBrains Mono', monospace" font-size="4" font-weight="700" fill="#111111">BWSSB 500-HP</text>
+  <text x="95" y="66" font-family="'JetBrains Mono', monospace" font-size="3" fill="#787774">FLOW: 12,000 LPM</text>
+</svg>

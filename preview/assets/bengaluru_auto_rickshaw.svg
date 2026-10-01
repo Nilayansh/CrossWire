@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" fill="none" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="bangalore-auto-vector">
+  <!-- Iconic Bangalore Three-Wheeler Auto-Rickshaw Vector -->
+  
+  <g id="auto-body-group" class="gsap-auto-body">
+    <!-- Canopy Hood & Canvas Roof Profile -->
+    <path d="M 28 85 L 28 42 C 28 35, 36 28, 52 26 L 105 26 C 114 26, 122 32, 128 42 L 138 68 L 134 85 Z" fill="#F7F6F3" stroke="#111111" stroke-width="2" />
+    
+    <!-- Classic Two-Tone Division (Bangalore Yellow/Black Division in Monochrome) -->
+    <path d="M 28 55 L 132 55" stroke="#111111" stroke-width="1.25" stroke-dasharray="2,2" />
+    
+    <!-- Windshield & A-Pillar -->
+    <path d="M 104 30 L 126 42 L 122 62 L 98 62 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    <!-- Single Bangalore Auto Wiper -->
+    <line x1="112" y1="62" x2="118" y2="40" stroke="#111111" stroke-width="1.5" class="gsap-auto-wiper" />
+    <circle cx="112" cy="62" r="1.5" fill="#111111" />
+
+    <!-- Open Passenger Doorway / Side Opening Cutout -->
+    <path d="M 46 85 L 46 45 C 46 38, 52 35, 62 35 L 94 35 L 94 85 Z" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+    
+    <!-- Passenger Rear Bench Seat -->
+    <rect x="32" y="60" width="16" height="25" fill="#111111" />
+    <path d="M 32 60 Q 40 54 48 60" stroke="#FFFFFF" stroke-width="1" />
+
+    <!-- Driver Seat & Handlebar Column -->
+    <rect x="76" y="68" width="14" height="17" fill="#2F3437" />
+    <line x1="102" y1="80" x2="108" y2="60" stroke="#111111" stroke-width="2" />
+    <!-- Handlebar Grip & Fare Meter Box -->
+    <line x1="104" y1="58" x2="112" y2="62" stroke="#111111" stroke-width="2.5" />
+    <!-- Digital Auto Fare Meter -->
+    <rect x="108" y="52" width="8" height="6" fill="#111111" stroke="#111111" stroke-width="0.75" />
+    <circle cx="112" cy="55" r="1" fill="#FFFFFF" />
+
+    <!-- Front Mudguard & Single Headlamp -->
+    <path d="M 125 78 L 144 78 C 148 78, 150 82, 146 88 L 132 88 Z" fill="#F7F6F3" stroke="#111111" stroke-width="1.5" />
+    <circle cx="145" cy="80" r="3" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" class="gsap-headlamp" />
+    <!-- Front Fork Strut -->
+    <line x1="130" y1="78" x2="135" y2="95" stroke="#111111" stroke-width="2.5" />
+
+    <!-- Rear Mudguard & License Plate Box -->
+    <path d="M 22 75 L 34 75 L 34 88 L 22 88 Z" fill="#111111" stroke="#111111" stroke-width="1" />
+    <text x="24" y="84" font-family="'JetBrains Mono', monospace" font-size="3" fill="#FFFFFF" font-weight="600">KA01</text>
+  </g>
+
+  <!-- Front Wheel (Spoked & Animated for Spin) -->
+  <g class="gsap-auto-wheel-front" transform-origin="135 95">
+    <circle cx="135" cy="95" r="12" fill="#FFFFFF" stroke="#111111" stroke-width="2.5" />
+    <circle cx="135" cy="95" r="5" fill="#111111" />
+    <line x1="135" y1="83" x2="135" y2="107" stroke="#111111" stroke-width="1" />
+    <line x1="123" y1="95" x2="147" y2="95" stroke="#111111" stroke-width="1" />
+    <line x1="127" y1="87" x2="143" y2="103" stroke="#111111" stroke-width="0.75" />
+    <line x1="127" y1="103" x2="143" y2="87" stroke="#111111" stroke-width="0.75" />
+  </g>
+
+  <!-- Rear Wheel (Spoked & Animated for Spin) -->
+  <g class="gsap-auto-wheel-rear" transform-origin="48 95">
+    <circle cx="48" cy="95" r="12" fill="#FFFFFF" stroke="#111111" stroke-width="2.5" />
+    <circle cx="48" cy="95" r="5" fill="#111111" />
+    <line x1="48" y1="83" x2="48" y2="107" stroke="#111111" stroke-width="1" />
+    <line x1="36" y1="95" x2="60" y2="95" stroke="#111111" stroke-width="1" />
+    <line x1="40" y1="87" x2="56" y2="103" stroke="#111111" stroke-width="0.75" />
+    <line x1="40" y1="103" x2="56" y2="87" stroke="#111111" stroke-width="0.75" />
+  </g>
+
+  <!-- Street Water Line & Reflection Ripples -->
+  <line x1="10" y1="107" x2="155" y2="107" stroke="#111111" stroke-width="1.5" />
+  <line x1="25" y1="112" x2="70" y2="112" stroke="#787774" stroke-width="1" stroke-dasharray="4,3" />
+  <line x1="115" y1="112" x2="150" y2="112" stroke="#787774" stroke-width="1" stroke-dasharray="4,3" />
+</svg>
