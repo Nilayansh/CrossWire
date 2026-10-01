@@ -15,6 +15,15 @@ run-api:
 run-ui:
 	streamlit run ui/streamlit_app.py
 
+run-ui-mock:
+	USE_MOCK_API=1 streamlit run ui/streamlit_app.py
+
+dev-frontend:
+	cd frontend && npm run dev
+
+build-frontend:
+	cd frontend && npm run build
+
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete

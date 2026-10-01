@@ -43,6 +43,7 @@ node_modules/
 dist/
 build/
 out/
+*.tsbuildinfo
 __pycache__/
 *.py[cod]
 *$py.class

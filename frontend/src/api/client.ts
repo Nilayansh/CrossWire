@@ -1,0 +1,55 @@
+import {
+  Incident,
+  IncidentDetailResponse,
+  DecisionPayload,
+  VerifyResponse,
+} from '../types/api';
+
+const BASE_URL = '';
+
+export async function fetchIncidents(): Promise<Incident[]> {
+  const res = await fetch(`${BASE_URL}/incidents`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch incidents: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function fetchIncidentDetail(id: string): Promise<IncidentDetailResponse> {
+  const res = await fetch(`${BASE_URL}/incidents/${encodeURIComponent(id)}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch incident ${id}: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function submitDecision(
+  id: string,
+  payload: DecisionPayload
+): Promise<Record<string, unknown>> {
+  const res = await fetch(`${BASE_URL}/incidents/${encodeURIComponent(id)}/decision`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to submit decision: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function verifyIncident(
+  id: string,
+  fastForwardMin = 45
+): Promise<VerifyResponse> {
+  const res = await fetch(
+    `${BASE_URL}/incidents/${encodeURIComponent(id)}/verify?fast_forward_min=${fastForwardMin}`,
+    {
+      method: 'POST',
+    }
+  );
+  if (!res.ok) {
+    throw new Error(`Failed to verify incident: ${res.statusText}`);
+  }
+  return res.json();
+}

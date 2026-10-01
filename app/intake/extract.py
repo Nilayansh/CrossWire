@@ -38,7 +38,7 @@ def translate(text: str, source_lang: str = "kn") -> str:
         if kn_phrase in text or text in kn_phrase:
             return en_trans
 
-    # Live translation via Sarvam Translate API if available
+    # Live translation via Sarvam Translate API if available and configured
     if settings.SARVAM_API_KEY and not settings.DEMO_MODE:
         try:
             url = "https://api.sarvam.ai/translate"
@@ -55,6 +55,23 @@ def translate(text: str, source_lang: str = "kn") -> str:
                     return resp.json().get("translated_text", text)
         except Exception:
             pass
+
+    # Universal Adapter Translation
+    try:
+        from app.adapters.llm_adapter import LLMAdapter
+        from pydantic import BaseModel
+
+        class TranslationDraft(BaseModel):
+            translated_en: str
+
+        draft = LLMAdapter.structured(
+            TranslationDraft,
+            prompt=f"Translate this Kannada citizen civic complaint to English: {text}",
+        )
+        if draft.translated_en and draft.translated_en != text:
+            return draft.translated_en
+    except Exception:
+        pass
 
     # Heuristic fallback for Bellandur Ecospace if text has ecospace
     if "ಇಕೋಸ್ಪೇಸ್" in text or "ಬೆಳ್ಳಂದೂರು" in text:
