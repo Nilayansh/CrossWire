@@ -109,5 +109,45 @@ def geocode(
         confidence = round((best_score / 100.0) * 0.75, 2)
         return (best_match.lat, best_match.lon, confidence)
 
-    # 4. Fallback to Bangalore centroid
+    # 4. Live OpenStreetMap / Nominatim query for any Bengaluru road, neighborhood, or landmark
+    nom_result = _geocode_nominatim(text)
+    if nom_result:
+        return nom_result
+
+    # 5. Fallback to Bangalore centroid
     return (12.9716, 77.5946, 0.20)
+
+
+def _geocode_nominatim(query: str) -> Optional[tuple[float, float, float]]:
+    """Query OpenStreetMap Nominatim API for live Bengaluru coordinates."""
+    if not query or len(query.strip()) < 3:
+        return None
+    try:
+        import hashlib
+        import httpx
+        import json
+        clean_q = query.strip()
+        h = hashlib.sha256(clean_q.lower().encode()).hexdigest()[:12]
+        cache_file = Path(__file__).resolve().parent.parent.parent / "data" / "cache" / f"geo_{h}.json"
+        if cache_file.exists():
+            with open(cache_file, "r") as f:
+                d = json.load(f)
+                return float(d["lat"]), float(d["lon"]), float(d.get("confidence", 0.95))
+
+        url = "https://nominatim.openstreetmap.org/search"
+        params = {"q": f"{clean_q}, Bengaluru, India", "format": "json", "limit": 1}
+        headers = {"User-Agent": "CrossWireBangalore/1.0 (incident-desk)"}
+        with httpx.Client(timeout=4.0) as client:
+            resp = client.get(url, params=params, headers=headers)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data and len(data) > 0:
+                    lat = float(data[0]["lat"])
+                    lon = float(data[0]["lon"])
+                    cache_file.parent.mkdir(parents=True, exist_ok=True)
+                    with open(cache_file, "w") as f:
+                        json.dump({"lat": lat, "lon": lon, "confidence": 0.95}, f)
+                    return lat, lon, 0.95
+    except Exception:
+        pass
+    return None

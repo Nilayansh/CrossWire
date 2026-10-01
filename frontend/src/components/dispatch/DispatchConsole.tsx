@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { ActionProposal, Incident } from '../../types/api';
 import { CheckCircle2, FastForward, Send, ShieldCheck } from 'lucide-react';
 
@@ -21,8 +21,22 @@ export const DispatchConsole: FC<DispatchConsoleProps> = ({
     actions.map((a, i) => a.id || `act-${i + 1}`)
   );
   const [officerName, setOfficerName] = useState('Chief Disaster Coordinator, BBMP Central Cell');
-  const [authorized, setAuthorized] = useState(incident?.status === 'dispatched' || incident?.status === 'resolving' || incident?.status === 'closed');
+  const [authorized, setAuthorized] = useState(
+    incident?.status === 'dispatched' || incident?.status === 'resolving' || incident?.status === 'closed'
+  );
   const [verifiedResult, setVerifiedResult] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (actions && actions.length > 0) {
+      setApprovedActionIds(actions.map((a, i) => a.id || `act-${i + 1}`));
+    }
+  }, [actions]);
+
+  useEffect(() => {
+    setAuthorized(
+      incident?.status === 'dispatched' || incident?.status === 'resolving' || incident?.status === 'closed'
+    );
+  }, [incident?.status]);
 
   const toggleAction = (id: string) => {
     setApprovedActionIds((prev) =>

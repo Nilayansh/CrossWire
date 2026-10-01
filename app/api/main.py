@@ -175,6 +175,11 @@ def create_app(
 
     @app.post("/tickets", response_model=TicketIngestResponse, tags=["Tickets"])
     async def ingest_ticket(ticket: Ticket):
+        # Recalculate H3 cell based on true coordinates
+        try:
+            ticket.h3_r8 = latlon_to_cell(ticket.lat, ticket.lon, res=8)
+        except Exception:
+            pass
         t_repo.add(ticket)
         inc = detector.ingest(ticket)
 
