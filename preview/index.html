@@ -138,189 +138,243 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 
-  <!-- TOP OFFICIAL HEADER -->
-  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
-          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
-          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Municipal Operations Portal</span>
-        </div>
-        <p class="text-sm font-serif italic text-textMuted mt-1">
-          City Incident Management System · Bengaluru Disaster Response Division
-        </p>
+  <!-- TOP UNIFIED SLIM HEADER & HOVER NAVIGATION (NEVER CUTS OFF) -->
+  <header class="sticky top-0 z-50 bg-[#FBFBF9]/95 backdrop-blur-md border-b-2 border-black shadow-sm">
+    <!-- Slim Project Title Bar -->
+    <div class="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between border-b border-borderSubtle">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Crest" class="w-6 h-6 object-contain" />
+          <span class="text-xl font-serif font-bold italic tracking-tight text-textMain group-hover:underline">CrossWire</span>
+        </a>
+        <span class="hidden sm:inline-block text-xs text-textMuted border-l border-borderSubtle pl-3 font-sans">
+          Bengaluru Flood & Emergency Helpline
+        </span>
       </div>
 
-      <div class="flex items-center gap-4 text-xs font-mono">
-        <a href="assets.html" class="border border-borderDark px-2.5 py-1.5 bg-bone hover:bg-black hover:text-white transition-colors flex items-center gap-1.5">
-          <span class="w-2 h-2 bg-black inline-block"></span>
-          <span>Asset & Vector Library</span>
+      <!-- Quick Incident Badges -->
+      <div class="flex items-center gap-3 text-xs font-mono">
+        <div class="border border-borderDark px-2.5 py-1 bg-bone flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+          <span class="font-bold text-black">Bellandur Flood</span>
+          <span class="text-textMuted hidden md:inline">(ORR Junction)</span>
+        </div>
+        <div class="border-2 border-black bg-black text-white px-2.5 py-1 font-bold text-[11px] uppercase tracking-wider">
+          Urgent Action
+        </div>
+        <a href="assets.html" class="border border-borderDark px-2.5 py-1 bg-white hover:bg-black hover:text-white transition-colors text-[11px] font-mono hidden md:flex items-center gap-1">
+          <span>🎨 City Assets</span>
         </a>
-        <div class="border border-borderSubtle bg-bone p-2 px-3">
-          <span class="text-textMuted block text-[10px] uppercase">Incident File:</span>
-          <strong class="text-black text-sm">#INC-892 (Bellandur Gate)</strong>
-        </div>
-        <div class="border-2 border-black p-2 px-3 bg-surface">
-          <span class="text-textMuted block text-[10px] uppercase">Official Status:</span>
-          <strong class="text-black text-sm uppercase">P1 Urgent Action</strong>
-        </div>
       </div>
     </div>
+
+    <!-- Intuitive Navigation Tabs with Hover Information Popovers -->
+    <nav class="max-w-6xl mx-auto px-6 flex items-center justify-between text-sm">
+      <div class="flex items-center gap-1 md:gap-4">
+        
+        <!-- Tab 1: Citizen Reports (Active) -->
+        <div class="relative group py-2.5">
+          <a href="index.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-black font-bold italic text-black font-serif transition-colors">
+            <span class="font-mono text-xs border border-black bg-white w-4 h-4 flex items-center justify-center not-italic">1</span>
+            <span>Citizen Reports</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 1 of 4</span>
+                <span class="font-mono text-[10px] bg-black text-white px-1.5 py-0.5">Current Page</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Helpline Calls & Photos</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Listen to Kannada emergency calls from citizens, check street flood photos, and see live rain radar.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span class="text-black font-bold">&bull; You are here</span>
+                <span class="text-textMuted">3 Active Calls</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: City Map -->
+        <div class="relative group py-2.5">
+          <a href="map.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">2</span>
+            <span>City Flood Map</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 2 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Interactive Map</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Flooded Roads & Drains</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Interactive map of Bellandur: see where water is pooling, follow storm drains, and check nearby schools and hospitals.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>Open Map &rarr;</span>
+                <span class="text-textMuted">Live Radar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Why It Happened -->
+        <div class="relative group py-2.5">
+          <a href="investigation.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">3</span>
+            <span>Why It Happened</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 3 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Cause Finder</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Root Cause Analysis</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Explains in plain English why the water overflowed: compares heavy rainfall, trash blocking the culvert, and lake levels.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>See Findings &rarr;</span>
+                <span class="text-textMuted">84% Drain Blockage</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Emergency Actions -->
+        <div class="relative group py-2.5">
+          <a href="dispatch.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">4</span>
+            <span>City Action Plan</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 4 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Emergency Orders</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Dispatching City Teams</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                See official work orders sent to Traffic Police (diverting traffic), BWSSB (water pump trucks), and BBMP (drain cleaning).
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>View Orders &rarr;</span>
+                <span class="text-textMuted">4 Teams Deployed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right side quick jump to asset gallery -->
+      <a href="assets.html" class="py-1 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0 hidden sm:flex items-center gap-1.5">
+        <span>Bangalore Assets</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
   </header>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
-      <div class="flex items-center gap-8 shrink-0">
-        <a href="index.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2">
-          <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center">1</span>
-          <span>Citizen Reports</span>
-        </a>
-        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
-          <span>Geographic Map</span>
-        </a>
-        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
-          <span>Cause Analysis</span>
-        </a>
-        <a href="dispatch.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">4</span>
-          <span>Departmental Actions</span>
-        </a>
-      </div>
-      <a href="assets.html" class="py-2 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0">
-        &larr; View Bangalore Assets & SVGs
-      </a>
-    </div>
-  </nav>
-
   <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-12 space-y-12 overflow-x-hidden">
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-10 space-y-10 overflow-x-hidden">
 
-    <!-- ATTENTION (HERO): 4-STAGE INCIDENT PROTOCOL NAVIGATION -->
-    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
-      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div class="max-w-3xl">
-          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Incident Response Protocol</span>
-          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
-            How to Navigate This Incident Response
+    <!-- SLIM INCIDENT BANNER (LAYMAN VOCABULARY & GENEROUS SPACING) -->
+    <section class="border-2 border-black bg-surface p-6 md:p-7 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-borderSubtle pb-4">
+        <div>
+          <span class="text-[11px] font-mono uppercase text-textMuted tracking-wider block font-bold">Active Flood Situation</span>
+          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight mt-1">
+            Bellandur Outer Ring Road: Waterlogging & Stalled Traffic
           </h1>
-          <p class="text-xs text-textMuted mt-1">
-            Unified verification workflow reconciling citizen voice statements, geographic drainage vectors, hydrological cause analysis, and departmental emergency dispatch.
-          </p>
         </div>
-        <span class="text-xs font-mono border border-black px-2.5 py-1 bg-bone font-semibold shrink-0">4-STAGE WORKFLOW</span>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-xs font-mono border border-black bg-bone px-3 py-1 font-bold">INCIDENT #892</span>
+          <span class="text-xs font-mono border-2 border-black bg-black text-white px-3 py-1 font-bold">WARD 150</span>
+        </div>
       </div>
+      
+      <p class="text-sm text-textBody leading-relaxed max-w-4xl">
+        Continuous heavy rain has flooded the Outer Ring Road near EcoSpace to nearly <strong>2 feet deep</strong>. Stormwater drains are clogged with mud and silt, slowing vehicle movement to a crawl. City emergency teams have deployed water pumps and traffic diversions.
+      </p>
 
-      <!-- 4 Explicit Protocol Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Stage 1 -->
-        <a href="index.html" class="step-card p-4 highlight-active border-2 border-black block space-y-2 group">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-black px-1.5 py-0.5 bg-white">01</span>
-            <span class="text-[11px] font-serif italic text-black font-bold">Active Stage</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">1. Citizen Reports</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Review incoming citizen complaints, flood depth photos, and voice audio statements.
-          </p>
-        </a>
-
-        <!-- Stage 2 -->
-        <a href="map.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">02</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">2. Geographic Map</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Inspect the low-lying flood basin, stormwater canal vectors, and nearby hospitals and schools.
-          </p>
-        </a>
-
-        <!-- Stage 3 -->
-        <a href="investigation.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">03</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">3. Cause Analysis</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Examine the verified findings comparing extreme rainfall, culvert debris, and electrical feeds.
-          </p>
-        </a>
-
-        <!-- Stage 4 -->
-        <a href="dispatch.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">04</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">4. Departmental Actions</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Authorize coordinated emergency orders for water dewatering pumps and traffic diversions.
-          </p>
-        </a>
+      <!-- Quick 4-step workflow indicator in one compact line -->
+      <div class="pt-3 border-t border-borderSubtle flex flex-wrap items-center gap-4 text-xs font-mono text-textMuted">
+        <span class="font-bold text-black uppercase">Navigation:</span>
+        <span class="text-black font-bold border-b border-black">1. Citizen Reports (Here)</span>
+        <span>&rarr;</span>
+        <a href="map.html" class="hover:text-black hover:underline">2. Flood Map</a>
+        <span>&rarr;</span>
+        <a href="investigation.html" class="hover:text-black hover:underline">3. Why It Happened</a>
+        <span>&rarr;</span>
+        <a href="dispatch.html" class="hover:text-black hover:underline">4. City Action Plan</a>
       </div>
     </section>
 
     <!-- SECTION TITLE & CONTEXT -->
-    <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+    <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
       <div>
-        <h2 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
-          Citizen Complaints & Sensory Telemetry
+        <h2 class="text-xl md:text-2xl font-serif font-bold italic text-textMain tracking-tight">
+          What Citizens Are Reporting on the Ground
         </h2>
         <p class="text-xs text-textBody mt-1 max-w-2xl leading-relaxed">
-          Incoming verified field reports from local residents in Ward 150 (Bellandur) correlated with Doppler radar and municipal sensor arrays.
+          Photos, emergency phone calls, and rainfall sensors received over the past hour from residents in Bellandur.
         </p>
       </div>
-      <span class="text-xs font-mono border border-black bg-bone px-2 py-0.5 font-bold shrink-0">INCIDENT CATCHMENT · WARD 150</span>
+      <span class="text-xs font-mono border border-black bg-bone px-2.5 py-1 font-bold shrink-0">LOCATION: BELLANDUR (WARD 150)</span>
     </div>
 
     <!-- GAPLESS BENTO GRID (INTEREST & DESIRE) -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-5 grid-flow-dense items-stretch">
 
       <!-- BENTO CELL 1: PRIMARY PHOTO EVIDENCE (COL-SPAN-7) -->
-      <div class="md:col-span-12 lg:col-span-7 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between group">
+      <div class="md:col-span-12 lg:col-span-7 border-2 border-black bg-surface p-6 md:p-7 space-y-5 flex flex-col justify-between group">
         <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 bg-black inline-block"></span>
-            <span class="font-mono text-xs font-bold uppercase text-black">Photographic Evidence · TK-4821</span>
+            <span class="w-2.5 h-2.5 bg-black inline-block"></span>
+            <span class="font-mono text-xs font-bold uppercase text-black">Photo from the Street</span>
           </div>
-          <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted">ORR BELLANDUR GATE</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted font-medium">Outer Ring Road, Bellandur</span>
         </div>
 
         <div class="relative border-2 border-black overflow-hidden bg-bone">
-          <img src="assets/bangalore_flood_incident.jpg" alt="Bangalore Bellandur flood incident evidence with BMTC Volvo and auto-rickshaw" class="w-full h-72 object-cover contrast-110 group-hover:scale-[1.02] transition-transform duration-500 ease-out" />
+          <img src="assets/bangalore_flood_incident.jpg" alt="Bangalore Bellandur flood incident with BMTC bus and auto-rickshaw" class="w-full h-72 object-cover contrast-110 group-hover:scale-[1.02] transition-transform duration-500 ease-out" />
           <!-- Measurement Overlay -->
-          <div class="absolute bottom-3 left-3 right-3 bg-white/95 border-2 border-black p-3 backdrop-blur-sm shadow-sm">
+          <div class="absolute bottom-3 left-3 right-3 bg-white/95 border-2 border-black p-3.5 backdrop-blur-sm shadow-sm space-y-1">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-bold text-black uppercase">Computer Vision Analysis</span>
-              <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">CONFIDENCE: 92%</span>
+              <span class="text-xs font-mono font-bold text-black uppercase">Verified Water Depth</span>
+              <span class="text-[10px] font-mono border border-black bg-bone px-1.5 py-0.5 font-bold">ACCURACY: 92%</span>
             </div>
-            <p class="text-sm font-sans text-textBody mt-1">
-              Standing Water Depth: <strong>45 to 60 cm</strong> · Grid: <strong>Outer Ring Road (ORR) Under Metro Pier #142</strong>
+            <p class="text-sm font-sans text-textBody leading-relaxed">
+              Water Depth: <strong>About 1.5 to 2 feet (45–60 cm)</strong> · Location: <strong>Outer Ring Road near Metro Pillar #142</strong>
             </p>
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-textMuted pt-1">
-          <span>Direction: Facing East toward Ecospace</span>
-          <span class="text-black font-semibold">BMTC Volvo 500C & Auto-Rickshaw Submerged</span>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-textMuted pt-2 border-t border-borderSubtle">
+          <span>Direction: Looking toward EcoSpace tech park</span>
+          <span class="text-black font-semibold">City Bus & Auto-Rickshaw stranded in water</span>
         </div>
       </div>
 
-      <!-- BENTO CELL 2: SARVAM KANNADA STT AUDIO & WAVEFORM (COL-SPAN-5) -->
-      <div class="md:col-span-12 lg:col-span-5 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+      <!-- BENTO CELL 2: KANNADA AUDIO VOICE HELPLINE (COL-SPAN-5) -->
+      <div class="md:col-span-12 lg:col-span-5 border-2 border-black bg-surface p-6 md:p-7 space-y-5 flex flex-col justify-between">
         <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
-          <span class="font-mono text-xs font-bold uppercase text-black">Citizen Voice Statement</span>
-          <span class="text-[10px] font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted">SARVAM STT · KANNADA</span>
+          <span class="font-mono text-xs font-bold uppercase text-black">Citizen Voice Recording</span>
+          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted">Emergency 112 Call</span>
         </div>
 
         <!-- Animated Audio Waveform Box -->
         <div class="border-2 border-black p-4 bg-bone space-y-3">
           <div class="flex items-center justify-between text-xs font-mono">
-            <span class="font-bold text-black font-serif italic text-sm">Audio Spectrum Visualizer</span>
-            <span class="border border-borderSubtle bg-white px-2 py-0.5">0:28 @ 16kHz</span>
+            <span class="font-bold text-black font-serif italic text-sm">Caller Voice Waveform</span>
+            <span class="border border-borderSubtle bg-white px-2 py-0.5 text-[11px]">0:28 duration</span>
           </div>
 
           <!-- Interactive Waveform SVG Component -->
@@ -330,9 +384,9 @@
             </object>
           </div>
 
-          <div class="flex items-center gap-3">
-            <button onclick="toggleAudio()" id="audio-btn" class="w-12 h-10 border-2 border-black bg-white flex items-center justify-center hover:bg-black hover:text-white transition-colors shrink-0 active:scale-95">
-              <span id="audio-icon" class="text-xs font-mono font-bold">PLAY</span>
+          <div class="flex items-center gap-3 pt-1">
+            <button onclick="toggleAudio()" id="audio-btn" class="w-14 h-9 border-2 border-black bg-white flex items-center justify-center hover:bg-black hover:text-white transition-colors shrink-0 active:scale-95 font-mono text-xs font-bold">
+              <span id="audio-icon">PLAY</span>
             </button>
             <div class="flex-1 bg-white h-3 border border-black p-0.5">
               <div id="audio-progress" class="bg-black h-full w-1/3 transition-all duration-300"></div>
@@ -342,143 +396,143 @@
         </div>
 
         <!-- Bilingual Transcription -->
-        <div class="space-y-2 text-xs">
+        <div class="space-y-3 text-xs">
           <div class="border border-borderSubtle bg-surface p-3 space-y-1">
-            <span class="font-mono text-[10px] text-textMuted block uppercase">Original Audio Statement (Kannada):</span>
+            <span class="font-mono text-[10px] text-textMuted block uppercase font-bold">What the Citizen Said (Kannada):</span>
             <p class="text-sm text-textBody leading-relaxed font-sans">
               "ಬೆಳ್ಳಂದೂರು ಗೇಟ್ ಬಳಿ ರಾಜಕಾಲುವೆ ನೀರು ರಸ್ತೆಗೆ ನುಗ್ಗಿದೆ, ವಾಹನಗಳು ಮುಳುಗಿವೆ."
             </p>
           </div>
           <div class="border border-borderSubtle bg-surface p-3 space-y-1">
-            <span class="font-mono text-[10px] text-textMuted block uppercase">Official English Translation:</span>
+            <span class="font-mono text-[10px] text-textMuted block uppercase font-bold">English Meaning:</span>
             <p class="text-sm text-textBody leading-relaxed font-serif italic">
-              "The main storm drain near Bellandur Gate is overflowing onto the road. Several vehicles are unable to move due to standing water."
+              "The big storm drain near Bellandur Gate is overflowing onto the road. Several cars and autos cannot move because of the flood."
             </p>
           </div>
         </div>
 
         <div class="border border-borderSubtle p-2.5 bg-bone flex items-center justify-between text-[11px] font-mono">
-          <span>Coordinates: <strong>12.9352° N, 77.6821° E</strong></span>
-          <span>H3: <strong>#88618925d3fffff</strong></span>
+          <span>Area: <strong>Near Bellandur Flyover</strong></span>
+          <span class="text-black font-semibold">Verified by Helpline</span>
         </div>
       </div>
 
-      <!-- BENTO CELL 3: KSNDMC PRECIPITATION DOPPLER (COL-SPAN-4) -->
-      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
-          <span class="text-xs font-mono font-bold uppercase text-black">KSNDMC Weather Radar</span>
-          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">50KM BEAM</span>
+      <!-- BENTO CELL 3: RAINFALL RADAR (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2.5">
+          <span class="text-xs font-mono font-bold uppercase text-black">Live Weather Radar</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1.5 py-0.5 font-bold">Govt Center</span>
         </div>
         <div class="w-full h-36 bg-bone border border-borderSubtle flex items-center justify-center p-2">
           <object data="assets/ksndmc_doppler_radar.svg" type="image/svg+xml" class="w-32 h-32 pointer-events-none ksndmc-radar-vector"></object>
         </div>
-        <div class="space-y-1 text-xs font-mono">
-          <div class="flex justify-between">
-            <span class="text-textMuted">Downpour Rate:</span>
-            <strong class="text-black">82.4 mm/hr</strong>
+        <div class="space-y-2 text-xs font-mono pt-1">
+          <div class="flex justify-between items-center">
+            <span class="text-textMuted">Rainfall Speed:</span>
+            <strong class="text-black text-sm">82 mm / hour</strong>
           </div>
-          <div class="flex justify-between">
-            <span class="text-textMuted">Cloudburst Status:</span>
-            <span class="border border-black px-1 text-[10px] font-bold bg-bone">SUSTAINED CELL</span>
+          <div class="flex justify-between items-center">
+            <span class="text-textMuted">Rain Severity:</span>
+            <span class="border border-black px-1.5 py-0.5 text-[10px] font-bold bg-bone">Very Heavy Downpour</span>
           </div>
         </div>
       </div>
 
-      <!-- BENTO CELL 4: BTP CORRIDOR TRAFFIC VECTOR (COL-SPAN-4) -->
-      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
-          <span class="text-xs font-mono font-bold uppercase text-black">BTP Traffic Bottleneck</span>
-          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">ORR CORRIDOR</span>
+      <!-- BENTO CELL 4: TRAFFIC JAMS (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2.5">
+          <span class="text-xs font-mono font-bold uppercase text-black">Traffic Police Alert</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1.5 py-0.5 font-bold">Road Blocked</span>
         </div>
         <div class="w-full h-36 bg-bone border border-borderSubtle flex items-center justify-center p-2">
           <object data="assets/bengaluru_auto_rickshaw.svg" type="image/svg+xml" class="w-36 h-28 pointer-events-none bangalore-auto-vector"></object>
         </div>
-        <div class="space-y-1 text-xs font-mono">
-          <div class="flex justify-between">
-            <span class="text-textMuted">Bottleneck Point:</span>
-            <strong class="text-black">Iblur to Ecospace</strong>
+        <div class="space-y-2 text-xs font-mono pt-1">
+          <div class="flex justify-between items-center">
+            <span class="text-textMuted">Stuck Stretch:</span>
+            <strong class="text-black text-xs">Iblur to EcoSpace</strong>
           </div>
-          <div class="flex justify-between">
-            <span class="text-textMuted">Traffic Advice:</span>
-            <span class="text-black font-semibold">Sarjapur Diversion</span>
+          <div class="flex justify-between items-center">
+            <span class="text-textMuted">Driver Advice:</span>
+            <span class="text-black font-bold">Take Sarjapur Road Detour</span>
           </div>
         </div>
       </div>
 
-      <!-- BENTO CELL 5: HYDROLOGICAL DRAINAGE & METRO STATUS (COL-SPAN-4) -->
-      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-5 space-y-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between border-b border-borderSubtle pb-2">
-          <span class="text-xs font-mono font-bold uppercase text-black">Basin & Transit Telemetry</span>
-          <span class="text-[10px] font-mono border border-black bg-bone px-1 font-bold">CANAL SWD-150</span>
+      <!-- BENTO CELL 5: DRAIN & METRO STATUS (COL-SPAN-4) -->
+      <div class="md:col-span-12 lg:col-span-4 border-2 border-black bg-surface p-6 space-y-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-borderSubtle pb-2.5">
+          <span class="text-xs font-mono font-bold uppercase text-black">Storm Drain & Metro Train</span>
+          <span class="text-[10px] font-mono border border-black bg-bone px-1.5 py-0.5 font-bold">Bellandur Canal</span>
         </div>
-        <div class="space-y-2 text-xs font-mono">
-          <div class="border border-borderSubtle bg-bone p-2.5 space-y-1">
-            <span class="text-textMuted block text-[10px] uppercase">Rajakaluve Bed Sediment</span>
-            <strong class="text-base text-black">32 cm Silt Detritus</strong>
-            <span class="text-[10px] text-textMuted block">Culvert throughput reduced by 15%</span>
+        <div class="space-y-2.5 text-xs font-mono">
+          <div class="border border-borderSubtle bg-bone p-3 space-y-1">
+            <span class="text-textMuted block text-[10px] uppercase font-bold">Storm Drain Silt & Trash</span>
+            <strong class="text-sm text-black">32 cm Mud Deposit</strong>
+            <span class="text-[11px] text-textMuted block">Water is draining 15% slower than usual</span>
           </div>
-          <div class="border border-borderDark bg-black text-white p-2.5 space-y-1">
-            <span class="text-gray-400 block text-[10px] uppercase">Namma Metro Elevated Transit</span>
-            <strong class="text-xs text-white">Pier #142 Viaduct: Operating Normal</strong>
+          <div class="border border-borderDark bg-black text-white p-3 space-y-1">
+            <span class="text-gray-300 block text-[10px] uppercase font-bold">Namma Metro Elevated Train</span>
+            <strong class="text-xs text-white">Pillar #142 Viaduct: Trains Running On Time</strong>
           </div>
         </div>
-        <div class="text-[10px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
-          <span>Sensor ID: S1-SD</span>
-          <span class="text-black font-semibold">Status: Nominal</span>
+        <div class="text-[11px] font-mono text-textMuted border-t border-borderSubtle pt-2 flex justify-between">
+          <span>Drain Sensor: Active</span>
+          <span class="text-black font-semibold">Safe for Trains</span>
         </div>
       </div>
 
       <!-- BENTO CELL 6: RELATED CITIZEN COMPLAINT STREAM (COL-SPAN-12) -->
-      <div class="md:col-span-12 border-2 border-black bg-surface p-6 space-y-4">
+      <div class="md:col-span-12 border-2 border-black bg-surface p-6 md:p-7 space-y-5">
         <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 bg-black inline-block"></span>
-            <h3 class="text-lg font-serif font-bold italic text-black">Catchment Queue of Incident Reports</h3>
+            <span class="w-2.5 h-2.5 bg-black inline-block"></span>
+            <h3 class="text-lg font-serif font-bold italic text-black">Other Citizen Calls from This Neighborhood</h3>
           </div>
-          <span class="text-xs font-mono text-textMuted">Past 60 Minutes · 3 Correlated Reports</span>
+          <span class="text-xs font-mono text-textMuted">Past 60 Minutes · 3 Verified Calls</span>
         </div>
 
         <div class="border border-borderSubtle divide-y divide-borderSubtle text-sm">
           <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
             <div class="space-y-1">
               <div class="flex items-center gap-3">
-                <span class="font-mono font-bold text-black">TK-4819</span>
-                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Drainage / Sewage</span>
-                <span class="text-xs font-mono text-textMuted">2:05 PM (10 mins ago)</span>
+                <span class="font-mono font-bold text-black text-xs">Call #4819</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono bg-bone">Sewage / Water Overflow</span>
+                <span class="text-xs font-mono text-textMuted">10 mins ago</span>
               </div>
-              <p class="text-sm text-textBody">
-                Resident in Green Glen Layout reported black wastewater bubbling out from the secondary road manhole.
+              <p class="text-sm text-textBody leading-relaxed">
+                Resident in Green Glen Layout reports dirty rain water bubbling out from the street manhole.
               </p>
             </div>
-            <span class="text-xs font-mono text-textMuted shrink-0">Location: 250m South of Junction</span>
+            <span class="text-xs font-mono text-textMuted shrink-0">250 meters south of junction</span>
           </div>
 
           <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
             <div class="space-y-1">
               <div class="flex items-center gap-3">
-                <span class="font-mono font-bold text-black">TK-4814</span>
-                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Power Utility</span>
-                <span class="text-xs font-mono text-textMuted">1:55 PM (20 mins ago)</span>
+                <span class="font-mono font-bold text-black text-xs">Call #4814</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono bg-bone">Electricity Spark</span>
+                <span class="text-xs font-mono text-textMuted">20 mins ago</span>
               </div>
-              <p class="text-sm text-textBody">
-                Transformer spark followed by localized power outage reported near the 66kV electrical substation feeder.
+              <p class="text-sm text-textBody leading-relaxed">
+                Transformer sparked near the substation during heavy rain; power was turned off as a safety measure.
               </p>
             </div>
-            <span class="text-xs font-mono text-textMuted shrink-0">Location: 180m East of Junction</span>
+            <span class="text-xs font-mono text-textMuted shrink-0">180 meters east of junction</span>
           </div>
 
           <div class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-bone/50 transition-colors">
             <div class="space-y-1">
               <div class="flex items-center gap-3">
-                <span class="font-mono font-bold text-black">TK-4809</span>
-                <span class="border border-black px-2 py-0.5 text-xs font-mono uppercase bg-bone">Traffic Delay</span>
-                <span class="text-xs font-mono text-textMuted">1:45 PM (30 mins ago)</span>
+                <span class="font-mono font-bold text-black text-xs">Call #4809</span>
+                <span class="border border-black px-2 py-0.5 text-xs font-mono bg-bone">Traffic Jam</span>
+                <span class="text-xs font-mono text-textMuted">30 mins ago</span>
               </div>
-              <p class="text-sm text-textBody">
-                Traffic stationary on Outer Ring Road from Iblur flyover towards Ecospace due to standing water at the dip.
+              <p class="text-sm text-textBody leading-relaxed">
+                Cars and two-wheelers cannot move forward near the lowest point under the flyover due to water on the road.
               </p>
             </div>
-            <span class="text-xs font-mono text-textMuted shrink-0">Location: 400m West of Junction</span>
+            <span class="text-xs font-mono text-textMuted shrink-0">400 meters west of junction</span>
           </div>
         </div>
       </div>
@@ -486,15 +540,15 @@
     </div>
 
     <!-- ACTION BANNER (AIDA: ACTION) -->
-    <div class="p-6 md:p-8 border-2 border-black bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div class="max-w-2xl">
-        <h3 class="text-lg md:text-xl font-serif font-bold italic text-black">Examine the Incident on the Geographic Map</h3>
-        <p class="text-xs text-textBody mt-1 leading-relaxed">
-          Inspect how these 4 citizen reports cluster geographically around the natural drainage bowl and critical public infrastructure.
+    <div class="p-6 md:p-8 border-2 border-black bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-5 my-6">
+      <div class="max-w-2xl space-y-1">
+        <h3 class="text-lg md:text-xl font-serif font-bold italic text-black">Next: Check the Flooded Area on the Map</h3>
+        <p class="text-xs text-textBody leading-relaxed">
+          See exactly where the water is pooling, follow the storm drain channels, and see nearby hospitals and detour routes.
         </p>
       </div>
-      <a href="map.html" class="inline-block border-2 border-black bg-black px-6 py-3.5 font-bold text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all text-center shrink-0 active:scale-95">
-        Go to Geographic Map &rarr;
+      <a href="map.html" class="inline-block border-2 border-black bg-black px-6 py-3 font-bold text-xs uppercase tracking-wider text-white hover:bg-white hover:text-black transition-all text-center shrink-0 active:scale-95 shadow-sm">
+        Open City Flood Map &rarr;
       </a>
     </div>
 

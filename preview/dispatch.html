@@ -137,144 +137,198 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 
-  <!-- TOP OFFICIAL HEADER (STRICT Z-50) -->
-  <header class="border-b border-borderSubtle bg-surface px-8 py-4 sticky top-0 z-50 shadow-sm relative">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Civic Crest" class="w-8 h-8 object-contain" />
-          <span class="text-2xl font-serif font-bold italic tracking-tight text-textMain">CrossWire</span>
-          <span class="text-xs font-mono border border-borderSubtle bg-bone px-2 py-0.5 text-textMuted uppercase">Municipal Operations Portal</span>
-        </div>
-        <p class="text-sm font-serif italic text-textMuted mt-1">
-          City Incident Management System · Bengaluru Disaster Response Division
-        </p>
+  <!-- TOP UNIFIED SLIM HEADER & HOVER NAVIGATION (NEVER CUTS OFF) -->
+  <header class="sticky top-0 z-50 bg-[#FBFBF9]/95 backdrop-blur-md border-b-2 border-black shadow-sm">
+    <!-- Slim Project Title Bar -->
+    <div class="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between border-b border-borderSubtle">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <img src="assets/vidhana_soudha_crest.svg" alt="Vidhana Soudha Crest" class="w-6 h-6 object-contain" />
+          <span class="text-xl font-serif font-bold italic tracking-tight text-textMain group-hover:underline">CrossWire</span>
+        </a>
+        <span class="hidden sm:inline-block text-xs text-textMuted border-l border-borderSubtle pl-3 font-sans">
+          Bengaluru Flood & Emergency Helpline
+        </span>
       </div>
 
-      <div class="flex items-center gap-4 text-xs font-mono">
-        <a href="assets.html" class="border border-borderDark px-2.5 py-1.5 bg-bone hover:bg-black hover:text-white transition-colors flex items-center gap-1.5">
-          <span class="w-2 h-2 bg-black inline-block"></span>
-          <span>Asset & Vector Library</span>
+      <!-- Quick Incident Badges -->
+      <div class="flex items-center gap-3 text-xs font-mono">
+        <div class="border border-borderDark px-2.5 py-1 bg-bone flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+          <span class="font-bold text-black">Bellandur Flood</span>
+          <span class="text-textMuted hidden md:inline">(ORR Junction)</span>
+        </div>
+        <div class="border-2 border-black bg-black text-white px-2.5 py-1 font-bold text-[11px] uppercase tracking-wider">
+          Urgent Action
+        </div>
+        <a href="assets.html" class="border border-borderDark px-2.5 py-1 bg-white hover:bg-black hover:text-white transition-colors text-[11px] font-mono hidden md:flex items-center gap-1">
+          <span>🎨 City Assets</span>
         </a>
-        <div class="border border-borderSubtle bg-bone p-2 px-3">
-          <span class="text-textMuted block text-[10px] uppercase">Incident File:</span>
-          <strong class="text-black text-sm">#INC-892 (Bellandur Gate)</strong>
-        </div>
-        <div class="border-2 border-black p-2 px-3 bg-surface">
-          <span class="text-textMuted block text-[10px] uppercase">Official Status:</span>
-          <strong class="text-black text-sm uppercase">P1 Urgent Action</strong>
-        </div>
       </div>
     </div>
+
+    <!-- Intuitive Navigation Tabs with Hover Information Popovers -->
+    <nav class="max-w-6xl mx-auto px-6 flex items-center justify-between text-sm">
+      <div class="flex items-center gap-1 md:gap-4">
+        
+        <!-- Tab 1: Citizen Reports -->
+        <div class="relative group py-2.5">
+          <a href="index.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">1</span>
+            <span>Citizen Reports</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 1 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Ground Reports</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Helpline Calls & Photos</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Listen to Kannada emergency calls from citizens, check street flood photos, and see live rain radar.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>View Reports &rarr;</span>
+                <span class="text-textMuted">3 Active Calls</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: City Map -->
+        <div class="relative group py-2.5">
+          <a href="map.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">2</span>
+            <span>City Flood Map</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 2 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Interactive Map</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Flooded Roads & Drains</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Interactive map of Bellandur: see where water is pooling, follow storm drains, and check nearby schools and hospitals.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>Open Map &rarr;</span>
+                <span class="text-textMuted">Live Radar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Why It Happened -->
+        <div class="relative group py-2.5">
+          <a href="investigation.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium font-serif transition-colors">
+            <span class="font-mono text-xs border border-borderSubtle w-4 h-4 flex items-center justify-center not-italic">3</span>
+            <span>Why It Happened</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 3 of 4</span>
+                <span class="font-mono text-[10px] bg-bone border border-black text-black px-1.5 py-0.5">Cause Finder</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Root Cause Analysis</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                Explains in plain English why the water overflowed: compares heavy rainfall, trash blocking the culvert, and lake levels.
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span>See Findings &rarr;</span>
+                <span class="text-textMuted">84% Drain Blockage</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Emergency Actions (Active) -->
+        <div class="relative group py-2.5">
+          <a href="dispatch.html" class="px-3 py-1 flex items-center gap-2 border-b-2 border-black font-bold italic text-black font-serif transition-colors">
+            <span class="font-mono text-xs border border-black bg-white w-4 h-4 flex items-center justify-center not-italic">4</span>
+            <span>City Action Plan</span>
+          </a>
+          <!-- Hover Popover Description -->
+          <div class="absolute left-0 top-full pt-1.5 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 w-72">
+            <div class="bg-white border-2 border-black p-4 shadow-xl space-y-2 text-left">
+              <div class="flex items-center justify-between border-b border-borderSubtle pb-1.5">
+                <span class="font-mono text-[10px] uppercase font-bold text-textMuted">Step 4 of 4</span>
+                <span class="font-mono text-[10px] bg-black text-white px-1.5 py-0.5">Current Page</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-black">Dispatching City Teams</h4>
+              <p class="text-xs text-textBody leading-relaxed font-sans">
+                See official work orders sent to Traffic Police (diverting traffic), BWSSB (water pump trucks), and BBMP (drain cleaning).
+              </p>
+              <div class="pt-1 text-[11px] font-mono text-black font-semibold flex items-center justify-between border-t border-borderSubtle">
+                <span class="text-black font-bold">&bull; You are here</span>
+                <span class="text-textMuted">4 Teams Deployed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right side quick jump to asset gallery -->
+      <a href="assets.html" class="py-1 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0 hidden sm:flex items-center gap-1.5">
+        <span>Bangalore Assets</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
   </header>
 
-  <!-- NAVIGATION TABS (STRICT Z-40) -->
-  <nav class="border-b border-borderSubtle bg-surface px-8 sticky top-[73px] z-40 relative">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 text-sm font-serif overflow-x-auto">
-      <div class="flex items-center gap-8 shrink-0">
-        <a href="index.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">1</span>
-          <span>Citizen Reports</span>
-        </a>
-        <a href="map.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">2</span>
-          <span>Geographic Map</span>
-        </a>
-        <a href="investigation.html" class="py-3.5 border-b-2 border-transparent hover:border-borderSubtle text-textMuted hover:text-black font-medium text-base flex items-center gap-2 transition-colors">
-          <span class="font-mono text-xs not-italic border border-borderSubtle w-5 h-5 flex items-center justify-center">3</span>
-          <span>Cause Analysis</span>
-        </a>
-        <a href="dispatch.html" class="py-3.5 border-b-2 border-black font-bold italic text-base text-black flex items-center gap-2">
-          <span class="font-mono text-xs not-italic border border-black w-5 h-5 flex items-center justify-center">4</span>
-          <span>Departmental Actions</span>
-        </a>
-      </div>
-      <a href="assets.html" class="py-2 px-3 border border-borderDark text-xs font-mono bg-bone hover:bg-black hover:text-white transition-colors shrink-0">
-        &larr; View Bangalore Assets & SVGs
-      </a>
-    </div>
-  </nav>
-
   <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-12 space-y-12 overflow-x-hidden">
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 md:px-8 py-8 md:py-10 space-y-10 overflow-x-hidden">
 
-    <!-- ATTENTION (HERO): 4-STAGE INCIDENT PROTOCOL NAVIGATION -->
-    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6">
-      <div class="border-b border-borderSubtle pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div class="max-w-3xl">
-          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Incident Response Protocol</span>
-          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight">
-            How to Navigate This Incident Response
+    <!-- SLIM INCIDENT BANNER (LAYMAN VOCABULARY & GENEROUS SPACING) -->
+    <section class="border-2 border-black bg-surface p-6 md:p-7 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-borderSubtle pb-4">
+        <div>
+          <span class="text-[11px] font-mono uppercase text-textMuted tracking-wider block font-bold">Emergency Action Center</span>
+          <h1 class="text-2xl md:text-3xl font-serif font-bold italic text-textMain tracking-tight mt-1">
+            Emergency Response & City Team Work Orders
           </h1>
-          <p class="text-xs text-textMuted mt-1">
-            Authoritative inter-agency execution coordinating dewatering pump deployment, traffic redirection, and bilingual public warning.
-          </p>
         </div>
-        <span class="text-xs font-mono border border-black px-2.5 py-1 bg-bone font-semibold shrink-0">4-STAGE WORKFLOW</span>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-xs font-mono border border-black bg-bone px-3 py-1 font-bold">ORDERS READY</span>
+          <span class="text-xs font-mono border-2 border-black bg-black text-white px-3 py-1 font-bold">WARD 150</span>
+        </div>
       </div>
+      
+      <p class="text-sm text-textBody leading-relaxed max-w-4xl">
+        Three city departments have been mobilized to resolve the Bellandur flood: water pump trucks to remove water, traffic police to divert cars, and municipality workers to clear the blocked drain.
+      </p>
 
-      <!-- 4 Explicit Protocol Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Stage 1 -->
-        <a href="index.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">01</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">1. Citizen Reports</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Review incoming citizen complaints, flood depth photos, and voice audio statements.
-          </p>
-        </a>
-
-        <!-- Stage 2 -->
-        <a href="map.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">02</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">2. Geographic Map</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Inspect the low-lying flood basin, stormwater canal vectors, and nearby hospitals and schools.
-          </p>
-        </a>
-
-        <!-- Stage 3 -->
-        <a href="investigation.html" class="step-card p-4 border border-borderSubtle bg-white hover:border-black block space-y-2 group" data-hover="true">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-borderSubtle px-1.5 py-0.5 text-textMuted">03</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">3. Cause Analysis</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Examine the verified findings comparing extreme rainfall, culvert debris, and electrical feeds.
-          </p>
-        </a>
-
-        <!-- Stage 4 (Active) -->
-        <a href="dispatch.html" class="step-card p-4 highlight-active border-2 border-black block space-y-2 group" data-hover="true">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold border border-black px-1.5 py-0.5 bg-white">04</span>
-            <span class="text-[11px] font-serif italic text-black font-bold">Active Stage</span>
-          </div>
-          <h2 class="text-base font-serif font-bold italic text-black group-hover:underline">4. Departmental Actions</h2>
-          <p class="text-xs text-textBody leading-relaxed">
-            Authorize coordinated emergency orders for water dewatering pumps and traffic diversions.
-          </p>
-        </a>
+      <!-- Quick 4-step workflow indicator in one compact line -->
+      <div class="pt-3 border-t border-borderSubtle flex flex-wrap items-center gap-4 text-xs font-mono text-textMuted">
+        <span class="font-bold text-black uppercase">Navigation:</span>
+        <a href="index.html" class="hover:text-black hover:underline">1. Citizen Reports</a>
+        <span>&rarr;</span>
+        <a href="map.html" class="hover:text-black hover:underline">2. Flood Map</a>
+        <span>&rarr;</span>
+        <a href="investigation.html" class="hover:text-black hover:underline">3. Why It Happened</a>
+        <span>&rarr;</span>
+        <span class="text-black font-bold border-b border-black">4. City Action Plan (Here)</span>
       </div>
     </section>
 
-    <!-- SECTION TITLE & CONTEXT (2-LINE HERO RULE COMPLIANT) -->
-    <div class="border-b border-borderSubtle pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <!-- SECTION TITLE & CONTEXT -->
+    <div class="border-b border-borderSubtle pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div class="max-w-4xl">
-        <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Unified Emergency Command</span>
-        <h2 class="text-3xl md:text-4xl font-serif font-bold italic text-textMain tracking-tight">
-          Departmental Directives & Public Alert Transmission
+        <span class="text-xs font-mono uppercase text-textMuted tracking-wider block font-bold">Coordinated City Response</span>
+        <h2 class="text-xl md:text-2xl font-serif font-bold italic text-textMain tracking-tight mt-1">
+          Work Orders for City Teams & Public SMS Alert
         </h2>
-        <p class="text-sm font-sans text-textBody mt-2 leading-relaxed">
-          Tri-agency execution orders dispatched across BWSSB dewatering, Traffic Police diversion, and BBMP municipal maintenance.
+        <p class="text-xs md:text-sm text-textBody mt-1 leading-relaxed">
+          Real-time instructions sent directly to water engineers, traffic wardens, and drain cleaning crews.
         </p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
-        <span class="text-xs font-mono border border-black px-3 py-1 bg-bone font-semibold">ALL 3 ORDERS READY</span>
+        <span class="text-xs font-mono border-2 border-black px-3 py-1 bg-bone font-bold">ALL 3 ORDERS ACTIVE</span>
       </div>
     </div>
 
@@ -296,9 +350,9 @@
       <div class="md:col-span-12 bg-surface highlight-box p-6 md:p-8 space-y-6" data-hover="true">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-borderSubtle gap-3">
           <div class="flex items-center gap-3">
-            <span class="font-mono text-sm font-bold border border-black px-2.5 py-1 bg-bone">ORDER 01</span>
+            <span class="font-mono text-xs font-bold border border-black px-2.5 py-1 bg-bone">ORDER 01</span>
             <h3 class="text-xl md:text-2xl font-serif font-bold italic text-black">
-              Bangalore Water Supply and Sewerage Board (BWSSB)
+              Water Board (BWSSB): Emergency Pump Trucks
             </h3>
           </div>
           <span class="text-xs font-mono font-bold uppercase text-black border border-black px-2.5 py-1 bg-bone shrink-0">Priority: Immediate</span>
@@ -306,128 +360,128 @@
 
         <div class="space-y-4">
           <p class="text-sm md:text-base text-textBody leading-relaxed">
-            <strong>Mandatory Directive:</strong> Mobilize and deploy <strong>two 50-horsepower high-capacity mobile diesel dewatering pump units</strong> to the Bellandur Gate culvert inlet. Position suction hoses at the lowest road depression point (elevation 884m) and discharge water directly into the downstream canal heading toward Bellandur Lake.
+            <strong>What this team will do:</strong> Send <strong>2 heavy-duty diesel water pump trucks</strong> to the flooded Bellandur Gate junction. Lower large suction pipes into the deepest part of the road puddle (under the metro line) and pump water straight into the downstream canal heading toward Bellandur Lake.
           </p>
 
           <!-- BWSSB FIELD DEPLOYMENT ASSETS (DOCUMENTARY PHOTO + ANIMATED VECTOR) -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-2">
             <!-- Field Photo -->
-            <div class="border-2 border-black bg-bone p-3 space-y-2 group overflow-hidden">
+            <div class="border-2 border-black bg-bone p-3.5 space-y-2 group overflow-hidden">
               <div class="flex items-center justify-between text-xs font-mono">
-                <span class="font-bold text-black uppercase">Rapid Suction Field Unit</span>
-                <span class="text-[10px] text-textMuted font-mono">OUTER RING ROAD</span>
+                <span class="font-bold text-black uppercase">Emergency Water Pump Truck</span>
+                <span class="text-xs text-textMuted font-mono">Bellandur ORR</span>
               </div>
               <div class="border border-borderDark overflow-hidden bg-black">
                 <img src="assets/bangalore_emergency_dispatch.jpg" alt="BWSSB Emergency Dewatering Unit Night Operation on Outer Ring Road" class="w-full h-52 object-cover contrast-110 group-hover:scale-105 transition-transform duration-500" />
               </div>
-              <p class="text-[11px] font-mono text-textMuted leading-tight">
-                BWSSB emergency response team operating 500-HP trailer pump with heavy suction hoses under Bangalore Police flood barrier.
+              <p class="text-xs font-mono text-textMuted leading-relaxed">
+                Water pump truck working behind police safety barricades on the flooded road.
               </p>
             </div>
 
             <!-- Animated Dewatering Pump Vector -->
-            <div class="border-2 border-black bg-white p-3 space-y-2">
+            <div class="border-2 border-black bg-white p-3.5 space-y-2">
               <div class="flex items-center justify-between text-xs font-mono">
-                <span class="font-bold text-black uppercase">Pump Schematic Telemetry</span>
-                <span class="border border-black bg-bone px-1 text-[10px] font-bold">FLOW: 12,000 LPM</span>
+                <span class="font-bold text-black uppercase">Pump Running Status</span>
+                <span class="border border-black bg-bone px-1.5 py-0.5 text-xs font-bold">12,000 Liters / Min</span>
               </div>
               <div class="border border-borderSubtle bg-bone p-2 h-52 flex items-center justify-center overflow-hidden">
                 <object data="assets/emergency_dewatering_pump.svg" type="image/svg+xml" class="w-full h-full pointer-events-none dewatering-pump-vector"></object>
               </div>
-              <p class="text-[11px] font-mono text-textMuted leading-tight">
-                High-capacity centrifugal impeller active. Manometer dial jitter indicates steady hydraulic head pressure.
+              <p class="text-xs font-mono text-textMuted leading-relaxed">
+                High-speed rotary pump running at full capacity to drain the road quickly.
               </p>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono text-textMuted pt-2 border-t border-borderSubtle">
-            <span>Target Station: <strong class="text-black">HSR Water Division</strong></span>
-            <span>Estimated Transit: <strong class="text-black">12 Minutes</strong></span>
-            <span>Field Unit: <strong class="text-black">Rapid Suction Fleet A-2</strong></span>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono text-textMuted pt-3 border-t border-borderSubtle">
+            <span>Dispatched From: <strong class="text-black">HSR Water Office</strong></span>
+            <span>Arrival Time: <strong class="text-black">About 12 Minutes</strong></span>
+            <span>Equipment: <strong class="text-black">2 Large Pump Trucks</strong></span>
           </div>
         </div>
       </div>
 
       <!-- DIRECTIVE 2: TRAFFIC POLICE DIVERSION (COL 6) -->
-      <div class="md:col-span-6 bg-surface border-2 border-borderDark p-6 space-y-4 flex flex-col justify-between" data-hover="true">
+      <div class="md:col-span-6 bg-surface border-2 border-borderDark p-6 md:p-7 space-y-4 flex flex-col justify-between" data-hover="true">
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-3 border-b border-borderSubtle">
             <div class="flex items-center gap-2">
               <span class="font-mono text-xs font-bold border border-black px-2 py-0.5 bg-bone">ORDER 02</span>
               <h4 class="text-lg font-serif font-bold italic text-textMain">
-                Bengaluru Traffic Police (BTP)
+                Traffic Police: Reroute Vehicles
               </h4>
             </div>
             <span class="text-[10px] font-mono font-bold uppercase text-black border border-black px-1.5 py-0.5 bg-bone">Immediate</span>
           </div>
 
           <p class="text-xs md:text-sm text-textBody leading-relaxed">
-            <strong>Mandatory Directive:</strong> Establish physical traffic diversion at the <strong>Iblur Flyover for all westbound vehicles</strong> heading along Outer Ring Road towards Bellandur. Divert commercial vehicles and low-clearance passenger cars down Sarjapur Road to avert engine stalls and prevent bottleneck formation.
+            <strong>What this team will do:</strong> Put up physical barricades and warning signs at the <strong>Iblur Flyover</strong>. Divert cars, autos, and buses towards <strong>Sarjapur Road</strong> so vehicles do not enter the deep water and stall their engines.
           </p>
         </div>
 
-        <div class="border-t border-borderSubtle pt-3 grid grid-cols-1 gap-1 text-[11px] font-mono text-textMuted">
-          <div>Assigned Divisions: <strong class="text-black">Madiwala & HSR Traffic</strong></div>
-          <div>Personnel Required: <strong class="text-black">4 Traffic Wardens</strong></div>
-          <div>Signage: <strong class="text-black">Variable Message Board 04</strong></div>
+        <div class="border-t border-borderSubtle pt-3 grid grid-cols-1 gap-1 text-xs font-mono text-textMuted">
+          <div>Police Stations: <strong class="text-black">Madiwala & HSR Traffic</strong></div>
+          <div>Officers on Ground: <strong class="text-black">4 Traffic Wardens</strong></div>
+          <div>Road Sign: <strong class="text-black">Electronic Warning Board Active</strong></div>
         </div>
       </div>
 
       <!-- DIRECTIVE 3: BBMP SOLID WASTE CLEARANCE (COL 6) -->
-      <div class="md:col-span-6 bg-surface border-2 border-borderDark p-6 space-y-4 flex flex-col justify-between" data-hover="true">
+      <div class="md:col-span-6 bg-surface border-2 border-borderDark p-6 md:p-7 space-y-4 flex flex-col justify-between" data-hover="true">
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-3 border-b border-borderSubtle">
             <div class="flex items-center gap-2">
               <span class="font-mono text-xs font-bold border border-black px-2 py-0.5 bg-bone">ORDER 03</span>
               <h4 class="text-lg font-serif font-bold italic text-textMain">
-                BBMP · Solid Waste & Drainage
+                Municipality (BBMP): Clear Drain
               </h4>
             </div>
-            <span class="text-[10px] font-mono font-bold uppercase text-textBody border border-borderSubtle px-1.5 py-0.5 bg-bone">Standard</span>
+            <span class="text-[10px] font-mono font-bold uppercase text-textBody border border-borderSubtle px-1.5 py-0.5 bg-bone">In Progress</span>
           </div>
 
           <p class="text-xs md:text-sm text-textBody leading-relaxed">
-            <strong>Mandatory Directive:</strong> Dispatch a <strong>six-person municipal emergency maintenance crew</strong> equipped with manual rakes and safety harness gear to clear trapped plastic waste, branches, and silt from the culvert intake grates.
+            <strong>What this team will do:</strong> Send a <strong>6-person emergency cleaning crew</strong> with long hooks and safety gear to clear plastic bottles, garbage bags, and tree branches blocking the storm drain grating.
           </p>
         </div>
 
-        <div class="border-t border-borderSubtle pt-3 grid grid-cols-1 gap-1 text-[11px] font-mono text-textMuted">
-          <div>Jurisdiction: <strong class="text-black">Ward 150 Division</strong></div>
-          <div>Superintendent: <strong class="text-black">S. Venkatraman</strong></div>
-          <div>Disposal Route: <strong class="text-black">Sarjapur Waste Hub</strong></div>
+        <div class="border-t border-borderSubtle pt-3 grid grid-cols-1 gap-1 text-xs font-mono text-textMuted">
+          <div>Area: <strong class="text-black">Bellandur Ward 150</strong></div>
+          <div>Supervisor: <strong class="text-black">S. Venkatraman</strong></div>
+          <div>Trash Disposal: <strong class="text-black">Sarjapur Waste Center</strong></div>
         </div>
       </div>
 
     </section>
 
     <!-- DESIRE: OFFICIAL BILINGUAL CITIZEN ADVISORY -->
-    <section class="space-y-4">
+    <section class="space-y-4 my-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderSubtle pb-3">
         <div>
-          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block">Citizen Emergency Alert</span>
-          <h3 class="text-xl font-serif font-bold italic text-textMain">Automated Bilingual Public Advisory</h3>
+          <span class="text-xs font-mono uppercase text-textMuted tracking-wider block font-bold">Public Warning</span>
+          <h3 class="text-xl font-serif font-bold italic text-textMain">Emergency SMS Sent to Local Residents</h3>
         </div>
-        <span class="text-xs font-mono text-textMuted">SMS & Telegram Broadcast Channel</span>
+        <span class="text-xs font-mono text-textMuted">Sent via Phone SMS & Telegram Broadcast</span>
       </div>
 
       <div class="border-2 border-black bg-surface p-6 md:p-8 space-y-4" data-hover="true">
         <div class="flex items-center justify-between border-b border-borderSubtle pb-3">
-          <span class="text-xs font-mono uppercase font-bold text-black">Broadcast Target: Ward 150 Residents (342 Subscribed Citizens)</span>
-          <span class="text-xs font-mono text-textMuted">English · ಕನ್ನಡ</span>
+          <span class="text-xs font-mono uppercase font-bold text-black">Delivered to: 342 Registered Citizens in Bellandur</span>
+          <span class="text-xs font-mono text-textMuted">English & Kannada</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="p-4 border border-borderDark bg-bone space-y-2">
-            <span class="text-xs font-mono font-bold text-black uppercase block">English Notice:</span>
+            <span class="text-xs font-mono font-bold text-black uppercase block">English Message:</span>
             <p class="text-sm font-serif italic text-textBody leading-relaxed">
-              "PUBLIC ADVISORY · BENGALURU DISASTER MANAGEMENT CELL: Waterlogging of approximately 45–60 cm has been detected at Bellandur Gate on the Outer Ring Road following heavy precipitation. BWSSB dewatering pump units are actively deploying. Commuters are strongly advised to use alternative routes via Sarjapur Road until water recedes."
+              "CITIZEN ALERT · BENGALURU EMERGENCY HELPLINE: Road waterlogging of about 1.5 to 2 feet has been reported at Bellandur Gate on Outer Ring Road due to heavy rain. High-power water pump trucks are arriving now. Drivers are advised to use Sarjapur Road detour."
             </p>
           </div>
 
           <div class="p-4 border border-borderDark bg-bone space-y-2">
-            <span class="text-xs font-mono font-bold text-black uppercase block">ಕನ್ನಡ ಪ್ರಕಟಣೆ:</span>
+            <span class="text-xs font-mono font-bold text-black uppercase block">ಕನ್ನಡ ಸಂದೇಶ:</span>
             <p class="text-sm font-sans text-textBody leading-relaxed">
-              "ಸಾರ್ವಜನಿಕ ಪ್ರಕಟಣೆ · ಬೆಂಗಳೂರು ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಕೋಶ: ಭಾರಿ ಮಳೆಯ ನಂತರ ಹೊರ ವರ್ತುಲ ರಸ್ತೆಯ ಬೆಳ್ಳಂದೂರು ಗೇಟ್ ಬಳಿ ಸುಮಾರು 45-60 ಸೆಂ.ಮೀ ನೀರು ನಿಂತಿರುವುದು ಕಂಡುಬಂದಿದೆ. ನೀರನ್ನು ಹೊರಹಾಕಲು ಬಿಡಬ್ಲ್ಯೂಎಸ್‌ಎಸ್‌ಬಿ ಪಂಪ್‌ಗಳನ್ನು ನಿಯೋಜಿಸಲಾಗುತ್ತಿದೆ. ಪರಿಸ್ಥಿತಿ ಸುಧಾರಿಸುವವರೆಗೆ ವಾಹನ ಸವಾರರು ಸರ್ಜಾಪುರ ರಸ್ತೆ ಮೂಲಕ ಪರ್ಯಾಯ ಮಾರ್ಗ ಬಳಸಲು ಕೋರಲಾಗಿದೆ."
+              "ಸಾರ್ವಜನಿಕ ಪ್ರಕಟಣೆ · ಬೆಂಗಳೂರು ತುರ್ತು ಸಹಾಯವಾಣಿ: ಭಾರಿ ಮಳೆಯಿಂದಾಗಿ ಹೊರ ವರ್ತುಲ ರಸ್ತೆಯ ಬೆಳ್ಳಂದೂರು ಗೇಟ್ ಬಳಿ ಸುಮಾರು 2 ಅಡಿ ನೀರು ನಿಂತಿದೆ. ನೀರನ್ನು ಹೊರಹಾಕಲು ಪಂಪ್‌ಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ. ವಾಹನ ಸವಾರರು ಸರ್ಜಾಪುರ ರಸ್ತೆ ಮೂಲಕ ಪರ್ಯಾಯ ಮಾರ್ಗ ಬಳಸಲು ಕೋರಲಾಗಿದೆ."
             </p>
           </div>
         </div>
@@ -435,28 +489,24 @@
     </section>
 
     <!-- ACTION: OFFICIAL AUTHORIZATION INTERLOCK -->
-    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6" data-hover="true">
-      <div>
-        <span class="text-xs font-mono uppercase text-textMuted block">Designated Officer Sign-Off</span>
-        <h3 class="text-2xl md:text-3xl font-serif font-bold italic text-black mt-1">
-          Authorize Coordinated Incident Directives
+    <section class="border-2 border-black bg-surface p-6 md:p-8 space-y-6 my-6" data-hover="true">
+      <div class="space-y-1">
+        <span class="text-xs font-mono uppercase text-textMuted block font-bold">Official Approval</span>
+        <h3 class="text-xl md:text-2xl font-serif font-bold italic text-black">
+          Approve & Send Orders to Field Teams
         </h3>
-        <p class="text-sm text-textBody mt-1">
-          Official orders will be transmitted instantaneously to BWSSB, Bengaluru Traffic Police, and BBMP control rooms, and the bilingual public warning broadcast will deploy to local citizens.
+        <p class="text-xs md:text-sm text-textBody leading-relaxed">
+          Click below to confirm and transmit these orders to the Water Board, Traffic Police, and BBMP control rooms, and dispatch the public SMS alert.
         </p>
       </div>
 
       <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
-        <button id="auth-btn" onclick="issueAuthorization()" class="py-4 px-8 border-2 border-black bg-black text-white font-bold text-xs md:text-sm tracking-wider uppercase hover:bg-white hover:text-black transition-all text-center">
-          Authorize & Issue Departmental Orders
+        <button id="auth-btn" onclick="issueAuthorization()" class="py-3.5 px-8 border-2 border-black bg-black text-white font-bold text-xs md:text-sm tracking-wider uppercase hover:bg-white hover:text-black transition-all text-center shadow-sm active:scale-95">
+          Approve & Send All 3 Orders
         </button>
 
-        <button onclick="alert('Action plan editor opened for adjustments.')" class="py-4 px-6 border border-borderSubtle bg-white text-textBody font-medium text-xs md:text-sm hover:border-black transition-all text-center">
-          Modify Action Directives
-        </button>
-
-        <button onclick="if(confirm('Reject this response plan and instruct re-investigation?')) alert('Plan returned for revision.')" class="py-4 px-6 border border-borderSubtle text-textMuted font-mono text-xs hover:text-black hover:border-black transition-all text-center">
-          Reject Plan
+        <button onclick="alert('Action plan editor opened for adjustments.')" class="py-3.5 px-6 border border-borderSubtle bg-white text-textBody font-medium text-xs md:text-sm hover:border-black transition-all text-center">
+          Edit Plan
         </button>
       </div>
 
