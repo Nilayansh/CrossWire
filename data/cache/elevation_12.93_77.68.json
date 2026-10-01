@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "latitude": 12.93,
+      "longitude": 77.68,
+      "elevation": 872.1
+    },
+    {
+      "latitude": 12.934,
+      "longitude": 77.683,
+      "elevation": 876.5
+    },
+    {
+      "latitude": 12.928,
+      "longitude": 77.686,
+      "elevation": 875.8
+    },
+    {
+      "latitude": 12.924,
+      "longitude": 77.678,
+      "elevation": 877.2
+    },
+    {
+      "latitude": 12.932,
+      "longitude": 77.674,
+      "elevation": 876.1
+    },
+    {
+      "latitude": 12.936,
+      "longitude": 77.68,
+      "elevation": 876.3
+    }
+  ],
+  "centroid_elevation_m": 872.1,
+  "surrounding_median_m": 876.3
+}

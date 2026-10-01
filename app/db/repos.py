@@ -6,7 +6,7 @@ from sqlalchemy import select, and_
 
 from app.contracts.interfaces import TicketRepo, IncidentRepo, EvidenceRepo
 from app.contracts.models import Ticket, Incident, Evidence
-from app.db.engine import SessionLocal
+from app.db.engine import SessionLocal, init_db
 from app.db.models import TicketModel, IncidentModel, EvidenceModel, IncidentEvidenceModel
 
 
@@ -33,6 +33,7 @@ class SqlTicketRepo(TicketRepo):
     """SQLAlchemy implementation of TicketRepo."""
 
     def __init__(self, session_factory: Optional[Callable[[], Session]] = None):
+        init_db()
         self._session_factory = session_factory or SessionLocal
 
     def add(self, t: Ticket) -> None:

@@ -1,0 +1,7 @@
+{
+  "feeder": "F-KADU-04",
+  "substation": "Kadubeesanahalli 66/11kV",
+  "status": "tripped",
+  "outage_reported": true,
+  "outage_start": "2026-09-05T07:10:00Z"
+}
