@@ -1,0 +1,913 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "NammaTwin API",
+    "description": "NammaTwin Urban Incident & Infrastructure Diagnostic API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets": {
+      "post": {
+        "tags": [
+          "Tickets"
+        ],
+        "summary": "Ingest Ticket",
+        "operationId": "ingest_ticket_tickets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ticket"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketIngestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents": {
+      "get": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "List Incidents",
+        "operationId": "list_incidents_incidents_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Incident"
+                  },
+                  "type": "array",
+                  "title": "Response List Incidents Incidents Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{incident_id}": {
+      "get": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Get Incident",
+        "operationId": "get_incident_incidents__incident_id__get",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncidentDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{incident_id}/stream": {
+      "get": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Stream Incident Trace",
+        "operationId": "stream_incident_trace_incidents__incident_id__stream_get",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{incident_id}/decision": {
+      "post": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Submit Decision",
+        "operationId": "submit_decision_incidents__incident_id__decision_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Decision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{incident_id}/verify": {
+      "post": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Verify Incident",
+        "operationId": "verify_incident_incidents__incident_id__verify_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          },
+          {
+            "name": "fast_forward_min",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 45,
+              "title": "Fast Forward Min"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Action": {
+        "properties": {
+          "dept": {
+            "type": "string",
+            "enum": [
+              "stormwater",
+              "power_utility",
+              "sewerage",
+              "traffic_police",
+              "solid_waste",
+              "water_board"
+            ],
+            "title": "Dept"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "target_latlon": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Latlon"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ],
+            "title": "Priority"
+          },
+          "rationale": {
+            "type": "string",
+            "title": "Rationale"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "needs_field_verification": {
+            "type": "boolean",
+            "title": "Needs Field Verification",
+            "default": false
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dept",
+          "action",
+          "priority",
+          "rationale",
+          "confidence"
+        ],
+        "title": "Action"
+      },
+      "Decision": {
+        "properties": {
+          "incident_id": {
+            "type": "string",
+            "title": "Incident Id"
+          },
+          "approved_action_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Approved Action Ids"
+          },
+          "edits": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Edits"
+          },
+          "rejected": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Rejected"
+          },
+          "officer": {
+            "type": "string",
+            "title": "Officer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "incident_id",
+          "officer"
+        ],
+        "title": "Decision"
+      },
+      "Dossier": {
+        "properties": {
+          "incident_id": {
+            "type": "string",
+            "title": "Incident Id"
+          },
+          "ranked": {
+            "items": {
+              "prefixItems": [
+                {
+                  "$ref": "#/components/schemas/HypothesisID"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Ranked"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "conclusive": {
+            "type": "boolean",
+            "title": "Conclusive"
+          },
+          "stop_reason": {
+            "type": "string",
+            "title": "Stop Reason"
+          },
+          "trace": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Trace"
+          }
+        },
+        "type": "object",
+        "required": [
+          "incident_id",
+          "ranked",
+          "conclusive",
+          "stop_reason"
+        ],
+        "title": "Dossier"
+      },
+      "Evidence": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "tool": {
+            "type": "string",
+            "title": "Tool"
+          },
+          "ts": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Ts"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "keys": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceKey"
+            },
+            "type": "array",
+            "title": "Keys"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "real",
+              "simulated",
+              "derived"
+            ],
+            "title": "Provenance"
+          },
+          "raw": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Raw"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tool",
+          "ts",
+          "summary",
+          "keys",
+          "source",
+          "provenance"
+        ],
+        "title": "Evidence"
+      },
+      "EvidenceKey": {
+        "type": "string",
+        "enum": [
+          "RAIN_GT_40",
+          "RAIN_GT_25",
+          "RAIN_LT_15",
+          "RAIN_LT_5",
+          "SUSTAINED_RAIN_24H",
+          "DRY_WEATHER",
+          "LOW_LYING",
+          "KNOWN_HOTSPOT",
+          "NEAR_LAKE",
+          "LARGE_STP_SITE_NEARBY",
+          "DEBRIS_TICKETS_NEARBY",
+          "LOCALIZED_SPREAD",
+          "LINEAR_SPREAD",
+          "POWER_TICKETS_PRECEDE_SEWAGE",
+          "OUTAGE_REPORTED",
+          "NO_WATER_POWER_SIGNAL",
+          "TRAFFIC_SLOWDOWN"
+        ],
+        "title": "EvidenceKey"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ok"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          }
+        },
+        "type": "object",
+        "title": "HealthResponse"
+      },
+      "HypothesisID": {
+        "type": "string",
+        "enum": [
+          "RAIN_OVERWHELM",
+          "DRAIN_BLOCKAGE",
+          "POWER_LED_STP_OVERFLOW",
+          "PIPE_BURST",
+          "LAKE_OVERFLOW",
+          "TRAFFIC_ONLY"
+        ],
+        "title": "HypothesisID"
+      },
+      "Incident": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "opened_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Opened At"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "investigating",
+              "awaiting_approval",
+              "dispatched",
+              "resolving",
+              "closed",
+              "escalated"
+            ],
+            "title": "Status",
+            "default": "open"
+          },
+          "ticket_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ticket Ids"
+          },
+          "centroid": {
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Centroid"
+          },
+          "cells": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cells"
+          },
+          "category_mix": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Category Mix"
+          },
+          "reinvestigate": {
+            "type": "boolean",
+            "title": "Reinvestigate",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "opened_at",
+          "centroid"
+        ],
+        "title": "Incident"
+      },
+      "IncidentDetailResponse": {
+        "properties": {
+          "incident": {
+            "$ref": "#/components/schemas/Incident"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "dossier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Dossier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "actions": {
+            "items": {
+              "$ref": "#/components/schemas/Action"
+            },
+            "type": "array",
+            "title": "Actions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "incident",
+          "status"
+        ],
+        "title": "IncidentDetailResponse"
+      },
+      "Ticket": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "ts": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Ts"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "telegram",
+              "web",
+              "synthetic"
+            ],
+            "title": "Channel"
+          },
+          "lang": {
+            "type": "string",
+            "title": "Lang"
+          },
+          "text_original": {
+            "type": "string",
+            "title": "Text Original"
+          },
+          "text_en": {
+            "type": "string",
+            "title": "Text En"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "waterlogging",
+              "power",
+              "sewage",
+              "water_supply",
+              "traffic",
+              "garbage_debris",
+              "road_damage",
+              "other"
+            ],
+            "title": "Category"
+          },
+          "severity": {
+            "type": "integer",
+            "title": "Severity"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "geo_confidence": {
+            "type": "number",
+            "title": "Geo Confidence"
+          },
+          "h3_r8": {
+            "type": "string",
+            "title": "H3 R8"
+          },
+          "photo_depth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ankle",
+                  "knee",
+                  "waist",
+                  "vehicle"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Photo Depth"
+          },
+          "reporter_chat_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reporter Chat Id"
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "title": "Is Synthetic",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "ts",
+          "channel",
+          "lang",
+          "text_original",
+          "text_en",
+          "category",
+          "severity",
+          "lat",
+          "lon",
+          "geo_confidence",
+          "h3_r8"
+        ],
+        "title": "Ticket"
+      },
+      "TicketIngestResponse": {
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "title": "Ticket Id"
+          },
+          "incident_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incident Id"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Ticket successfully ingested"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ticket_id"
+        ],
+        "title": "TicketIngestResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VerifyResponse": {
+        "properties": {
+          "incident_id": {
+            "type": "string",
+            "title": "Incident Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "verify_result": {
+            "type": "string",
+            "title": "Verify Result"
+          },
+          "fast_forward_min": {
+            "type": "integer",
+            "title": "Fast Forward Min"
+          }
+        },
+        "type": "object",
+        "required": [
+          "incident_id",
+          "status",
+          "verify_result",
+          "fast_forward_min"
+        ],
+        "title": "VerifyResponse"
+      }
+    }
+  }
+}
