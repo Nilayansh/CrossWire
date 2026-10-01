@@ -23,6 +23,7 @@ class IncidentDetailResponse(BaseModel):
     status: str
     dossier: Optional[Dossier] = None
     actions: list[Action] = Field(default_factory=list)
+    tickets: list[Ticket] = Field(default_factory=list)
 
 
 class VerifyResponse(BaseModel):

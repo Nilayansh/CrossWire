@@ -152,13 +152,43 @@ def create_app(
         dossier = cached.get("dossier")
         actions = cached.get("actions", [])
         status = cached.get("status", inc.status)
+        all_t = t_repo.all()
+        inc_tickets = [t for t in all_t if t.id in inc.ticket_ids]
 
         return IncidentDetailResponse(
             incident=inc,
             status=status,
             dossier=dossier,
             actions=actions,
+            tickets=inc_tickets,
         )
+
+    @app.post("/scenarios/load", tags=["Scenarios"])
+    async def load_scenario(name: str = Query("bellandur_flood")):
+        fixture_path = Path("tests/fixtures/tickets_bellandur_flood.json")
+        if not fixture_path.exists():
+            raise HTTPException(status_code=404, detail="Scenario fixture not found")
+        with open(fixture_path, encoding="utf-8") as f:
+            tickets_data = json.load(f)
+
+        last_inc_id = None
+        for td in tickets_data:
+            t = Ticket(**td)
+            t_repo.add(t)
+            inc = detector.ingest(t)
+            if inc:
+                i_repo.upsert(inc)
+                res = pipe.start(inc, [t])
+                pipeline_cache[inc.id] = res
+                dossier = res.get("dossier")
+                if dossier and dossier.trace:
+                    trace_store[inc.id] = list(dossier.trace)
+                inc_dict = inc.model_dump()
+                inc_dict["status"] = res.get("status", "awaiting_approval")
+                i_repo.upsert(Incident(**inc_dict))
+                last_inc_id = inc.id
+
+        return {"status": "ok", "scenario": name, "incident_id": last_inc_id, "tickets_loaded": len(tickets_data)}
 
     @app.get("/incidents/{incident_id}/stream", tags=["Incidents"])
     async def stream_incident_trace(incident_id: str):

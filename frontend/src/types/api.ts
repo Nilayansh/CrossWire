@@ -73,6 +73,7 @@ export interface IncidentDetailResponse {
   status: IncidentStatus;
   dossier?: Dossier | null;
   actions: ActionProposal[];
+  tickets?: Ticket[];
 }
 
 export interface DecisionPayload {
